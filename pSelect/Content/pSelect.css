@@ -1,22 +1,62 @@
 ﻿select.pSelect {
   position: absolute;
-  top: -1000px;
-  left: -1000px;
-  width: 1px;
-  height: 1px;
+  top: 100px;
+  left: 100px;
+  display: none;
 }
 label.pSelect {
-  border: 1px solid #000;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   overflow: hidden;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 4px 20px 4px 8px;
 }
-label.pSelect.pFocus {
-  background-color: silver;
+label.pSelect .pInput {
+  position: absolute;
+  top: -1000000px;
+  left: -1000000px;
 }
 ul.pSelcetUl {
   position: absolute;
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  list-style-type: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow-y: auto;
+}
+ul.pSelcetUl li {
+  background-color: #fff;
+  margin: 0;
+  padding: 6px 12px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 0 solid #ccc;
+  list-style-type: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+ul.pSelcetUl li + li {
+  border-width: 1px 0 0;
+}
+ul.pSelcetUl li:hover {
+  background-color: #eee;
+}
+ul.pSelcetUl li.pActive {
+  background-color: #eee;
+  color: #000;
+}
+ul.pSelcetUl li.pSelected {
+  background-color: #66afe9;
+  color: #fff;
 }
 /*# sourceMappingURL=pSelect.css.map */

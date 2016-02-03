@@ -1,3 +1,3 @@
 ﻿$(document).ready(function() {
-    $('select').pSelect();
+    $('select.doit').pSelect();
 });

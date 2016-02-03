@@ -12,12 +12,33 @@
 
     <div class="container">
         <div class="row">
-            <form>
-                <input/>
-                <select>
-                    <option>First</option>
-                    <option>Second</option>
-                </select>
+            <form role="form">
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="sel1">Select list:</label>
+                    <select class="form-control doit" id="sel1" name="select1">
+                        <option>1</option>
+                        <option selected>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sel2">Select list:</label>
+                    <select class="form-control" id="sel2" name="select2">
+                        <option>1</option>
+                        <option selected>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="remember" value="1">Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>
     </div>
