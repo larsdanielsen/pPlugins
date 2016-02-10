@@ -8,20 +8,54 @@
 }
 
 label.pSelect {
-    //border: 1px solid #000;
-    //overflow: hidden;
-    //-moz-box-sizing: border-box;
-    //-webkit-box-sizing: border-box;
-    //box-sizing: border-box;
-    //padding: 4px 20px 4px 8px;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-    overflow: hidden;
+    position: relative;
 
-    &.pFocus {
+    &:after {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        content: '';
+        background-image: url(/Images/arrow.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 26px;
+        height: 28px;
+        position: absolute;
+        top: 2px;
+        right: 0px;
+        border-style: none none none solid;
+        border-width: 0 0 0 1px;
+        border-color: #999;
+        opacity: .4;
     }
+    
+    &.pFocus {
+        &:after {
+            
+        opacity: .7;
+              }
+    }
+
+    .label-inner {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        font-weight: normal;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        margin: 0 20px 0 0;
+    }
+
 
     .pInput {
         position: absolute;
@@ -46,18 +80,20 @@ ul.pSelcetUl {
     overflow-y: auto;
 
     li {
+        position: relative;
         background-color: #fff;
         margin: 0;
-        padding: 6px 12px;
+        padding: 5px 10px;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        border: 0 solid #ccc;
+        border: 0px solid #ccc;
         list-style-type: none;
         -moz-user-select: none;
         -ms-user-select: none;
         -webkit-user-select: none;
         user-select: none;
+        cursor: default;
 
         + li {
             border-width: 1px 0 0;
@@ -66,7 +102,7 @@ ul.pSelcetUl {
         &:hover {
             background-color: #eee;
         }
-        
+
         &.pActive {
             background-color: #eee;
             color: #000;
@@ -76,7 +112,5 @@ ul.pSelcetUl {
             background-color: #66afe9;
             color: #fff;
         }
-
-
     }
 }

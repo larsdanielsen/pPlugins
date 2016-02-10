@@ -23,7 +23,7 @@
                 .addClass(this.options.labelClass)
                 .addClass(function () { return that.$selectBox.attr('class'); });
 
-            this.$label = $('<span/>').text('hep');
+            this.$label = $('<span/>').addClass('label-inner');
 
             this.$input = $('<input/>').addClass(this.options.inputClass);
 
@@ -43,6 +43,7 @@
             this.$wrapperLabel.append(this.$input);
             this.$wrapperLabel.append(this.$selectBox);
 
+            this.getUl();
             this.bindEvents();
 
             /*  this.$selectBox.closest('form').bind('reset.pSelect', function () {
@@ -55,24 +56,28 @@
 
 
             this.$selectBox.trigger('update.pSelect');
-
             this.options.initDone = true;
         },
         open: function open() {
-            //console.log('open');
+            var that = this;
+            this.getUl();
+            $('body').append(this.$ul);
             this.isOpen = true;
             this.$wrapperLabel.addClass(this.options.openClass);
-            this.getUl();
             this.positionUl();
+            $(document).one('click.pSelect', function () {
+                //console.log('document click.pSelect');
+                that.close();
+            });
         },
-        close: function close() {
+        close: function close(isMySelf) {
             //console.log('close');
             this.$wrapperLabel.removeClass(this.options.openClass);
-            if (this.$ul) {
-                this.$ul.remove();
-            }
-
+            this.$ul.detach();
             this.isOpen = false;
+            if (isMySelf) {
+                this.$input.trigger('focus.pSelect');
+            }
         },
         toggle: function toggle() {
             //console.log('toggle');
@@ -100,40 +105,51 @@
         bindEvents: function bindEvents() {
             var that = this;
 
-            this.$wrapperLabel.bind('click.pSelect', function (e) {
+            this.$ul.on('click.pSelect', 'li', function (e) {
+                //console.log('li click');
+                e.stopPropagation();
+                e.preventDefault();
+                that.selectOption($(this));
+                that.close(true);
+            });
+            
+            this.$wrapperLabel.on('click.pSelect', function (e) {
                 //console.log('$wrapperLabel click.pSelect');
                 e.stopPropagation();
             });
 
-            this.$input.bind('focus.pSelect', function () {
+            this.$input.on('focus.pSelect', function () {
                 //console.log('$input focus.pSelect');
+                that.CloseOtherInstances();
                 that.$wrapperLabel.addClass(that.options.focusClass);
             });
 
-            this.$input.bind('blur.pSelect', function (e) {
-                //console.log('$input blur.pSelect');
-                e.stopPropagation();
+            this.$input.on('blur.pSelect', function () {
+                //console.log('$input focus.pSelect');
+                //that.CloseOtherInstances();
                 that.$wrapperLabel.removeClass(that.options.focusClass);
             });
 
-            this.$input.bind('click.pSelect', function (e) {
+
+            this.$input.on('click.pSelect', function (e) {
                 //console.log('$input click.pSelect');
                 e.stopPropagation();
+                e.preventDefault();
                 that.toggle();
             });
 
-            this.$input.bind('keydown.pSelect', function (e) {
+            this.$input.on('keydown.pSelect', function (e) {
                 that.inputKeyDown(e);
             });
-            this.$input.bind('keypress.pSelect', function (e) {
+            this.$input.on('keypress.pSelect', function (e) {
                 that.inputKeyPress(e);
             });
 
-            this.$selectBox.bind('update.pSelect', function () {
+            this.$selectBox.on('update.pSelect', function () {
                 //console.log('$selectBox update.pSelect');
                 that.update();
             });
-            this.$selectBox.bind('change.pSelect', function (e) {
+            this.$selectBox.on('change.pSelect', function (e) {
                 //console.log('$selectBox change.pSelect');
                 e.stopPropagation();
                 e.preventDefault();
@@ -141,16 +157,12 @@
                 var selectedOption = $(that.$selectBox.find('option').get(selectedIndex));
                 that.$label.text(selectedOption.text());
             });
-
-            $(document).bind('click.pSelect', function () {
-                //console.log('document click.pSelect');
-                that.close();
-            });
-
         },
         getUl: function getUl() {
-            var that = this;
-            this.$ul = $('<ul/>').addClass(this.options.ulClass);
+            if (!this.$ul) {
+                this.$ul = $('<ul/>').addClass(this.options.ulClass);
+            }
+            this.$ul.empty();
             var struct = this.getStruct();
             for (var i = 0; i < struct.length; i++) {
                 var opt = struct[i];
@@ -161,23 +173,12 @@
                 if (opt.selected) {
                     li.addClass(this.options.selectedClass);
                 }
-                
+
                 if (opt.active) {
                     li.addClass(this.options.activeClass);
                 }
-
-                li.bind('click.pSelect',
-                    function (e) {
-                        console.log(this);
-                        e.stopPropagation();
-                        that.selectOption($(this));
-                        that.close();
-                        //objects.input.trigger('focus.DGselectbox');
-                    });
-
                 this.$ul.append(li);
             }
-            $('body').append(this.$ul);
         },
         getStruct: function () {
             var that = this;
@@ -201,12 +202,15 @@
             return struct;
         },
         positionUl: function (above) {
+            this.$ul.hide();
             var ulCss = {};
             ulCss.width = this.$wrapperLabel.outerWidth() + 'px';
             var wrapperLabelOfs = this.$wrapperLabel.offset();
             ulCss.top = wrapperLabelOfs.top + this.$wrapperLabel.outerHeight();
             ulCss.left = wrapperLabelOfs.left;
+            //console.log(ulCss);
             this.$ul.height('');
+            this.$ul.show();
 
             if (above) {
                 if (ulCss.top - this.$ul.outerHeight() - 30 < 0) {
@@ -222,7 +226,7 @@
                 if (ulCss.top + this.$ul.outerHeight() + 30 > $(window).height()) {
                     this.$ul.height(0);
                     wrapperLabelOfs = this.$wrapperLabel.offset();
-                    this.$ul.height($(window).height() - wrapperLabelOfs.top - this.options.height - 30);
+                    this.$ul.height($(window).height() - wrapperLabelOfs.top - this.$wrapperLabel.outerHeight() - 30);
                 } else {
                     this.$ul.height('');
                 }
@@ -230,16 +234,15 @@
             //console.log(ulCss);
             this.$ul.css(ulCss);
 
-
-            if (!above && this.$ul.outerHeight() < this.options.height) {
+            if (!above && this.$ul.outerHeight() < this.$wrapperLabel.outerHeight()) {
                 this.$ul.height('');
                 this.positionUl(true);
                 return;
             }
 
-            var selectedposition = this.$ul.find('li.selected').position();
+            var selectedposition = this.$ul.find('li.' + this.options.selectedClass).position();
             if (selectedposition) {
-                this.$ul.get(0).scrollTop = this.$ul.find('li.selected').position().top;
+                this.$ul.get(0).scrollTop = selectedposition.top;
             }
         },
         selectOption: function selectOption(li) {
@@ -272,42 +275,45 @@
         moveFocus: function moveFocus(dir) {
             //console.log('moveFocus ' + dir);
             var that = this;
-            if (this.$ul) {
-                var currentActive = this.$ul.find('li:first');
-                var counter = 0;
-                this.$ul.find('li').each(function () {
-                    var li = $(this);
-                    if (li.is('.' + that.options.activeClass)) {
-                        currentActive = li;
-                    }
-                    counter++;
-                });
-
-                if (currentActive.size()) {
-                    var newActive;
-                    if (dir == 1) {
-                        newActive = currentActive.next();
-                    } else if (dir == -1) {
-                        newActive = currentActive.prev();
-                    } else {
-                        newActive = currentActive;
-                    }
-                    this.setFocusTo(newActive);
+            var currentActive = this.$ul.find('li:first');
+            var counter = 0;
+            this.$ul.find('li').each(function () {
+                var li = $(this);
+                if (li.is('.' + that.options.activeClass)) {
+                    currentActive = li;
                 }
+                counter++;
+            });
+
+            if (currentActive.size()) {
+                var newActive;
+                if (dir == 1) {
+                    newActive = currentActive.next();
+                } else if (dir == -1) {
+                    newActive = currentActive.prev();
+                } else {
+                    newActive = currentActive;
+                }
+                this.setFocusTo(newActive);
             }
         },
         setFocusTo: function setFocusTo(li) {
-            //console.log(li);
             if (li.size()) {
                 this.$ul.children('li').removeClass(this.options.activeClass);
                 li.addClass(this.options.activeClass);
                 if (!this.$ul.is(':visible')) {
                     li.trigger('click.pSelect');
                 }
-                if (li.position().top < 0) {
-                    this.$ul.get(0).scrollTop += li.position().top; // scroll up
-                } else if (li.position().top + li.outerHeight(true) > this.$ul.innerHeight()) {
-                    this.$ul.get(0).scrollTop += li.outerHeight(true) + li.position().top - this.$ul.innerHeight(); // scroll down
+
+                var liTop = li.position().top;
+                var ulInnerHeight = this.$ul.innerHeight();
+                var liOuterHeight = li.outerHeight(true);
+                var ulScrollTop = this.$ul.get(0).scrollTop;
+
+                if (liTop < ulScrollTop) {
+                    this.$ul.get(0).scrollTop = liTop; // scroll up
+                } else if (liTop + liOuterHeight > ulInnerHeight + ulScrollTop) {
+                    this.$ul.get(0).scrollTop = li.outerHeight(true) + liTop - this.$ul.innerHeight(); // scroll down
                 }
             }
         },
@@ -315,7 +321,6 @@
             this.moveFocus(-1);
         },
         moveFocusDown: function moveFocusDown() {
-            //console.log('moveFocusDown');
             this.moveFocus(1);
         },
         inputKeyDown: function inputKeyDown(e) {
@@ -389,6 +394,14 @@
             if (foundLi && foundLi.size()) {
                 this.setFocusTo(foundLi);
             }
+        },
+        CloseOtherInstances: function closeOtherInstances() {
+            for (var i = 0 ; i < $.fn.pSelect.instances.length; i++) {
+                var inst = $.fn.pSelect.instances[i];
+                if (inst !== this) {
+                    inst.close();
+                }
+            }
         }
     };
 
@@ -402,7 +415,9 @@
                 $this.trigger('removeSelect.pSelect');
             }
             // ReSharper disable once InconsistentNaming
-            $this.data('pSelect', new pSelect(this, options, event));
+            var inst = new pSelect(this, options, event);
+            $.fn.pSelect.instances.push(inst);
+            $this.data('pSelect', inst);
 
         });
         //this.trigger('change.pSelect');
@@ -422,6 +437,6 @@
         ulClass: 'pSelcetUl'
     };
 
-
+    $.fn.pSelect.instances = [];
 
 })(jQuery);

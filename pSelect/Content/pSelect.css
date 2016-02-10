@@ -9,7 +9,43 @@ label.pSelect {
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  position: relative;
+}
+label.pSelect:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  content: '';
+  background-image: url(/Images/arrow.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 26px;
+  height: 28px;
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  border-style: none none none solid;
+  border-width: 0 0 0 1px;
+  border-color: #999;
+  opacity: .4;
+}
+label.pSelect.pFocus:after {
+  opacity: .7;
+}
+label.pSelect .label-inner {
+  display: block;
+  white-space: nowrap;
   overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  font-weight: normal;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  margin: 0 20px 0 0;
 }
 label.pSelect .pInput {
   position: absolute;
@@ -32,18 +68,20 @@ ul.pSelcetUl {
   overflow-y: auto;
 }
 ul.pSelcetUl li {
+  position: relative;
   background-color: #fff;
   margin: 0;
-  padding: 6px 12px;
+  padding: 5px 10px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border: 0 solid #ccc;
+  border: 0px solid #ccc;
   list-style-type: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  cursor: default;
 }
 ul.pSelcetUl li + li {
   border-width: 1px 0 0;
