@@ -1,9 +1,4 @@
 ﻿select.pSelect {
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    //width: 1px;
-    //height: 1px;
     display: none;
 }
 
@@ -27,18 +22,17 @@ label.pSelect {
         height: 28px;
         position: absolute;
         top: 2px;
-        right: 0px;
+        right: 0;
         border-style: none none none solid;
         border-width: 0 0 0 1px;
         border-color: #999;
         opacity: .4;
     }
-    
+
     &.pFocus {
         &:after {
-            
-        opacity: .7;
-              }
+            opacity: .7;
+        }
     }
 
     .label-inner {
@@ -79,6 +73,8 @@ ul.pSelcetUl {
     user-select: none;
     overflow-y: auto;
 
+
+
     li {
         position: relative;
         background-color: #fff;
@@ -87,7 +83,7 @@ ul.pSelcetUl {
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        border: 0px solid #ccc;
+        border: 0 solid #ccc;
         list-style-type: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -108,9 +104,42 @@ ul.pSelcetUl {
             color: #000;
         }
 
-        &.pSelected {
-            background-color: #66afe9;
-            color: #fff;
+        &.pDisabled {
+            color: gray;
+        }
+    }
+
+    &.pNormal {
+        li {
+
+            &.pSelected {
+                background-color: #66afe9;
+                color: #fff;
+            }
+        }
+    }
+
+    &.pMultiple {
+        li {
+
+            &.pSelected {
+                &:after {
+                    -moz-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+                    display: block;
+                    content: '';
+                    background-image: url(/Images/check.png);
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    width: 26px;
+                    height: 28px;
+                    position: absolute;
+                    top: 2px;
+                    right: 0;                    
+                    opacity: .4;
+                }
+            }
         }
     }
 }

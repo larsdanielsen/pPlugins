@@ -1,7 +1,4 @@
 ﻿select.pSelect {
-  position: absolute;
-  top: 100px;
-  left: 100px;
   display: none;
 }
 label.pSelect {
@@ -24,7 +21,7 @@ label.pSelect:after {
   height: 28px;
   position: absolute;
   top: 2px;
-  right: 0px;
+  right: 0;
   border-style: none none none solid;
   border-width: 0 0 0 1px;
   border-color: #999;
@@ -75,7 +72,7 @@ ul.pSelcetUl li {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border: 0px solid #ccc;
+  border: 0 solid #ccc;
   list-style-type: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -93,8 +90,27 @@ ul.pSelcetUl li.pActive {
   background-color: #eee;
   color: #000;
 }
-ul.pSelcetUl li.pSelected {
+ul.pSelcetUl li.pDisabled {
+  color: gray;
+}
+ul.pSelcetUl.pNormal li.pSelected {
   background-color: #66afe9;
   color: #fff;
+}
+ul.pSelcetUl.pMultiple li.pSelected:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  content: '';
+  background-image: url(/Images/check.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 26px;
+  height: 28px;
+  position: absolute;
+  top: 2px;
+  right: 0;
+  opacity: .4;
 }
 /*# sourceMappingURL=pSelect.css.map */

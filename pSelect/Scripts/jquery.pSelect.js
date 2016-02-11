@@ -17,6 +17,9 @@
 
             if (this.$selectBox.is('select')) {
                 this.options.source = 'select';
+                if (this.$selectBox.is('[multiple]')) {
+                    this.options.multiple = true;
+                }
             }
 
             this.$wrapperLabel = $('<label />')
@@ -46,37 +49,34 @@
             this.getUl();
             this.bindEvents();
 
-            /*  this.$selectBox.closest('form').bind('reset.pSelect', function () {
-                  that.$selectBox.prop('checked', that.$selectBox.get(0).defaultChecked);
-                  that.$selectBox.trigger('change.pSelect');
-              });
-              this.$selectBox.bind('change.pSelect', function () {
-                  that.$selectBox.trigger('update.pSelect');
-              });*/
-
-
-            this.$selectBox.trigger('update.pSelect');
+            this.$selectBox.trigger('updateLabel.pSelect');
             this.options.initDone = true;
         },
         open: function open() {
             var that = this;
-            this.getUl();
-            $('body').append(this.$ul);
             this.isOpen = true;
+            this.fillUl();
+            $('body').append(this.$ul);
             this.$wrapperLabel.addClass(this.options.openClass);
             this.positionUl();
-            $(document).one('click.pSelect', function () {
-                //console.log('document click.pSelect');
+            $(window).one('click.pSelect resize.pSelect', function () {
                 that.close();
+                that.blur();
             });
         },
+        blur: function blur() {
+            this.$wrapperLabel.removeClass(this.options.focusClass);
+        },
+        focus: function focus() {
+            this.$input.focus();
+        },
         close: function close(isMySelf) {
-            //console.log('close');
+            //console.log('close, isMySelf: ' + isMySelf);
+            this.isOpen = false;
             this.$wrapperLabel.removeClass(this.options.openClass);
             this.$ul.detach();
-            this.isOpen = false;
             if (isMySelf) {
-                this.$input.trigger('focus.pSelect');
+                this.focus();
             }
         },
         toggle: function toggle() {
@@ -87,20 +87,37 @@
                 this.open();
             }
         },
-        update: function () {
-            //console.log('update');
-            var struct = this.getStruct();
-            var found = false, text = '';
+        updateLabel: function updateLabel() {
+            //console.log('updateLabel');
+            //var struct = this.getStruct();
+            /*var found = false, text = '';
             for (var i = 0; i < struct.length; i++) {
                 if (struct[i].selected) {
                     text = struct[i].text;
                     found = true;
                 }
-            }
+            }*/
             /*if (!found && struct.length > 0) {
                 text = struct[0].text;
             }*/
-            this.$selectBox.trigger('change.pSelect');
+            var options = this.$selectBox.find('option');
+            var text = options.first().text();
+            if (this.options.multiple) {
+                var selectedOptions = options.filter(':selected');
+                var allSelectedTexts = [];
+                selectedOptions.each(function () {
+                    allSelectedTexts.push($(this).text());
+                });
+                if (allSelectedTexts.length) {
+                    text = allSelectedTexts.join(', ');
+                }
+            } else {
+                var selectedIndex = this.$selectBox.get(0).selectedIndex;
+                var selectedOption = $(this.$selectBox.find('option').get(selectedIndex));
+                text = selectedOption.text();
+            }
+            this.$label.text(text);
+
         },
         bindEvents: function bindEvents() {
             var that = this;
@@ -110,9 +127,13 @@
                 e.stopPropagation();
                 e.preventDefault();
                 that.selectOption($(this));
-                that.close(true);
+                if (that.options.multiple) {
+                    that.focus();
+                } else {
+                    that.close(true);
+                }
             });
-            
+
             this.$wrapperLabel.on('click.pSelect', function (e) {
                 //console.log('$wrapperLabel click.pSelect');
                 e.stopPropagation();
@@ -125,11 +146,13 @@
             });
 
             this.$input.on('blur.pSelect', function () {
-                //console.log('$input focus.pSelect');
-                //that.CloseOtherInstances();
-                that.$wrapperLabel.removeClass(that.options.focusClass);
+                //console.log('blur, isOpen: ' + that.isOpen);
+                if (that.isOpen) {
+                    $(this).focus();
+                } else {
+                    that.blur();
+                }
             });
-
 
             this.$input.on('click.pSelect', function (e) {
                 //console.log('$input click.pSelect');
@@ -145,36 +168,48 @@
                 that.inputKeyPress(e);
             });
 
-            this.$selectBox.on('update.pSelect', function () {
+            this.$selectBox.on('updateLabel.pSelect', function () {
                 //console.log('$selectBox update.pSelect');
-                that.update();
+                that.updateLabel();
             });
             this.$selectBox.on('change.pSelect', function (e) {
                 //console.log('$selectBox change.pSelect');
                 e.stopPropagation();
                 e.preventDefault();
-                var selectedIndex = that.$selectBox.get(0).selectedIndex;
-                var selectedOption = $(that.$selectBox.find('option').get(selectedIndex));
-                that.$label.text(selectedOption.text());
+                that.updateLabel();
             });
         },
         getUl: function getUl() {
-            if (!this.$ul) {
-                this.$ul = $('<ul/>').addClass(this.options.ulClass);
+            this.$ul = $('<ul/>').addClass(this.options.ulClass);
+            if (this.options.multiple) {
+                this.$ul.addClass(this.options.multipleUlClass);
+            } else {
+                this.$ul.addClass(this.options.normalUlClass);
             }
+
+        },
+        fillUl: function fillUl() {
             this.$ul.empty();
             var struct = this.getStruct();
+            var activeFound = false;
             for (var i = 0; i < struct.length; i++) {
                 var opt = struct[i];
                 var li = $('<li/>')
                     .text(opt.text)
+                    .data('option', opt.option)
                     .data('index', opt.index);
 
                 if (opt.selected) {
                     li.addClass(this.options.selectedClass);
                 }
 
-                if (opt.active) {
+                if (opt.disabled) {
+                    li.addClass(this.options.disabledClass);
+                    li.prop('disabled', true);
+                }
+
+                if (!activeFound && opt.active) {
+                    activeFound = true;
                     li.addClass(this.options.activeClass);
                 }
                 this.$ul.append(li);
@@ -192,6 +227,7 @@
                             text: op.text(),
                             selected: !!op.is(':selected'),
                             active: !!op.is(':selected'),
+                            disabled: !!op.is(':disabled'),
                             index: i,
                             option: op
                         });
@@ -246,24 +282,30 @@
             }
         },
         selectOption: function selectOption(li) {
+
+            this.setFocusTo(li);
             var newselection = true;
-            if (li.is('.selected')) {
+            var option = li.data('option');
+            var index = li.data('index');
+            if (option.prop('selected')) {
                 newselection = false;
             }
-            li.addClass(this.options.selectedClass)
-                .siblings().removeClass(this.options.selectedClass);
-
-            if (this.options.source == 'select') {
-                var index = li.data('index');
-                if (this.options.initDone) {
-                    this.$selectBox.get(0).selectedIndex = index;
-                    if (newselection && !this.options.runningInternalChange) {
-                        this.options.runningOriginalChange = true;
-                        this.$selectBox.trigger('change');
-                        this.options.runningOriginalChange = false;
-                    }
-                }
+            if (this.options.multiple) {
+                option.prop('selected', !option.prop('selected'));
+                li.toggleClass(this.options.selectedClass, option.prop('selected'));
+            } else {
+                option.prop('selected', true);
+                this.$selectBox.get(0).selectedIndex = index;
+                li.addClass(this.options.selectedClass).siblings().removeClass(this.options.selectedClass);
             }
+
+            if (newselection && !this.options.runningInternalChange) {
+                this.options.runningOriginalChange = true;
+                this.$selectBox.trigger('change');
+                this.options.runningOriginalChange = false;
+            }
+
+            this.updateLabel();
 
             //objects.input.trigger('focus.DGselectbox');
             // HideAllDGselectbox_uls();
@@ -273,19 +315,19 @@
             }
         },
         moveFocus: function moveFocus(dir) {
-            //console.log('moveFocus ' + dir);
+            console.log('moveFocus ' + dir);
             var that = this;
-            var currentActive = this.$ul.find('li:first');
-            var counter = 0;
+            var currentActive = this.$ul.find('li').first();
+            
             this.$ul.find('li').each(function () {
                 var li = $(this);
                 if (li.is('.' + that.options.activeClass)) {
                     currentActive = li;
                 }
-                counter++;
             });
 
             if (currentActive.size()) {
+                console.log('currentActive ' + currentActive);
                 var newActive;
                 if (dir == 1) {
                     newActive = currentActive.next();
@@ -298,7 +340,8 @@
             }
         },
         setFocusTo: function setFocusTo(li) {
-            if (li.size()) {
+            console.log(li);
+            if (li.size() && !li.prop('disabled')) {
                 this.$ul.children('li').removeClass(this.options.activeClass);
                 li.addClass(this.options.activeClass);
                 if (!this.$ul.is(':visible')) {
@@ -326,26 +369,31 @@
         inputKeyDown: function inputKeyDown(e) {
             //Say('InputKeyDown');
 
+            var keyCodes = $.fn.pSelect.keyCodes;
+
             var keycode = e.keyCode;
 
-            if (keycode == 40) { // down arrow
+            //console.log(keycode);
+            if (keycode == keyCodes.Down) {
                 if (e.altKey) {
-                    this.$input.trigger('click.pSelect');
+                    this.open();
                 } else {
                     this.moveFocusDown();
                 }
-            } else if (keycode == 38) { // up arrow
+            } else if (keycode ==keyCodes.Up) {
                 this.moveFocusUp();
-            } else if (keycode == 13) { // enter
+            } else if (keycode == keyCodes.Enter || keycode == keyCodes.Space) { // enter of space
                 e.preventDefault();
-                this.$ul.find('li.' + this.options.activeClass).trigger('click.pSelect');
-            } else if (keycode == 27) { // esc
+                if (keycode == keyCodes.Enter || this.options.multiple) {
+                    this.$ul.find('li.' + this.options.activeClass).trigger('click.pSelect');
+                }
+            } else if (keycode == keyCodes.Esc) { // esc
                 this.close();
-            } else if (keycode == 9) { // tab
+            } else if (keycode == keyCodes.Tab) { // tab
                 this.close();
             }
 
-            if (keycode != 9 && keycode != 16) { // shift and tab is allowed to pass
+            if (keycode != keyCodes.Tab && keycode != keyCodes.Shift) { // shift and tab is allowed to pass
                 //event.preventDefault();
                 return true;
             }
@@ -434,9 +482,21 @@
         activeClass: 'pActive',
         selectedClass: 'pSelected',
         disabledClass: 'pDisabled',
-        ulClass: 'pSelcetUl'
+        ulClass: 'pSelcetUl',
+        normalUlClass: 'pNormal',
+        multipleUlClass: 'pMultiple',
+        multiple: false
     };
 
     $.fn.pSelect.instances = [];
+    $.fn.pSelect.keyCodes = {
+        Down: 40,
+        Up: 38,
+        Enter: 13,
+        Space: 32,
+        Esc: 27,
+        Tab: 9,
+        Shift: 16
+    };
 
 })(jQuery);
