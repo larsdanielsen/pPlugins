@@ -47,6 +47,7 @@
             this.$wrapperLabel.append(this.$selectBox);
 
             this.getUl();
+            this.fillUl();
             this.bindEvents();
 
             this.$selectBox.trigger('updateLabel.pSelect');
@@ -88,18 +89,7 @@
             }
         },
         updateLabel: function updateLabel() {
-            //console.log('updateLabel');
-            //var struct = this.getStruct();
-            /*var found = false, text = '';
-            for (var i = 0; i < struct.length; i++) {
-                if (struct[i].selected) {
-                    text = struct[i].text;
-                    found = true;
-                }
-            }*/
-            /*if (!found && struct.length > 0) {
-                text = struct[0].text;
-            }*/
+
             var options = this.$selectBox.find('option');
             var text = options.first().text();
             if (this.options.multiple) {
@@ -123,7 +113,6 @@
             var that = this;
 
             this.$ul.on('click.pSelect', 'li', function (e) {
-                //console.log('li click');
                 e.stopPropagation();
                 e.preventDefault();
                 that.selectOption($(this));
@@ -136,6 +125,7 @@
 
             this.$wrapperLabel.on('click.pSelect', function (e) {
                 //console.log('$wrapperLabel click.pSelect');
+                that.CloseOtherInstances();
                 e.stopPropagation();
             });
 
@@ -196,8 +186,7 @@
                 var opt = struct[i];
                 var li = $('<li/>')
                     .text(opt.text)
-                    .data('option', opt.option)
-                    .data('index', opt.index);
+                    .data('option', opt);
 
                 if (opt.selected) {
                     li.addClass(this.options.selectedClass);
@@ -206,6 +195,10 @@
                 if (opt.disabled) {
                     li.addClass(this.options.disabledClass);
                     li.prop('disabled', true);
+                }
+
+                if (opt.option.is('optgroup')) {
+                    li.addClass(this.options.optgroupClass);
                 }
 
                 if (!activeFound && opt.active) {
@@ -219,22 +212,46 @@
             var that = this;
             var struct = new Array();
             var i = 0;
-            this.$selectBox.find('option').each(
-                function () {
-                    var op = $(this);
-                    if (!that.options.filter || op.text().match(that.options.filter)) {
-                        struct.push({
-                            text: op.text(),
-                            selected: !!op.is(':selected'),
-                            active: !!op.is(':selected'),
-                            disabled: !!op.is(':disabled'),
-                            index: i,
-                            option: op
-                        });
-                        i++;
-                    }
+
+            this.$selectBox.children().each(function () {
+                var child = $(this);
+                if (child.is('option')) {
+                    addOption(child);
+                } else if (child.is('optgroup')) {
+                    addOptgroup(child);
                 }
-            );
+            });
+
+            function addOptgroup(optgroup) {
+                struct.push({
+                    text: optgroup.attr('label'),
+                    selected: false,
+                    active: false,
+                    disabled: true,
+                    index: -1,
+                    option: optgroup
+                });
+                optgroup.find('> option').each(
+                    function () {
+                        addOption($(this));
+                    }
+                );
+            }
+
+            function addOption(op) {
+                if (!that.options.filter || op.text().match(that.options.filter)) {
+                    struct.push({
+                        text: op.text(),
+                        selected: !!op.is(':selected'),
+                        active: !!op.is(':selected'),
+                        disabled: !!op.is(':disabled'),
+                        index: i,
+                        option: op
+                    });
+                    i++;
+                }
+            }
+
             return struct;
         },
         positionUl: function (above) {
@@ -283,10 +300,11 @@
         },
         selectOption: function selectOption(li) {
 
-            this.setFocusTo(li);
             var newselection = true;
-            var option = li.data('option');
-            var index = li.data('index');
+            var opt = li.data('option');
+            var option = opt.option;
+            var index = opt.index;
+
             if (option.prop('selected')) {
                 newselection = false;
             }
@@ -315,32 +333,30 @@
             }
         },
         moveFocus: function moveFocus(dir) {
-            console.log('moveFocus ' + dir);
             var that = this;
-            var currentActive = this.$ul.find('li').first();
-            
-            this.$ul.find('li').each(function () {
-                var li = $(this);
-                if (li.is('.' + that.options.activeClass)) {
-                    currentActive = li;
-                }
-            });
+
+            var currentActive = this.$ul.find('li.' + that.options.activeClass);
+            if (currentActive.size() == 0) {
+                currentActive = this.$ul.find('li').first();
+            }
 
             if (currentActive.size()) {
-                console.log('currentActive ' + currentActive);
-                var newActive;
+                var newActive = currentActive;
                 if (dir == 1) {
                     newActive = currentActive.next();
+                    while (!newActive || newActive.is('.' + this.options.disabledClass)) {
+                        newActive = newActive.next();
+                    }
                 } else if (dir == -1) {
                     newActive = currentActive.prev();
-                } else {
-                    newActive = currentActive;
+                    while (!newActive || newActive.is('.' + this.options.disabledClass)) {
+                        newActive = newActive.prev();
+                    }
                 }
                 this.setFocusTo(newActive);
             }
         },
         setFocusTo: function setFocusTo(li) {
-            console.log(li);
             if (li.size() && !li.prop('disabled')) {
                 this.$ul.children('li').removeClass(this.options.activeClass);
                 li.addClass(this.options.activeClass);
@@ -367,20 +383,17 @@
             this.moveFocus(1);
         },
         inputKeyDown: function inputKeyDown(e) {
-            //Say('InputKeyDown');
 
             var keyCodes = $.fn.pSelect.keyCodes;
-
             var keycode = e.keyCode;
 
-            //console.log(keycode);
             if (keycode == keyCodes.Down) {
                 if (e.altKey) {
                     this.open();
                 } else {
                     this.moveFocusDown();
                 }
-            } else if (keycode ==keyCodes.Up) {
+            } else if (keycode == keyCodes.Up) {
                 this.moveFocusUp();
             } else if (keycode == keyCodes.Enter || keycode == keyCodes.Space) { // enter of space
                 e.preventDefault();
@@ -482,6 +495,7 @@
         activeClass: 'pActive',
         selectedClass: 'pSelected',
         disabledClass: 'pDisabled',
+        optgroupClass: 'pOptgroup',
         ulClass: 'pSelcetUl',
         normalUlClass: 'pNormal',
         multipleUlClass: 'pMultiple',

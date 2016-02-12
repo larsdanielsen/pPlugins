@@ -93,6 +93,10 @@ ul.pSelcetUl li.pActive {
 ul.pSelcetUl li.pDisabled {
   color: gray;
 }
+ul.pSelcetUl li.pDisabled.pOptgroup {
+  color: #000;
+  font-weight: bold;
+}
 ul.pSelcetUl.pNormal li.pSelected {
   background-color: #66afe9;
   color: #fff;
