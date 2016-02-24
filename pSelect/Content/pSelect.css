@@ -84,14 +84,15 @@ ul.pSelcetUl li + li {
   border-width: 1px 0 0;
 }
 ul.pSelcetUl li:hover {
-  background-color: #eee;
+  background-color: #999;
+  color: #fff;
 }
 ul.pSelcetUl li.pActive {
   background-color: #eee;
   color: #000;
 }
 ul.pSelcetUl li.pDisabled {
-  color: gray;
+  color: #999;
 }
 ul.pSelcetUl li.pDisabled.pOptgroup {
   color: #000;

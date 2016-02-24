@@ -5,7 +5,8 @@
     <title></title>
     <link href="Content/bootstrap.css" rel="stylesheet"/>
     <link href="Content/bootstrap-theme.css" rel="stylesheet"/>
-    <link href="Content/pSelect.css" rel="stylesheet"/>
+    <link href="Content/page.css" rel="stylesheet" />
+    <link href="Content/pSelect.css" rel="stylesheet" />
 </head>
 <body>
     <nav>Menu</nav>
@@ -22,7 +23,7 @@
                     <label for="sel1">Select list:</label>
                     <select class="form-control doit" id="sel1" name="select1" multiple>
                         <option>1</option>
-                        <option selected>Dette er en meget lang tekst</option>
+                        <option>Dette er en meget lang tekst</option>
                         <option>3</option>
                         <option>4</option>
                     </select>
@@ -42,7 +43,7 @@
                 </div>
                 <div class="form-group col-lg-2">
                     <div class="checkbox">
-                        <label><input type="checkbox" name="remember" value="1">Remember me</label>
+                        <label><input type="checkbox" data-checkbox-confirm="Sikker?" name="remember" value="1">Remember me</label>
                     </div>
                 </div>
 
@@ -157,11 +158,17 @@
                     </select>
                 </div>
             </div>
-                <div class="row">
-                    <div class="form-group col-lg-12">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <button type="submit" class="btn btn-default">Submit</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <button type="button" class="btn btn-default" data-action="run">Run</button>
+                    <button type="button" class="btn btn-default" data-action="remove">Remove</button>
+                </div>
+            </div>
 </form>
     </div>
     <footer>Footer</footer>
