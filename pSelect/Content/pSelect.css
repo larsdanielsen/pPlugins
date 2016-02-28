@@ -50,6 +50,8 @@ label.pSelect .pInput {
   left: -1000000px;
 }
 ul.pSelcetUl {
+  height: auto;
+  width: auto;
   position: absolute;
   margin: 0;
   padding: 0;
@@ -73,6 +75,7 @@ ul.pSelcetUl li {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border: 0 solid #ccc;
+  border-color: inherit;
   list-style-type: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -82,10 +85,6 @@ ul.pSelcetUl li {
 }
 ul.pSelcetUl li + li {
   border-width: 1px 0 0;
-}
-ul.pSelcetUl li:hover {
-  background-color: #999;
-  color: #fff;
 }
 ul.pSelcetUl li.pActive {
   background-color: #eee;
@@ -97,6 +96,10 @@ ul.pSelcetUl li.pDisabled {
 ul.pSelcetUl li.pDisabled.pOptgroup {
   color: #000;
   font-weight: bold;
+}
+ul.pSelcetUl li:hover {
+  background-color: #999;
+  color: #fff;
 }
 ul.pSelcetUl.pNormal li.pSelected {
   background-color: #66afe9;

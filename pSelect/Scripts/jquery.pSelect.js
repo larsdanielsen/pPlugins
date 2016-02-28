@@ -56,6 +56,7 @@
             var that = this;
             this.isOpen = true;
             this.fillUl();
+            //this.$ul.hide();
             $('body').append(this.$ul);
             this.positionUl();
             this.updateLabelView();
@@ -205,7 +206,10 @@
             });
         },
         getUl: function getUl() {
-            this.$ul = $('<ul/>').addClass(this.options.ulClass);
+            this.$ul = $('<ul/>')
+                .addClass(this.options.ulClass);
+                //.addClass(function () { return that.$selectBox.attr('class'); });
+            
             if (this.options.multiple) {
                 this.$ul.addClass(this.options.multipleUlClass);
             } else {
@@ -334,24 +338,15 @@
         },
         selectOption: function selectOption(item) {
 
-            var newselection = true;
-            //var li = item.$li;
-            var option = item.$option;
-            var index = item.Index;
-
-            if (!item.Selected) {
-                newselection = false;
-            }
             if (this.options.multiple) {
                 item.Selected = !item.Selected;
             } else {
                 item.Selected = true;
-                this.$selectBox.get(0).selectedIndex = index;
             }
 
-            option.prop('selected', item.Selected);
+            item.$option.prop('selected', item.Selected);
 
-            if (newselection && !this.options.runningInternalChange) {
+            if (!this.options.runningInternalChange) {
                 this.options.runningOriginalChange = true;
                 this.$selectBox.trigger('change');
                 this.options.runningOriginalChange = false;
@@ -473,7 +468,11 @@
             var indexToUse = 0;
             for (var i = 0; i < this.Struct.items.length; i++) {
                 var item = this.Struct.items[i];
+                if (item.Disabled) {
+                    continue;
+                }
                 var li = item.$li;
+                
                 var text = item.Text.substring(0, matchLength);
                 if (text && text.match(matchExp)) {
                     matchingItems.push(item);
