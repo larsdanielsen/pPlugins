@@ -360,31 +360,43 @@
             }
         },
         moveFocus: function moveFocus(dir) {
-            var that = this;
-
-            var currentActive = this.$ul.find('li.' + that.options.activeClass);
-            if (currentActive.size() == 0) {
-                currentActive = this.$ul.find('li').first();
+            var newActive = null;
+            var newItemIndex = 0;
+            for (var i = 0; i < this.Struct.items.length; i++) {
+                var item = this.Struct.items[i];
+                if (item.Active) {
+                    newActive = item;
+                    item.Active = false;
+                    newItemIndex = i + dir;
+                    if (newItemIndex < this.Struct.items.length && newItemIndex >= 0) {
+                        newActive = this.Struct.items[newItemIndex];
+                    }
+                    while (newActive.Disabled && newItemIndex < this.Struct.items.length && newItemIndex >= 0) {
+                        newItemIndex = newItemIndex + dir;
+                        newActive = this.Struct.items[newItemIndex];
+                        break;
+                    }
+                    break;
+                }
+            }
+            if (!newActive) {
+                newItemIndex = 0;
+                newActive = this.Struct.items[newItemIndex];
+                while (newActive.Disabled && newItemIndex < this.Struct.items.length) {
+                    newItemIndex++;
+                    newActive = this.Struct.items[newItemIndex];
+                    break;
+                }
             }
 
-            if (currentActive.size()) {
-                var newActive = currentActive;
-                if (dir == 1) {
-                    newActive = currentActive.next();
-                    while (!newActive || newActive.is('.' + this.options.disabledClass)) {
-                        newActive = newActive.next();
-                    }
-                } else if (dir == -1) {
-                    newActive = currentActive.prev();
-                    while (!newActive || newActive.is('.' + this.options.disabledClass)) {
-                        newActive = newActive.prev();
-                    }
-                }
+            if (newActive) {
+                newActive.Active = true;
                 this.setFocusTo(newActive);
             }
         },
-        setFocusTo: function setFocusTo(li) {
-            if (li.size() && !li.prop('disabled')) {
+        setFocusTo: function setFocusTo(item) {
+            var li = item.$li;
+            if (li.size()) {
                 this.$ul.children('li').removeClass(this.options.activeClass);
                 li.addClass(this.options.activeClass);
                 if (!this.options.multiple && !this.$ul.is(':visible')) {
