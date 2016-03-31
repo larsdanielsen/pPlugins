@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Content/page.css" rel="stylesheet" />
+    <link href="Content/pSelect.css" rel="stylesheet" />
+</head>
+<body>
+    <nav>
+        <div class="container">
+            Menu
+        </div>
+    </nav>
+    <header>
+        <div class="container">
+            Header
+        </div>
+    </header>
+    <div class="container">
+        <form role="form">
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group col-lg-2">
+                    <label for="sel2">Select list:</label>
+                    <select class="form-control doit" name="cars">
+                        <optgroup label="Swedish Cars">
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                        </optgroup>
+                        <optgroup label="German Cars">
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="button" class="btn btn-default" data-action="trigger">Trigger</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer>
+        <div class="container">
+            Footer
+        </div>
+    </footer>
+    <script src="Scripts/jquery-2.2.0.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/jquery.pSelect.js"></script>
+    <script src="Scripts/main.js"></script>
+</body>
+</html>

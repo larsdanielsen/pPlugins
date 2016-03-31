@@ -1,12 +1,10 @@
-﻿select.pSelect {
-  display: none;
-}
-label.pSelect {
+﻿label.pSelect {
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
   position: relative;
+  padding-right: 26px;
 }
 label.pSelect:after {
   -moz-box-sizing: border-box;
@@ -37,17 +35,38 @@ label.pSelect .label-inner {
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  font-weight: normal;
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
   margin: 0 20px 0 0;
+  font: inherit;
 }
 label.pSelect .pInput {
   position: absolute;
   top: -1000000px;
   left: -1000000px;
+}
+label.pSelect select {
+  display: none;
+}
+label.pSelect.pAutocomplete .pInput {
+  border: 0 none;
+  padding: 0;
+  margin: 0 12px 0 0;
+  font: inherit;
+  background-color: transparent;
+  width: 100%;
+  height: auto;
+  outline: none;
+}
+label.pSelect.pAutocomplete.pOpen .label-inner {
+  display: none;
+}
+label.pSelect.pAutocomplete.pOpen .pInput {
+  position: relative;
+  top: 0;
+  left: 0;
 }
 ul.pSelcetUl {
   height: auto;
@@ -65,6 +84,7 @@ ul.pSelcetUl {
   -webkit-user-select: none;
   user-select: none;
   overflow-y: auto;
+  display: none;
 }
 ul.pSelcetUl li {
   position: relative;
@@ -86,14 +106,14 @@ ul.pSelcetUl li {
 ul.pSelcetUl li + li {
   border-width: 1px 0 0;
 }
-ul.pSelcetUl li.pActive {
+ul.pSelcetUl li.pFocusedItem {
   background-color: #eee;
   color: #000;
 }
-ul.pSelcetUl li.pDisabled {
+ul.pSelcetUl li.pDisabledItem {
   color: #999;
 }
-ul.pSelcetUl li.pDisabled.pOptgroup {
+ul.pSelcetUl li.pDisabledItem.pOptgroup {
   color: #000;
   font-weight: bold;
 }
@@ -101,11 +121,18 @@ ul.pSelcetUl li:hover {
   background-color: #999;
   color: #fff;
 }
-ul.pSelcetUl.pNormal li.pSelected {
+ul.pSelcetUl.pNormal li.pSelectedItem {
   background-color: #66afe9;
   color: #fff;
 }
-ul.pSelcetUl.pMultiple li.pSelected:after {
+ul.pSelcetUl.pMultiple li {
+  padding: 5px 26px 5px 10px;
+}
+ul.pSelcetUl.pMultiple li.pSelectedItem {
+  background-color: #66afe9;
+  color: #fff;
+}
+ul.pSelcetUl.pMultiple li.pSelectedItem:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;

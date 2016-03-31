@@ -18,5 +18,10 @@
 
     });
 
+    $('body').on('change.myNameSpace', 'select.doit', function (e) {
+        $('#email').val($(this).val());
+    });
+
+
 
 });

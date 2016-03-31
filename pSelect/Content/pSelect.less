@@ -1,13 +1,11 @@
-﻿select.pSelect {
-    display: none;
-}
-
+﻿
 label.pSelect {
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
     position: relative;
+    padding-right: 26px;
 
     &:after {
         -moz-box-sizing: border-box;
@@ -42,12 +40,12 @@ label.pSelect {
         -ms-text-overflow: ellipsis;
         -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
-        font-weight: normal;
         -moz-user-select: none;
         -ms-user-select: none;
         -webkit-user-select: none;
         user-select: none;
         margin: 0 20px 0 0;
+        font: inherit;
     }
 
 
@@ -57,6 +55,39 @@ label.pSelect {
         left: -1000000px;
         //top: -50px;
         //color: black;
+    }
+
+
+
+    select {
+        display: none;
+    }
+
+    &.pAutocomplete {
+
+        .pInput {
+            border: 0 none;
+            padding: 0;
+            margin: 0 12px 0 0;
+            font: inherit;
+            background-color: transparent;
+            width: 100%;
+            height: auto;
+            outline: none;
+        }
+
+        &.pOpen {
+
+            .label-inner {
+                display: none;
+            }
+
+            .pInput {
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+        }
     }
 }
 
@@ -76,6 +107,7 @@ ul.pSelcetUl {
     -webkit-user-select: none;
     user-select: none;
     overflow-y: auto;
+    display: none;
 
     li {
         position: relative;
@@ -98,12 +130,12 @@ ul.pSelcetUl {
             border-width: 1px 0 0;
         }
 
-        &.pActive {
+        &.pFocusedItem {
             background-color: #eee;
             color: #000;
         }
 
-        &.pDisabled {
+        &.pDisabledItem {
             color: #999;
 
             &.pOptgroup {
@@ -121,7 +153,7 @@ ul.pSelcetUl {
     &.pNormal {
         li {
 
-            &.pSelected {
+            &.pSelectedItem {
                 background-color: #66afe9;
                 color: #fff;
             }
@@ -130,8 +162,12 @@ ul.pSelcetUl {
 
     &.pMultiple {
         li {
+            padding: 5px 26px 5px 10px;
 
-            &.pSelected {
+            &.pSelectedItem {
+                background-color: #66afe9;
+                color: #fff;
+
                 &:after {
                     -moz-box-sizing: border-box;
                     -webkit-box-sizing: border-box;
