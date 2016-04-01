@@ -53,7 +53,7 @@
             this.options.initDone = true;
         },
         open: function () {
-            console.log('open');
+            //console.log('open');
             var that = this;
             this.$input.val('');
             this.isOpen = true;
@@ -173,14 +173,14 @@
 
             this.$input.on('focus.pSelect', function () {
                 //console.log('$input focus.pSelect');
-                that.fillUl();
+                //that.fillUl();
                 that.closeOtherInstances();
                 that.hasFocus = true;
                 that.updateLabelView();
             });
 
             this.$input.on('blur.pSelect', function () {
-                console.log('blur, isOpen: ' + that.isOpen);
+                //console.log('blur, isOpen: ' + that.isOpen);
                 if (that.isOpen) {
                     that.focus();
                 } else {
@@ -350,7 +350,7 @@
             });
         },
         selectOption: function (item) {
-            console.log(item);
+            //console.log(item);
             if (this.options.multiple) {
                 item.Selected = !item.Selected;
             } else {
@@ -525,9 +525,9 @@
             }
         },
         filterOptions: function (keycode) {
-
+            //console.log('filterOptions: ' + keycode);
             var keyCodes = $.fn.pSelect.keyCodes;
-            if (keycode == keyCodes.Enter || keycode == keyCodes.Up || keycode == keyCodes.Down || this.options.multiple) {
+            if (keycode == keyCodes.Enter || keycode == keyCodes.Up || keycode == keyCodes.Down) {
                 return;
             }
             var regExp = new RegExp(this.$input.val(), 'i');
@@ -603,7 +603,7 @@
         multipleUlClass: 'pMultiple',
         selectCallback: null,
         multiple: false,
-        autocomplete: false
+        autocomplete: true
     };
 
     $.fn.pSelect.instances = [];
