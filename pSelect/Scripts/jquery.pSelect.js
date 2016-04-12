@@ -61,7 +61,7 @@
             $('body').append(this.$ul);
             this.positionUl();
             this.updateLabelView();
-            $(window).one('click.pSelect resize.pSelect', function () {
+            $(window).one('click.pSelect resize.pSelect scroll.pSelect', function () {
                 that.close();
                 that.blur();
             });
@@ -104,27 +104,33 @@
                 var options = that.$selectBox.find('option');
                 var text = '';
                 if (forcedText === undefined) {
-
                     if (that.options.multiple) {
                         var selectedOptions = options.filter(':selected');
-                        var allSelectedTexts = [];
-                        selectedOptions.each(function () {
-                            allSelectedTexts.push($(this).text());
-                        });
-                        if (allSelectedTexts.length) {
-                            text = allSelectedTexts.join(', ');
+                        if (that.options.summeyIfMoreThan > 0 && selectedOptions.length > that.options.summeyIfMoreThan) {
+                            text = that.options.summeyText.replace('#', selectedOptions.length).replace('%', that.Struct.items.length);
+                        } else {
+                            var allSelectedTexts = [];
+                            selectedOptions.each(function () {
+                                allSelectedTexts.push($(this).text());
+                            });
+                            if (allSelectedTexts.length) {
+                                text = allSelectedTexts.join(', ');
+                            }
                         }
                     } else {
                         var selectedIndex = that.$selectBox.get(0).selectedIndex;
                         var selectedOption = $(that.$selectBox.find('option').get(selectedIndex));
                         text = selectedOption.text();
                     }
+                    if (text == '' && that.options.labelIfNoneSelected) {
+                        text = that.options.labelIfNoneSelected;
+                    }
+
                 } else {
-                    //console.log(forcedText);
                     text = forcedText;
                 }
                 that.$label.text(text);
-            });
+            }, 0);
         },
         updateUlView: function () {
             var that = this;
@@ -149,7 +155,7 @@
                     }
                     item.$li.toggle(!item.Hidden);
                 }
-            });
+            }, 0);
         },
         bindEvents: function () {
             var that = this;
@@ -220,7 +226,10 @@
         getUl: function () {
             this.$ul = $('<ul/>')
                 .addClass(this.options.ulClass);
-            //.addClass(function () { return that.$selectBox.attr('class'); });
+
+            if (this.options.addSelectClassToLabel) {
+                this.$ul.addClass(this.$selectBox.attr('class'));
+            }
 
             if (this.options.multiple) {
                 this.$ul.addClass(this.options.multipleUlClass);
@@ -235,6 +244,7 @@
             for (var i = 0; i < this.Struct.items.length; i++) {
                 var item = this.Struct.items[i];
                 var li = $('<li/>')
+                    .addClass(item.$option.data('classnames'))
                     .text(item.Text)
                     .data('item', item);
                 item.$li = li;
@@ -269,6 +279,8 @@
                 item.$option = optgroup;
                 items.push(item);
 
+                optgroup.data('item', item);
+
                 optgroup.find('> option').each(
                     function () {
                         addOption($(this));
@@ -286,7 +298,7 @@
                     item.$option = op;
                     items.push(item);
                     i++;
-
+                    op.data('item', item);
                 }
             }
 
@@ -347,7 +359,7 @@
                 if (selectedposition) {
                     that.$ul.get(0).scrollTop = selectedposition.top;
                 }
-            });
+            }, 0);
         },
         selectOption: function (item) {
             //console.log(item);
@@ -365,15 +377,14 @@
                 this.options.runningOriginalChange = false;
             }
 
+            if (this.options.selectCallback) {
+                this.options.selectCallback(this, item);
+            }
+
             this.updateLabelView();
             this.updateUlView();
-
-            if (this.options.selectCallback) {
-                this.options.selectCallback(this);
-            }
         },
         moveFocus: function (dir) {
-            var that = this;
             this.focusedItemIndex += dir;
             this.moveFocusToNextValidItem(dir);
 
@@ -521,7 +532,8 @@
             }
             var foundItem = matchingItems[indexToUse];
             if (foundItem) {
-                this.setFocusTo(foundItem);
+                this.focusedItemIndex = foundItem.Index;
+                this.setFocusToFocusedItem();
             }
         },
         filterOptions: function (keycode) {
@@ -602,8 +614,12 @@
         normalUlClass: 'pNormal',
         multipleUlClass: 'pMultiple',
         selectCallback: null,
+        addSelectClassToLabel: false,
         multiple: false,
-        autocomplete: true
+        autocomplete: false,
+        labelIfNoneSelected: null,
+        summeyIfMoreThan: 0,
+        summeyText: null
     };
 
     $.fn.pSelect.instances = [];
@@ -635,52 +651,3 @@
 
 })(jQuery);
 
-
-/*
-
-inputKeyPress: function inputKeyPress(e) {
-            var charcode = e.charCode || e.keyCode;
-            this.findAndSelectNearest(charcode);
-            return false;
-        },
-        findAndSelectNearest: function findAndSelectNearest(charcode) {
-            var that = this;
-            if (!this.options.charsEntered) {
-                this.options.charsEntered = [];
-            }
-            var charToMatch = String.fromCharCode(charcode);
-            //if (!charToMatch.match(/[\w|\d|æøå]/i)) return;
-            //Say(charcode + ' - ' + charToMatch);
-            if (charcode == 40 || charcode == 41) return; // ( and )
-            if (charToMatch != this.options.charsEntered[0]) {
-                this.options.charsEntered.push(charToMatch);
-                window.clearTimeout(this.options.nearestMatchTimeout);
-                this.options.nearestMatchTimeout = window.setTimeout(function () {
-                    that.options.charsEntered = new Array();
-                }, 1000);
-            }
-            var indexToUse = 0;
-            var matchString = this.options.charsEntered.join('');
-            var matchLength = matchString.length;
-            var matchExp = new RegExp(matchString, 'i');
-            var matchingLis = new Array();
-            this.$ul.find('li').each(function () {
-                var li = $(this);
-                var text = li.text().substring(0, matchLength);
-                if (text && text.match(matchExp)) {
-                    matchingLis.push(li);
-                    if (li.is('.' + that.options.selectedItemClass) || li.is('.' + that.options.focusedItemClass)) {
-                        indexToUse = matchingLis.length;
-                    }
-                }
-            });
-            if (indexToUse >= matchingLis.length) {
-                indexToUse = 0;
-            }
-            var foundLi = matchingLis[indexToUse];
-            if (foundLi && foundLi.size()) {
-                this.setFocusTo(foundLi);
-            }
-        }
-
- */
