@@ -54,6 +54,7 @@
         },
         open: function () {
             var that = this;
+            //debugger;
             //console.log('open');
             if (this.options.getUlMaxHeight) {
                 this.options.ulMaxHeight = this.options.getUlMaxHeight(this);
@@ -61,6 +62,7 @@
             this.$input.val('');
             this.isOpen = true;
             this.fillUl();
+            this.$ul.hide();
             $('body').append(this.$ul);
             this.positionUl();
             this.updateLabelView();
@@ -315,22 +317,18 @@
             this.positionUlTimeout = window.setTimeout(function () {
                 //console.log('positionUlTimeout');
                 that.positionUlTimeout = null;
-
-                that.$ul.hide();
                 var ulCss = {};
                 ulCss.width = that.$wrapperLabel.outerWidth() + 'px';
                 var wrapperLabelOfs = that.$wrapperLabel.offset();
                 ulCss.top = wrapperLabelOfs.top + that.$wrapperLabel.outerHeight();
                 ulCss.left = wrapperLabelOfs.left;
                 that.$ul.css('max-height', 'none');
-                that.$ul.show();
 
                 var minDistance = 0, maxHeight;
 
                 if (above) {
                     minDistance = parseInt(ulCss.top / 4);
                     if (ulCss.top - that.$ul.outerHeight() - minDistance < 0) {
-                        that.$ul.height(0);
                         that.$ul.css('max-height', '0');
                         wrapperLabelOfs = that.$wrapperLabel.offset();
                         maxHeight = wrapperLabelOfs.top - minDistance;
@@ -370,6 +368,9 @@
                 if (selectedposition) {
                     that.$ul.get(0).scrollTop = selectedposition.top;
                 }
+
+                that.$ul.show();
+
             }, 0);
         },
         selectOption: function (item) {
@@ -633,7 +634,7 @@
         summeyText: null,
         ulMaxHeight: null,
         getUlMaxHeight: null
-};
+    };
 
     $.fn.pSelect.instances = [];
     $.fn.pSelect.keyCodes = {
