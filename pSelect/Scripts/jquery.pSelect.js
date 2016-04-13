@@ -53,8 +53,11 @@
             this.options.initDone = true;
         },
         open: function () {
-            //console.log('open');
             var that = this;
+            //console.log('open');
+            if (this.options.getUlMaxHeight) {
+                this.options.ulMaxHeight = this.options.getUlMaxHeight(this);
+            }
             this.$input.val('');
             this.isOpen = true;
             this.fillUl();
@@ -322,7 +325,7 @@
                 that.$ul.css('max-height', 'none');
                 that.$ul.show();
 
-                var minDistance = 0;
+                var minDistance = 0, maxHeight;
 
                 if (above) {
                     minDistance = parseInt(ulCss.top / 4);
@@ -330,7 +333,11 @@
                         that.$ul.height(0);
                         that.$ul.css('max-height', '0');
                         wrapperLabelOfs = that.$wrapperLabel.offset();
-                        that.$ul.css('max-height', (wrapperLabelOfs.top - minDistance) + 'px');
+                        maxHeight = wrapperLabelOfs.top - minDistance;
+                        if (that.options.ulMaxHeight && maxHeight > that.options.ulMaxHeight) {
+                            maxHeight = that.options.ulMaxHeight;
+                        }
+                        that.$ul.css('max-height', maxHeight + 'px');
                     } else {
                         that.$ul.css('max-height', 'none');
                     }
@@ -341,7 +348,11 @@
                     if (ulCss.top + that.$ul.outerHeight() + minDistance > $(window).height()) {
                         that.$ul.css('max-height', '0');
                         wrapperLabelOfs = that.$wrapperLabel.offset();
-                        that.$ul.css('max-height', ($(window).height() - wrapperLabelOfs.top - that.$wrapperLabel.outerHeight() - minDistance) + 'px');
+                        maxHeight = $(window).height() - wrapperLabelOfs.top - that.$wrapperLabel.outerHeight() - minDistance;
+                        if (that.options.ulMaxHeight && maxHeight > that.options.ulMaxHeight) {
+                            maxHeight = that.options.ulMaxHeight;
+                        }
+                        that.$ul.css('max-height', maxHeight + 'px');
                     } else {
                         that.$ul.css('max-height', 'none');
                     }
@@ -619,8 +630,10 @@
         autocomplete: false,
         labelIfNoneSelected: null,
         summeyIfMoreThan: 0,
-        summeyText: null
-    };
+        summeyText: null,
+        ulMaxHeight: null,
+        getUlMaxHeight: null
+};
 
     $.fn.pSelect.instances = [];
     $.fn.pSelect.keyCodes = {
