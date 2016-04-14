@@ -3,6 +3,9 @@
     $('[data-action=remove]').click(function () {
         $('select.doit').pSelect('remove');
     });
+    $('[data-action=runAutoComplete]').click(function () {
+        $('select.doit').pSelect({ autoComplete: true });
+    });
     $('[data-action=run]').click(function () {
         $('select.doit').pSelect();
     });

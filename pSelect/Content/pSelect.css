@@ -50,7 +50,7 @@ label.pSelect .pInput {
 label.pSelect select {
   display: none;
 }
-label.pSelect.pAutocomplete .pInput {
+label.pSelect.pAutoComplete .pInput {
   border: 0 none;
   padding: 0;
   margin: 0 12px 0 0;
@@ -60,10 +60,10 @@ label.pSelect.pAutocomplete .pInput {
   height: auto;
   outline: none;
 }
-label.pSelect.pAutocomplete.pOpen .label-inner {
+label.pSelect.pAutoComplete.pOpen .label-inner {
   display: none;
 }
-label.pSelect.pAutocomplete.pOpen .pInput {
+label.pSelect.pAutoComplete.pOpen .pInput {
   position: relative;
   top: 0;
   left: 0;
