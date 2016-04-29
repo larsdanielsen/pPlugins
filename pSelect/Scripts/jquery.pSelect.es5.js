@@ -1,15 +1,14 @@
 ﻿/*
- * Requires jQuery 1.7.x
- * For use on mobile, touchstart must be supported 
- * TODO: specify this 
- */
+* Requires jQuery 1.7.x
+* For use on mobile, touchstart must be supported 
+* TODO: specify this 
+*/
 
-
-
+'use strict';
 
 !(function ($) {
 
-    var pSelect = function (element, options, e) {
+    var pSelect = function pSelect(element, options, e) {
         if (e) {
             e.stopPropagation();
             e.preventDefault();
@@ -20,7 +19,7 @@
     };
 
     pSelect.prototype = {
-        init: function () {
+        init: function init() {
             var that = this;
             this.options.initDone = false;
 
@@ -28,9 +27,9 @@
                 this.multiple = true;
             }
 
-            this.$wrapperLabel = $('<label />')
-                .addClass(this.options.labelClass)
-                .addClass(function () { return that.$selectBox.attr('class'); });
+            this.$wrapperLabel = $('<label />').addClass(this.options.labelClass).addClass(function () {
+                return that.$selectBox.attr('class');
+            });
 
             if (this.options.autoComplete) {
                 this.$wrapperLabel.addClass(this.options.autoCompleteClass);
@@ -47,8 +46,7 @@
             this.$selectBox.bind('removeSelect.pSelect', function () {
                 var pSelectInstance = $(this).data('pSelect');
                 pSelectInstance.$wrapperLabel.before($(this)).remove();
-                $(this).unbind('.pSelect')
-                    .removeData('pSelect');
+                $(this).unbind('.pSelect').removeData('pSelect');
             });
 
             this.$selectBox.data('pSelect', this);
@@ -68,7 +66,7 @@
 
             this.options.initDone = true;
         },
-        open: function () {
+        open: function open() {
             var that = this;
             //debugger;
             if (this.options.getUlMaxHeight) {
@@ -86,16 +84,16 @@
                 that.blur();
             });
         },
-        blur: function () {
+        blur: function blur() {
             //console.log('blur');
             this.hasFocus = false;
             this.updateLabelView();
         },
-        focus: function () {
+        focus: function focus() {
             //console.log('focus');
             this.$input.focus();
         },
-        close: function (isMySelf) {
+        close: function close(isMySelf) {
             if (this.isOpen) {
                 this.isOpen = false;
                 this.updateLabelView();
@@ -108,7 +106,7 @@
                 }
             }
         },
-        toggle: function () {
+        toggle: function toggle() {
             //console.log('toggle');
             if (this.isOpen) {
                 this.close();
@@ -116,7 +114,7 @@
                 this.open();
             }
         },
-        updateLabelView: function (forcedText) {
+        updateLabelView: function updateLabelView(forcedText) {
             var that = this;
             if (this.updateLabelViewTimeout) {
                 window.clearTimeout(this.updateLabelViewTimeout);
@@ -149,14 +147,13 @@
                     if (text == '' && that.options.labelIfNoneSelected) {
                         text = that.options.labelIfNoneSelected;
                     }
-
                 } else {
                     text = forcedText;
                 }
                 that.$label.text(text);
             }, 0);
         },
-        updateUlView: function () {
+        updateUlView: function updateUlView() {
             var that = this;
             if (this.updateUlViewTimeout) {
                 window.clearTimeout(this.updateUlViewTimeout);
@@ -181,7 +178,7 @@
                 }
             }, 0);
         },
-        bindEvents: function () {
+        bindEvents: function bindEvents() {
             var that = this;
 
             this.$ul.on('click.pSelect', 'li', function (e) {
@@ -251,9 +248,8 @@
                 that.updateLabelView();
             });
         },
-        getUl: function () {
-            this.$ul = $('<ul/>')
-                .addClass(this.options.ulClass);
+        getUl: function getUl() {
+            this.$ul = $('<ul/>').addClass(this.options.ulClass);
 
             if (this.options.addSelectClassToLabel) {
                 this.$ul.addClass(this.$selectBox.attr('class'));
@@ -265,16 +261,13 @@
                 this.$ul.addClass(this.options.normalUlClass);
             }
         },
-        fillUl: function () {
+        fillUl: function fillUl() {
             //console.log('fillUl');
             this.$ul.empty();
             this.getStruct();
             for (var i = 0; i < this.Struct.items.length; i++) {
                 var item = this.Struct.items[i];
-                var li = $('<li/>')
-                    .addClass(item.$option.data('classnames'))
-                    .text(item.Text)
-                    .data('item', item);
+                var li = $('<li/>').addClass(item.$option.data('classnames')).text(item.Text).data('item', item);
                 item.$li = li;
                 if (item.$option.is('optgroup')) {
                     item.$li.addClass(this.options.optgroupClass);
@@ -283,7 +276,7 @@
             }
             this.updateUlView();
         },
-        getStruct: function () {
+        getStruct: function getStruct() {
             var that = this;
             var items = [];
             var i = 0;
@@ -309,11 +302,9 @@
 
                 optgroup.data('item', item);
 
-                optgroup.find('> option').each(
-                    function () {
-                        addOption($(this));
-                    }
-                );
+                optgroup.find('> option').each(function () {
+                    addOption($(this));
+                });
             }
 
             function addOption(op) {
@@ -332,7 +323,7 @@
 
             this.Struct = { items: items };
         },
-        positionUl: function (above) {
+        positionUl: function positionUl(above) {
             var that = this;
             if (this.positionUlTimeout) {
                 window.clearTimeout(this.positionUlTimeout);
@@ -369,7 +360,6 @@
                         that.positionUl(true);
                         return;
                     }
-
                 };
 
                 that.$ul.css(ulCss);
@@ -384,10 +374,9 @@
                     that.$ul.get(0).scrollTop = that.ulScrollTop;
                     that.ulScrollTop = null;
                 }
-
             }, 0);
         },
-        selectOption: function (item) {
+        selectOption: function selectOption(item) {
             //console.log(item);
             if (this.multiple) {
                 item.Selected = !item.Selected;
@@ -410,7 +399,7 @@
             this.updateLabelView();
             this.updateUlView();
         },
-        moveFocus: function (dir) {
+        moveFocus: function moveFocus(dir) {
             this.focusedItemIndex += dir;
             this.moveFocusToNextValidItem(dir);
 
@@ -425,7 +414,7 @@
             }
             this.setFocusToFocusedItem();
         },
-        moveFocusToNextValidItem: function (dir) {
+        moveFocusToNextValidItem: function moveFocusToNextValidItem(dir) {
             dir = dir || 1;
             var that = this;
             while (isInsideArray() && isUnFocusable(this.Struct.items[this.focusedItemIndex])) {
@@ -444,13 +433,13 @@
                 return item.Hidden || item.Disabled;
             }
         },
-        moveFocusUp: function () {
+        moveFocusUp: function moveFocusUp() {
             this.moveFocus(-1);
         },
-        moveFocusDown: function () {
+        moveFocusDown: function moveFocusDown() {
             this.moveFocus(1);
         },
-        setFocusToFocusedItem: function () {
+        setFocusToFocusedItem: function setFocusToFocusedItem() {
             var that = this;
             window.setTimeout(function () {
                 var item = that.Struct.items[that.focusedItemIndex];
@@ -466,11 +455,11 @@
                 if (liTop < ulScrollTop) {
                     that.$ul.get(0).scrollTop = liTop; // scroll up
                 } else if (liTop + liOuterHeight > ulInnerHeight + ulScrollTop) {
-                    that.$ul.get(0).scrollTop = liOuterHeight + liTop - ulInnerHeight; // scroll down
-                }
+                        that.$ul.get(0).scrollTop = liOuterHeight + liTop - ulInnerHeight; // scroll down
+                    }
             }, 0);
         },
-        inputKeyDown: function (e) {
+        inputKeyDown: function inputKeyDown(e) {
 
             var keyCodes = $.fn.pSelect.keyCodes;
             var keycode = e.keyCode;
@@ -483,32 +472,36 @@
                 }
             } else if (keycode == keyCodes.Up) {
                 this.moveFocusUp();
-            } else if (keycode == keyCodes.Enter || keycode == keyCodes.Space) { // enter of space
+            } else if (keycode == keyCodes.Enter || keycode == keyCodes.Space) {
+                // enter of space
                 e.preventDefault();
                 if (keycode == keyCodes.Enter || this.multiple) {
                     this.$ul.find('li.' + this.options.focusedItemClass).trigger('click.pSelect');
                 }
-            } else if (keycode == keyCodes.Esc) { // esc
+            } else if (keycode == keyCodes.Esc) {
+                // esc
                 this.close();
-            } else if (keycode == keyCodes.Tab) { // tab
+            } else if (keycode == keyCodes.Tab) {
+                // tab
                 this.close();
             }
 
-            if (keycode != keyCodes.Tab && keycode != keyCodes.Shift) { // shift and tab is allowed to pass
+            if (keycode != keyCodes.Tab && keycode != keyCodes.Shift) {
+                // shift and tab is allowed to pass
                 //event.preventDefault();
                 return true;
             }
 
             return true;
         },
-        inputKeyPress: function (e) {
+        inputKeyPress: function inputKeyPress(e) {
             var charcode = e.charCode || e.keyCode;
             if (!this.options.autoComplete) {
                 this.findAndSelectNearest(charcode);
             }
             return false;
         },
-        inputKeyUp: function (e) {
+        inputKeyUp: function inputKeyUp(e) {
             if (this.options.autoComplete) {
                 var charcode = e.charCode || e.keyCode;
                 var keycode = e.charCode || e.keyCode;
@@ -516,7 +509,7 @@
             }
             //return false;
         },
-        findAndSelectNearest: function (charcode) {
+        findAndSelectNearest: function findAndSelectNearest(charcode) {
             var that = this;
             if (charcode == 40 || charcode == 41) return; // ( and )
             if (!this.options.charsEntered) {
@@ -563,7 +556,7 @@
                 this.setFocusToFocusedItem();
             }
         },
-        filterOptions: function (keycode) {
+        filterOptions: function filterOptions(keycode) {
             //console.log('filterOptions: ' + keycode);
             var keyCodes = $.fn.pSelect.keyCodes;
             if (keycode == keyCodes.Enter || keycode == keyCodes.Up || keycode == keyCodes.Down || keycode == keyCodes.Esc || keycode == keyCodes.Tab) {
@@ -584,7 +577,7 @@
             this.focusedItemIndex = 0;
             this.moveFocusUp();
         },
-        closeOtherInstances: function () {
+        closeOtherInstances: function closeOtherInstances() {
             for (var i = 0; i < $.fn.pSelect.instances.length; i++) {
                 var instance = $.fn.pSelect.instances[i];
                 if (instance !== this) {
@@ -604,7 +597,6 @@
         multiple: false
     };
 
-
     $.fn.pSelect = function (option, event) {
         this.each(function () {
 
@@ -623,7 +615,6 @@
             var inst = new pSelect(this, options, event);
             $.fn.pSelect.instances.push(inst);
             $this.data('pSelect', inst);
-
         });
         //this.trigger('change.pSelect');
         return this;
@@ -665,9 +656,7 @@
         Shift: 16
     };
 
-    $.fn.pSelect.Item = function () {
-
-    };
+    $.fn.pSelect.Item = function () {};
 
     $.fn.pSelect.Item.prototype = {
         Text: '',
@@ -680,6 +669,5 @@
         $option: null,
         $li: null
     };
-
 })(jQuery);
 

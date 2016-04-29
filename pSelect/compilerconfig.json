@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "Content/pSelect.css",
+    "inputFile": "Content/pSelect.less"
+  },
+  {
+    "outputFile": "Scripts/jquery.pSelect.es5.js",
+    "inputFile": "Scripts/jquery.pSelect.js"
+  },
+  {
+    "outputFile": "Content/page.css",
+    "inputFile": "Content/page.less"
+  },
+  {
+    "outputFile": "Content/bootstrap.pSelect.css",
+    "inputFile": "Content/bootstrap.pSelect.less"
+  }
+]

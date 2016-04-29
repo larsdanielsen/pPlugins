@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>pSelect DEMO</title>
-    <link href="Content/bootstrap.css" rel="stylesheet" />
-    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
-    <link href="Content/page.css" rel="stylesheet" />
-    <link href="Content/pSelect.css" rel="stylesheet" />
+    <link data-type="generic" href="Content/pSelect.css" rel="stylesheet" />
+    <link data-type="bootstrap" href="Content/bootstrap.pSelect.css" rel="stylesheet" />
+    <link data-type="bootstrap" href="Content/bootstrap.css" rel="stylesheet" />
+    <link data-type="bootstrap" href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <link data-type="generic" href="Content/page.css" rel="stylesheet" />
 </head>
 <body>
     <nav>
@@ -27,6 +28,14 @@
                     <button type="button" class="btn btn-default" data-action="run">Run</button>
                     <button type="button" class="btn btn-default" data-action="runAutoComplete">Run with autocomplete</button>
                     <button type="button" class="btn btn-default" data-action="remove">Remove</button>
+                    <div class="checkbox">
+                        <label><input type="checkbox" data-role="BootstrapCss">Bootstrap</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-2">
+                    <div class="checkbox">
+                    </div>
                 </div>
             </div>
             <div class="row">

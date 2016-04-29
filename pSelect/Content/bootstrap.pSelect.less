@@ -1,18 +1,12 @@
 ﻿
 label.pSelect {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
     position: relative;
     overflow: hidden;
-    padding: 5px 26px 5px 10px;
-    display: block;
-    background-color: #fff;
-    border: 1px solid #999;
+    padding-right: 26px;
 
     &:after {
         -moz-box-sizing: border-box;
@@ -81,6 +75,8 @@ label.pSelect {
             margin: 0 12px 0 0;
             font: inherit;
             background-color: transparent;
+            width: 100%;
+            height: auto;
             outline: none;
         }
 
@@ -94,8 +90,6 @@ label.pSelect {
                 position: relative;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: auto;
             }
         }
     }
