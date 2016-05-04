@@ -1,0 +1,64 @@
+﻿label.pSelect {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+label.pSelect .label-inner {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  line-height: inherit;
+  cursor: default;
+}
+label.pSelect select {
+  display: none;
+}
+label.pSelect.pAutoComplete.pOpen .label-inner {
+  display: none;
+}
+label.pSelect.pAutoComplete.pOpen .pInput {
+  position: relative;
+}
+ul.pSelcetUl {
+  height: auto;
+  width: auto;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  list-style-type: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow-y: auto;
+  display: none;
+}
+ul.pSelcetUl li {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  list-style-type: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  cursor: default;
+}

@@ -1,18 +1,22 @@
 ﻿[
   {
-    "outputFile": "Content/pSelect.css",
-    "inputFile": "Content/pSelect.less"
+    "outputFile": "Content/css/page.css",
+    "inputFile": "Content/less/page.less"
   },
   {
-    "outputFile": "Scripts/jquery.pSelect.es5.js",
-    "inputFile": "Scripts/jquery.pSelect.js"
+    "outputFile": "Content/css/bootstrap.page.css",
+    "inputFile": "Content/less/bootstrap.page.less"
   },
   {
-    "outputFile": "Content/page.css",
-    "inputFile": "Content/page.less"
+    "outputFile": "Content/css/core.pSelect.css",
+    "inputFile": "Content/less/core.pSelect.less"
   },
   {
-    "outputFile": "Content/bootstrap.pSelect.css",
-    "inputFile": "Content/bootstrap.pSelect.less"
+    "outputFile": "Content/css/simple.pSelect.css",
+    "inputFile": "Content/less/simple.pSelect.less"
+  },
+  {
+    "outputFile": "Content/css/bootstrap.pSelect.css",
+    "inputFile": "Content/less/bootstrap.pSelect.less"
   }
 ]

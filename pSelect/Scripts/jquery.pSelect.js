@@ -39,6 +39,7 @@
             this.$label = $('<span/>').addClass('label-inner');
 
             this.$input = $('<input/>').addClass(this.options.inputClass);
+            this.hideInput();
 
             if (!this.options.autoComplete) {
                 this.$input.prop('readonly', true);
@@ -70,12 +71,10 @@
         },
         open: function () {
             var that = this;
-            //debugger;
-            if (this.options.getUlMaxHeight) {
-                this.options.ulMaxHeight = this.options.getUlMaxHeight(this);
-            }
-            this.$input.val('');
             this.isOpen = true;
+            if (this.options.autoComplete) {
+                this.$input.removeAttr('style');
+            }
             this.fillUl();
             this.$ul.hide();
             $('body').append(this.$ul);
@@ -87,7 +86,6 @@
             });
         },
         blur: function () {
-            //console.log('blur');
             this.hasFocus = false;
             this.updateLabelView();
         },
@@ -98,6 +96,12 @@
         close: function (isMySelf) {
             if (this.isOpen) {
                 this.isOpen = false;
+
+                if (this.options.autoComplete) {
+                    this.hideInput();
+                }
+                this.$input.val('');
+
                 this.updateLabelView();
                 if (this.ulScrollTop === null) {
                     this.ulScrollTop = this.$ul.get(0).scrollTop;
@@ -184,9 +188,12 @@
         bindEvents: function () {
             var that = this;
 
-            this.$ul.on('click.pSelect', 'li', function (e) {
+            this.$ul.on('click.pSelect', function (e) {
                 e.stopPropagation();
                 e.preventDefault();
+            });
+
+            this.$ul.on('click.pSelect', 'li', function (e) {
                 that.selectOption($(this).data('item'));
                 if (that.multiple) {
                     that.focus();
@@ -200,21 +207,16 @@
             });
 
             this.$wrapperLabel.on('click.pSelect', function (e) {
-                //console.log('$wrapperLabel click.pSelect');
-                that.closeOtherInstances();
                 e.stopPropagation();
             });
 
             this.$input.on('focus.pSelect', function () {
-                //console.log('$input focus.pSelect');
-                //that.fillUl();
                 that.closeOtherInstances();
                 that.hasFocus = true;
                 that.updateLabelView();
             });
 
             this.$input.on('blur.pSelect', function () {
-                //console.log('blur, isOpen: ' + that.isOpen);
                 if (that.isOpen) {
                     that.focus();
                 } else {
@@ -340,37 +342,50 @@
             this.positionUlTimeout = window.setTimeout(function () {
                 that.positionUlTimeout = null;
 
+                if (that.options.getUlMaxHeight) {
+                    that.options.ulMaxHeight = that.options.getUlMaxHeight(that);
+                }
+
                 var wrapperLabelOfset = that.$wrapperLabel.offset();
                 var wrapperLabelHeight = that.$wrapperLabel.outerHeight();
                 var windowScrollTop = $(window).scrollTop();
-                var ulCss = {};
+                var windowScrollLeft = $(window).scrollLeft();
+
+                var ulCss = {
+                    top: 'auto',
+                    bottom: 'auto',
+                    width: that.$wrapperLabel.outerWidth(),
+                    left: wrapperLabelOfset.left - windowScrollLeft
+                };
 
                 that.$ul.hide();
-                ulCss.width = that.$wrapperLabel.outerWidth();
-                ulCss.left = wrapperLabelOfset.left;
-                that.$ul.css('max-height', '0');
 
                 var distanceAvailable;
                 if (above) {
                     distanceAvailable = wrapperLabelOfset.top - windowScrollTop;
                     ulCss.maxHeight = distanceAvailable * .8;
-                    if (ulCss.maxHeight > wrapperLabelHeight) {
-                        that.$ul.css('max-height', ulCss.maxHeight);
-                        ulCss.top = wrapperLabelOfset.top - that.$ul.outerHeight();
-                    } else {
-                        ulCss.top = windowScrollTop;
-                        ulCss.maxHeight = wrapperLabelHeight;
+                    ulCss.bottom = $(window).outerHeight() - wrapperLabelOfset.top + windowScrollTop;
+                    if (that.options.ulMaxHeight && ulCss.maxHeight > that.options.ulMaxHeight) {
+                        ulCss.maxHeight = that.options.ulMaxHeight;
                     }
                 } else {
-                    ulCss.top = wrapperLabelOfset.top + wrapperLabelHeight;
-                    distanceAvailable = $(window).outerHeight() - ulCss.top + windowScrollTop;
+                    ulCss.top = wrapperLabelOfset.top + wrapperLabelHeight - windowScrollTop;
+                    distanceAvailable = $(window).outerHeight() - wrapperLabelOfset.top - wrapperLabelHeight + windowScrollTop;
                     ulCss.maxHeight = distanceAvailable * .8;
-                    if (ulCss.maxHeight < wrapperLabelHeight * 4 && distanceAvailable < wrapperLabelOfset.top - windowScrollTop) {
+                    if (that.options.ulMaxHeight && ulCss.maxHeight > that.options.ulMaxHeight) {
+                        ulCss.maxHeight = that.options.ulMaxHeight;
+                    }
+                    if (ulCss.maxHeight < wrapperLabelHeight * 6 && distanceAvailable * 2 < wrapperLabelOfset.top - windowScrollTop) {
                         that.positionUl(true);
                         return;
                     }
-
                 };
+
+                if (ulCss.maxHeight < wrapperLabelHeight * 3) {
+                    ulCss.top = windowScrollTop + 10 - windowScrollTop;
+                    ulCss.bottom = 'auto';
+                    ulCss.maxHeight = $(window).outerHeight() - 20;
+                }
 
                 that.$ul.css(ulCss);
                 that.$ul.show();
@@ -387,10 +402,26 @@
 
             }, 0);
         },
+        hideInput: function () {
+            this.$input.css({
+                position: 'absolute',
+                top: 0,
+                left: -10,
+                border: '0 none',
+                padding: 0,
+                margin: 0,
+                width: 2,
+                height: 2
+            });
+        },
         selectOption: function (item) {
             //console.log(item);
             if (this.multiple) {
-                item.Selected = !item.Selected;
+                if (!item.Disabled) {
+                    item.Selected = !item.Selected;
+                } else {
+                    //return;
+                }
             } else {
                 item.Selected = true;
             }
@@ -502,9 +533,11 @@
             return true;
         },
         inputKeyPress: function (e) {
-            var charcode = e.charCode || e.keyCode;
             if (!this.options.autoComplete) {
+                e.preventDefault();
+                var charcode = e.charCode || e.keyCode;
                 this.findAndSelectNearest(charcode);
+                this.$input.val('');
             }
             return false;
         },
@@ -528,11 +561,11 @@
                 window.clearTimeout(this.options.nearestMatchTimeout);
                 this.options.nearestMatchTimeout = window.setTimeout(function () {
                     that.options.charsEntered = [];
-                    that.$input.val('');
+                    //that.$input.val('');
                 }, 1000);
             }
             var matchString = this.options.charsEntered.join('');
-            that.$input.val(matchString);
+            //that.$input.val(matchString);
 
             var matchLength = matchString.length;
             var matchExp = new RegExp(matchString, 'i');
@@ -566,10 +599,23 @@
         filterOptions: function (keycode) {
             //console.log('filterOptions: ' + keycode);
             var keyCodes = $.fn.pSelect.keyCodes;
-            if (keycode == keyCodes.Enter || keycode == keyCodes.Up || keycode == keyCodes.Down || keycode == keyCodes.Esc || keycode == keyCodes.Tab) {
+            /*
+            
+            if (keycode == keyCodes.Enter || keycode == keyCodes.Up || keycode == keyCodes.Down || keycode == keyCodes.Esc || keycode == keyCodes.Tab || keycode == keyCodes.Shift) {
                 return;
             }
-            var regExp = new RegExp(this.$input.val(), 'i');
+            */
+            var inputVal = this.$input.val();
+            if (keycode == keyCodes.Enter || this.lastInputValue == inputVal) {
+                return;
+            }
+            this.lastInputValue = inputVal;
+
+            if (!this.isOpen) {
+                this.open();
+            }
+
+            var regExp = new RegExp(inputVal, 'i');
             //var firstFound = false;
             for (var i = 0; i < this.Struct.items.length; i++) {
                 var item = this.Struct.items[i];
@@ -583,6 +629,7 @@
             this.positionUl();
             this.focusedItemIndex = 0;
             this.moveFocusUp();
+
         },
         closeOtherInstances: function () {
             for (var i = 0; i < $.fn.pSelect.instances.length; i++) {
@@ -601,6 +648,7 @@
         positionUlTimeout: null,
         focusedItemIndex: 0,
         ulScrollTop: null,
+        lastInputValue: '',
         multiple: false
     };
 
