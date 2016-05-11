@@ -12,16 +12,19 @@ label.pSelect {
     display: block;
 
     .label-inner {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
         display: block;
         white-space: nowrap;
         overflow: hidden;
         -ms-text-overflow: ellipsis;
         -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        -webkit-user-select: none;
-        user-select: none;
         line-height: inherit;
         cursor: default;
     }
@@ -30,15 +33,18 @@ label.pSelect {
         display: none;
     }
 
+    .pInput {
+        position: relative;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
     &.pAutoComplete {
 
         &.pOpen {
             .label-inner {
                 display: none;
-            }
-
-            .pInput {
-                position: relative;
             }
         }
     }
@@ -70,7 +76,6 @@ ul.pSelcetUl {
         -ms-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-
         position: relative;
         cursor: default;
     }

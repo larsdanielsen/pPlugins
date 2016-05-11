@@ -11,27 +11,33 @@
   display: block;
 }
 label.pSelect .label-inner {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
   line-height: inherit;
   cursor: default;
 }
 label.pSelect select {
   display: none;
 }
+label.pSelect .pInput {
+  position: relative;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 label.pSelect.pAutoComplete.pOpen .label-inner {
   display: none;
-}
-label.pSelect.pAutoComplete.pOpen .pInput {
-  position: relative;
 }
 ul.pSelcetUl {
   height: auto;

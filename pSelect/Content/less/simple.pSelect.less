@@ -2,10 +2,10 @@
 label.pSelect {
     border: 1px solid #333;
     color: #333;
-    padding: 5px 10px;
+    padding: 3px 28px 3px 3px;
     height: 32px;
     width: 50%;
-    line-height: 20px;
+    line-height: 18px;
     font-size: 14px;
     opacity: .7;
 
@@ -20,15 +20,21 @@ label.pSelect {
         height: 30px;
     }
 
-    &.pFocus {
-        opacity: 1;
-    }
-
     .label-inner {
-        margin: 0 20px 0 0;
+        height: 24px;
+        border: 1px dotted transparent;
+        margin: 0;
+        padding: 2px 5px;
         font: inherit;
     }
 
+    &.pFocus {
+        opacity: 1;
+
+        .label-inner {
+            border-color: #999;
+        }
+    }
 
     &.pAutoComplete {
 
@@ -39,17 +45,16 @@ label.pSelect {
             }
 
             .pInput {
-                margin: 0 20px 0 0;
-                border: 0 none;
-                padding: 0;
+                height: 24px;
+                line-height: 18px;
+                margin: 0;
+                padding: 3px 5px;
                 font: inherit;
+                border: 0 none;
                 width: 100%;
-                height: auto;
                 outline: none;
                 background-color: transparent;
                 position: relative;
-                top: 0;
-                left: 0;
             }
         }
     }
@@ -65,11 +70,13 @@ ul.pSelcetUl {
         margin: 0;
         border: 0 solid #ccc;
         background-color: #fff;
-        padding: 5px 10px;
-            height: 32px;
+        padding: 6px 10px;
+        height: 30px;
+        line-height: 18px;
 
         + li {
             border-width: 1px 0 0;
+            height: 31px;
         }
 
         &.pFocusedItem {
@@ -103,7 +110,7 @@ ul.pSelcetUl {
 
     &.pMultiple {
         li {
-            padding: 5px 20px 5px 10px;
+            padding: 6px 20px 6px 10px;
 
             &.pSelectedItem {
                 &:after {
@@ -113,8 +120,8 @@ ul.pSelcetUl {
                     box-sizing: border-box;
                     display: block;
                     width: 26px;
-                    height: 31px;
-                    line-height: 31px;
+                    height: 30px;
+                    line-height: 30px;
                     position: absolute;
                     top: 0;
                     right: 0;

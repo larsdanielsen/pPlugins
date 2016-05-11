@@ -72,20 +72,21 @@
         open: function () {
             var that = this;
             this.isOpen = true;
-            if (this.options.autoComplete) {
-                this.$input.removeAttr('style');
-            }
             this.fillUl();
             this.$ul.hide();
             $('body').append(this.$ul);
             this.positionUl();
             this.updateLabelView();
+            if (this.options.autoComplete) {
+                this.$input.removeAttr('style');
+            }
             $(window).one('click.pSelect touchstart.pSelect resize.pSelect scroll.pSelect', function () {
                 that.close();
                 that.blur();
             });
         },
         blur: function () {
+            //console.log('blur');
             this.hasFocus = false;
             this.updateLabelView();
         },
@@ -350,7 +351,7 @@
                 var wrapperLabelHeight = that.$wrapperLabel.outerHeight();
                 var windowScrollTop = $(window).scrollTop();
                 var windowScrollLeft = $(window).scrollLeft();
-
+                //var ulScrollHeight = that.$ul.get(0).scrollHeight;
                 var ulCss = {
                     top: 'auto',
                     bottom: 'auto',
@@ -375,6 +376,9 @@
                     if (that.options.ulMaxHeight && ulCss.maxHeight > that.options.ulMaxHeight) {
                         ulCss.maxHeight = that.options.ulMaxHeight;
                     }
+                    //  console.log(ulCss.maxHeight);
+                    //  console.log(that.$ul.get(0).scrollHeight);
+                    //if (ulCss.maxHeight < ulScrollHeight && ulCss.maxHeight < wrapperLabelHeight * 6 && distanceAvailable * 2 < wrapperLabelOfset.top - windowScrollTop) {
                     if (ulCss.maxHeight < wrapperLabelHeight * 6 && distanceAvailable * 2 < wrapperLabelOfset.top - windowScrollTop) {
                         that.positionUl(true);
                         return;
@@ -390,6 +394,8 @@
                 that.$ul.css(ulCss);
                 that.$ul.show();
 
+                //console.log(ulCss.maxHeight);
+                //console.log(ulScrollHeight);
                 if (that.ulScrollTop === null) {
                     var selectedposition = that.$ul.find('li.' + that.options.selectedItemClass).position();
                     if (selectedposition) {
@@ -406,12 +412,14 @@
             this.$input.css({
                 position: 'absolute',
                 top: 0,
-                left: -10,
+                left: 0,
                 border: '0 none',
                 padding: 0,
                 margin: 0,
-                width: 2,
-                height: 2
+                width: 1,
+                background: 'none transparent',
+                color: 'transparent',
+                height: this.$wrapperLabel.outerHeight()
             });
         },
         selectOption: function (item) {
@@ -534,12 +542,12 @@
         },
         inputKeyPress: function (e) {
             if (!this.options.autoComplete) {
-                e.preventDefault();
+                //e.preventDefault();
                 var charcode = e.charCode || e.keyCode;
                 this.findAndSelectNearest(charcode);
                 this.$input.val('');
             }
-            return false;
+            //return false;
         },
         inputKeyUp: function (e) {
             if (this.options.autoComplete) {
