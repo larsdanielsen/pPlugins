@@ -3,48 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "pSelect", "http://localhost:49397", "{5D670EB1-BE8F-4451-BF68-11330AF52EFA}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "pPlugins", "pPlugins\", "{71355504-6B33-4595-8A5F-67086F00716B}"
 	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_49397"
-		Debug.AspNetCompiler.PhysicalPath = "pSelect\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49397\"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50575"
+		Debug.AspNetCompiler.PhysicalPath = "pPlugins\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50575\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_49397"
-		Release.AspNetCompiler.PhysicalPath = "pSelect\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49397\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50575"
+		Release.AspNetCompiler.PhysicalPath = "pPlugins\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50575\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "pSelect\"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "pCheckRadio", "pCheckRadio\", "{FBC58605-B67C-418F-9A39-E87988A9299C}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_49568"
-		Debug.AspNetCompiler.PhysicalPath = "pCheckRadio\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49568\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_49568"
-		Release.AspNetCompiler.PhysicalPath = "pCheckRadio\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49568\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "49568"
-		SlnRelativePath = "pCheckRadio\"
-		DefaultWebSiteLanguage = "Visual C#"
+		VWDPort = "50575"
+		SlnRelativePath = "pPlugins\"
 	EndProjectSection
 EndProject
 Global
@@ -52,10 +29,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5D670EB1-BE8F-4451-BF68-11330AF52EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D670EB1-BE8F-4451-BF68-11330AF52EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBC58605-B67C-418F-9A39-E87988A9299C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBC58605-B67C-418F-9A39-E87988A9299C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71355504-6B33-4595-8A5F-67086F00716B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71355504-6B33-4595-8A5F-67086F00716B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

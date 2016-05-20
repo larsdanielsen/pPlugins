@@ -1,0 +1,42 @@
+﻿[
+  {
+    "outputFile": "pCheckRadio/Content/css/core.pCheckRadio.css",
+    "inputFile": "pCheckRadio/Content/less/core.pCheckRadio.less"
+  },
+  {
+    "outputFile": "pCheckRadio/Content/css/page.css",
+    "inputFile": "pCheckRadio/Content/less/page.less"
+  },
+  {
+    "outputFile": "pSelect/Content/css/page.css",
+    "inputFile": "pSelect/Content/less/page.less"
+  },
+  {
+    "outputFile": "pCheckRadio/Content/css/bootstrap.page.css",
+    "inputFile": "pCheckRadio/Content/less/bootstrap.page.less"
+  },
+  {
+    "outputFile": "pCheckRadio/Content/css/bootstrap.pCheckRadio.css",
+    "inputFile": "pCheckRadio/Content/less/bootstrap.pCheckRadio.less"
+  },
+  {
+    "outputFile": "pCheckRadio/Content/css/simple.pCheckRadio.css",
+    "inputFile": "pCheckRadio/Content/less/simple.pCheckRadio.less"
+  },
+  {
+    "outputFile": "pSelect/Content/css/bootstrap.page.css",
+    "inputFile": "pSelect/Content/less/bootstrap.page.less"
+  },
+  {
+    "outputFile": "pSelect/Content/css/simple.pSelect.css",
+    "inputFile": "pSelect/Content/less/simple.pSelect.less"
+  },
+  {
+    "outputFile": "pSelect/Content/css/bootstrap.pSelect.css",
+    "inputFile": "pSelect/Content/less/bootstrap.pSelect.less"
+  },
+  {
+    "outputFile": "pSelect/Content/css/core.pSelect.css",
+    "inputFile": "pSelect/Content/less/core.pSelect.less"
+  }
+]
