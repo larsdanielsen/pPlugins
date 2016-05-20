@@ -2,9 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>pPlugins</title>
+    <title data-type="base">pPlugins</title>
     <link data-theme="bootstrap" href="/Content/bootstrap.css" rel="stylesheet" />
     <link data-theme="bootstrap" href="/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link data-theme="simple" href="/Content/css/page.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -34,7 +35,16 @@
         </div><!-- /.container -->
     </nav>
     <div class="container">
-
+        <form role="form">
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    <div class="radio">
+                        <label><input type="radio" name="theme" data-theme="simple">Simple</label>
+                        <label><input type="radio" name="theme" data-theme="bootstrap">Bootstrap</label>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
     <footer>
         <div class="container">

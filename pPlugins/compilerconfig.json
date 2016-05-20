@@ -4,14 +4,6 @@
     "inputFile": "pCheckRadio/Content/less/core.pCheckRadio.less"
   },
   {
-    "outputFile": "pCheckRadio/Content/css/page.css",
-    "inputFile": "pCheckRadio/Content/less/page.less"
-  },
-  {
-    "outputFile": "pSelect/Content/css/page.css",
-    "inputFile": "pSelect/Content/less/page.less"
-  },
-  {
     "outputFile": "pCheckRadio/Content/css/bootstrap.page.css",
     "inputFile": "pCheckRadio/Content/less/bootstrap.page.less"
   },
@@ -38,5 +30,9 @@
   {
     "outputFile": "pSelect/Content/css/core.pSelect.css",
     "inputFile": "pSelect/Content/less/core.pSelect.less"
+  },
+  {
+    "outputFile": "Content/css/page.css",
+    "inputFile": "Content/less/page.less"
   }
 ]

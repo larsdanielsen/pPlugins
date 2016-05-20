@@ -90,7 +90,7 @@ ul.pSelcetUl.pMultiple li.pSelectedItem:after {
   box-sizing: border-box;
   display: block;
   content: '';
-  background-image: url(/Images/check.png);
+  background-image: url(/pSelect/Images/check.png);
   background-repeat: no-repeat;
   background-position: center center;
   width: 26px;
