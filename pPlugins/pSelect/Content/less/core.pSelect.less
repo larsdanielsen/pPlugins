@@ -34,14 +34,24 @@ label.pSelect {
     }
 
     .pInput {
-        position: relative;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
+        background: red;
+
+        &.pHidden {
+            clip: rect(0, 0, 0, 0);
+            overflow: hidden;
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
     }
 
-    &.pAutoComplete {
 
+
+    &.pAutoComplete {
         &.pOpen {
             .label-inner {
                 display: none;

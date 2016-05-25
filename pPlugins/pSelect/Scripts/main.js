@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    //var runOnInit = true;
+    var runOnInit = true;
 
     var options = {
         summeyText: '# of % selected',
@@ -15,10 +15,12 @@
         $('select.doit').pSelect(options);
     });
     $('[data-action=run]').click(function () {
+        options.autoComplete = false;
         $('select.doit').pSelect(options);
     });
-    //if (runOnInit) $('select.doit').pSelect();
-    $('[data-action=run]').trigger('click');
+
+// ReSharper disable once ConditionIsAlwaysConst
+    if (runOnInit) $('[data-action=run]').trigger('click');
 
     $('body').on('change.checkboxConfirm', '[data-checkbox-confirm]', function (e) {
 

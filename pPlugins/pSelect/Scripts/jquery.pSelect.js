@@ -31,10 +31,11 @@
             this.$wrapperLabel = $('<label />')
                 .addClass(this.options.labelClass)
                 .addClass(function () { return that.$selectBox.attr('class'); });
-
+            
             if (this.options.autoComplete) {
                 this.$wrapperLabel.addClass(this.options.autoCompleteClass);
             }
+
 
             this.$label = $('<span/>').addClass('label-inner');
 
@@ -78,7 +79,8 @@
             this.positionUl();
             this.updateLabelView();
             if (this.options.autoComplete) {
-                this.$input.removeAttr('style');
+                this.showInput();
+                this.$input.focus();
             }
             $(window).one('click.pSelect touchstart.pSelect resize.pSelect scroll.pSelect', function () {
                 that.close();
@@ -409,18 +411,10 @@
             }, 0);
         },
         hideInput: function () {
-            this.$input.css({
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                border: '0 none',
-                padding: 0,
-                margin: 0,
-                width: 1,
-                background: 'none transparent',
-                color: 'transparent',
-                height: this.$wrapperLabel.outerHeight()
-            });
+            this.$input.addClass('pHidden');
+        },
+        showInput: function () {
+            this.$input.removeClass('pHidden');
         },
         selectOption: function (item) {
             //console.log(item);
@@ -689,6 +683,7 @@
         debug: true,
         inputClass: 'pInput',
         labelClass: 'pSelect',
+        innerSpanClass: 'pInnerSpan',
         focusClass: 'pFocus',
         openClass: 'pOpen',
         focusedItemClass: 'pFocusedItem',

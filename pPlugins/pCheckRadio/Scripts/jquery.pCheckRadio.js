@@ -59,13 +59,9 @@
                 .addClass(options.labelClass)
                 .addClass(typeClass)
                 .addClass(function () { return that.$element.attr('class'); });
-
-            var innerSpan = $('<label />')
-                .addClass(options.innerSpanClass);
-
+            
             wrapperLabel.insertBefore(this.$element);
-            wrapperLabel.append(innerSpan);
-            innerSpan.append(this.$element);
+            wrapperLabel.append(this.$element);
 
             this.$element.data('label', this.$element.closest('label.' + options.labelClass));
 
@@ -123,7 +119,6 @@
     $.fn.pCheckRadio.defaults = {
         debug: true,
         labelClass: 'pCheckRadio',
-        innerSpanClass: 'pInnerSpan',
         checkboxClass: 'pCheckbox',
         radioClass: 'pRadio',
         focusClass: 'pFocus',

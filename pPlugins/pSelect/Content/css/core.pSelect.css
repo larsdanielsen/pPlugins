@@ -31,10 +31,18 @@ label.pSelect select {
   display: none;
 }
 label.pSelect .pInput {
-  position: relative;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  background: red;
+}
+label.pSelect .pInput.pHidden {
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 label.pSelect.pAutoComplete.pOpen .label-inner {
   display: none;
