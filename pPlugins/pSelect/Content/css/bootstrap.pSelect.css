@@ -35,7 +35,8 @@ label.pSelect.pAutoComplete.pOpen .label-inner {
   display: none;
 }
 ul.pSelcetUl {
-  border: 1px solid #ccc;
+  border: 1px solid #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
 }
 ul.pSelcetUl li {
   position: relative;

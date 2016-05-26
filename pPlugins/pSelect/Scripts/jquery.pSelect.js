@@ -82,7 +82,7 @@
                 this.showInput();
                 this.$input.focus();
             }
-            $(window).one('click.pSelect touchstart.pSelect resize.pSelect scroll.pSelect', function () {
+            $(window).one('click.pSelect touchstart.pSelect resize.pSelect scroll.pSelect', function (e) {
                 that.close();
                 that.blur();
             });
@@ -97,6 +97,7 @@
             this.$input.focus();
         },
         close: function (isMySelf) {
+
             if (this.isOpen) {
                 this.isOpen = false;
 
@@ -113,6 +114,8 @@
                 if (isMySelf) {
                     this.focus();
                 }
+
+                $(window).off('.pSelect');
             }
         },
         toggle: function () {
@@ -211,6 +214,8 @@
 
             this.$wrapperLabel.on('click.pSelect', function (e) {
                 e.stopPropagation();
+                //e.preventDefault();
+                //return false;
             });
 
             this.$input.on('focus.pSelect', function () {
@@ -228,7 +233,6 @@
             });
 
             this.$input.on('click.pSelect', function (e) {
-                //console.log('$input click.pSelect');
                 e.stopPropagation();
                 e.preventDefault();
                 that.toggle();
@@ -255,6 +259,10 @@
                 }
                 that.updateLabelView();
             });
+            this.$selectBox.on('click.pSelect', function () {
+                that.$input.trigger('focus.pSelect');
+            });
+
         },
         getUl: function () {
             this.$ul = $('<ul/>')

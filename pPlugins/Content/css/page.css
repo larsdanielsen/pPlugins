@@ -3,7 +3,8 @@
   font-size: 14px;
 }
 .container {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   margin: 0 auto;
 }
 footer {
@@ -28,8 +29,10 @@ footer {
   margin-bottom: 5px;
   padding: 0 0 0 24px;
   position: relative;
-  min-height: 16px;
-  line-height: 16px;
+  min-height: 20px;
+  line-height: 20px;
+  display: inline-block;
+  clear: both;
 }
 .form-group label.checkbox-inline input,
 .form-group label.radio-inline input,
@@ -37,4 +40,14 @@ footer {
 .form-group .radio > label input {
   position: absolute;
   margin: 3px 0 0 -24px;
+}
+.nav {
+  overflow: hidden;
+}
+.nav li {
+  list-style: none;
+  float: left;
+}
+.nav li a {
+  padding: 10px;
 }

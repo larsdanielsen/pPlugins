@@ -33,7 +33,10 @@
     });
 
     $('body').on('change.myNameSpace', 'select.doit', function (e) {
-        $('#email').val($(this).val());
+        $('[data-role=DisplayValue]').text($(this).val());
     });
+
+
+
 
 });

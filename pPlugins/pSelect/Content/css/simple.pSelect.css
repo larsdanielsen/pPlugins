@@ -9,14 +9,22 @@
   opacity: .7;
 }
 label.pSelect:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  content: '';
+  font-size: 0;
+  line-height: 0;
   display: block;
   position: absolute;
-  top: 0;
-  right: 0;
-  line-height: 30px;
-  content: '\25bc';
-  width: 20px;
-  height: 30px;
+  top: 11px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  background-color: transparent;
+  border-style: solid solid none solid;
+  border-color: #333 transparent transparent transparent;
+  border-width: 8px 4px 0 4px;
 }
 label.pSelect .label-inner {
   height: 24px;
@@ -57,12 +65,12 @@ ul.pSelcetUl li {
   border: 0 solid #ccc;
   background-color: #fff;
   padding: 6px 10px;
-  height: 30px;
+  min-height: 30px;
   line-height: 18px;
 }
 ul.pSelcetUl li + li {
   border-width: 1px 0 0;
-  height: 31px;
+  min-height: 31px;
 }
 ul.pSelcetUl li.pFocusedItem {
   background-color: #eee;
@@ -87,7 +95,7 @@ ul.pSelcetUl.pMultiple li {
   padding: 6px 20px 6px 10px;
 }
 ul.pSelcetUl.pMultiple li.pSelectedItem:after {
-  content: '\2713';
+  content: '\2714';
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
