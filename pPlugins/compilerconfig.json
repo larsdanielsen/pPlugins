@@ -34,5 +34,9 @@
   {
     "outputFile": "Content/css/page.css",
     "inputFile": "Content/less/page.less"
+  },
+  {
+    "outputFile": "pFigure/Content/css/page.css",
+    "inputFile": "pFigure/Content/less/page.less"
   }
 ]

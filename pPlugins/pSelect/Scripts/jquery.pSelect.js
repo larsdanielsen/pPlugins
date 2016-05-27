@@ -4,9 +4,6 @@
  * TODO: specify this 
  */
 
-
-
-
 !(function ($) {
 
     var pSelect = function (element, options, e) {
@@ -403,6 +400,12 @@
 
                 that.$ul.css(ulCss);
                 that.$ul.show();
+
+                //that.$ul.css({maxHeight: 0, overflow: 'hidden'});
+                //that.$ul.show();
+                //window.setTimeout(function () { that.$ul.css(ulCss); }, 0);
+                //window.setTimeout(function () { that.$ul.css({ overflowY: 'auto' }); }, 500);
+                //that.$ul.css(ulCss);
 
                 //console.log(ulCss.maxHeight);
                 //console.log(ulScrollHeight);

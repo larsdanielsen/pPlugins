@@ -48,7 +48,6 @@ label.pSelect.pAutoComplete.pOpen .label-inner {
   display: none;
 }
 ul.pSelcetUl {
-  height: auto;
   width: auto;
   position: fixed;
   margin: 0;
