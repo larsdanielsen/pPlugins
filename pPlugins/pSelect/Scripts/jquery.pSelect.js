@@ -94,7 +94,7 @@
             this.$input.focus();
         },
         close: function (isMySelf) {
-
+            console.log('closing ' + this.$selectBox.attr('id'));
             if (this.isOpen) {
                 this.isOpen = false;
 
@@ -112,7 +112,7 @@
                     this.focus();
                 }
 
-                $(window).off('.pSelect');
+                //$(window).off('.pSelect');
             }
         },
         toggle: function () {
@@ -192,11 +192,13 @@
             var that = this;
 
             this.$ul.on('click.pSelect', function (e) {
+                console.log('$ul click.pSelect');
                 e.stopPropagation();
                 e.preventDefault();
             });
 
             this.$ul.on('click.pSelect', 'li', function (e) {
+                console.log('$ul click.pSelect');
                 that.selectOption($(this).data('item'));
                 if (that.multiple) {
                     that.focus();
@@ -206,22 +208,26 @@
             });
 
             this.$ul.on('touchstart.pSelect', function (e) {
+                console.log('$ul touchstart.pSelect');
                 e.stopPropagation();
             });
 
             this.$wrapperLabel.on('click.pSelect', function (e) {
+                console.log('$wrapperLabel click.pSelect');
                 e.stopPropagation();
                 //e.preventDefault();
                 //return false;
             });
 
             this.$input.on('focus.pSelect', function () {
+                console.log('$input focus.pSelect');
                 that.closeOtherInstances();
                 that.hasFocus = true;
                 that.updateLabelView();
             });
 
             this.$input.on('blur.pSelect', function () {
+                console.log('$input blur.pSelect');
                 if (that.isOpen) {
                     that.focus();
                 } else {
@@ -230,26 +236,31 @@
             });
 
             this.$input.on('click.pSelect', function (e) {
+                console.log('$input click.pSelect');
                 e.stopPropagation();
                 e.preventDefault();
                 that.toggle();
             });
 
             this.$input.on('keydown.pSelect', function (e) {
+                console.log('$input keydown.pSelect');
                 that.inputKeyDown(e);
             });
             this.$input.on('keypress.pSelect', function (e) {
+                console.log('$input keypress.pSelect');
                 that.inputKeyPress(e);
             });
             this.$input.on('keyup.pSelect', function (e) {
+                console.log('$input keyup.pSelect');
                 that.inputKeyUp(e);
             });
 
             this.$selectBox.on('updateLabelView.pSelect', function () {
-                //console.log('$selectBox update.pSelect');
+                console.log('$selectBox updateLabelView.pSelect');
                 that.updateLabelView();
             });
             this.$selectBox.on('change.pSelect', function (e) {
+                console.log('$selectBox change.pSelect');
                 e.preventDefault();
                 if (!that.isOpen) {
                     that.fillUl();
@@ -257,6 +268,7 @@
                 that.updateLabelView();
             });
             this.$selectBox.on('click.pSelect', function () {
+                console.log('$selectBox click.pSelect');
                 that.$input.trigger('focus.pSelect');
             });
 
@@ -409,6 +421,7 @@
 
                 //console.log(ulCss.maxHeight);
                 //console.log(ulScrollHeight);
+
                 if (that.ulScrollTop === null) {
                     var selectedposition = that.$ul.find('li.' + that.options.selectedItemClass).position();
                     if (selectedposition) {
@@ -648,6 +661,7 @@
             for (var i = 0; i < $.fn.pSelect.instances.length; i++) {
                 var instance = $.fn.pSelect.instances[i];
                 if (instance !== this) {
+                    //console.log('closeOtherInstances');
                     instance.close();
                     instance.blur();
                 }
