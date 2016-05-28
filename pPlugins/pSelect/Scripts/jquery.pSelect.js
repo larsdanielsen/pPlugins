@@ -28,7 +28,7 @@
             this.$wrapperLabel = $('<label />')
                 .addClass(this.options.labelClass)
                 .addClass(function () { return that.$selectBox.attr('class'); });
-            
+
             if (this.options.autoComplete) {
                 this.$wrapperLabel.addClass(this.options.autoCompleteClass);
             }
@@ -85,16 +85,16 @@
             });
         },
         blur: function () {
-            //console.log('blur');
+            //this.consoleLog('blur');
             this.hasFocus = false;
             this.updateLabelView();
         },
         focus: function () {
-            //console.log('focus');
+            //this.consoleLog('focus');
             this.$input.focus();
         },
         close: function (isMySelf) {
-            console.log('closing ' + this.$selectBox.attr('id'));
+            this.consoleLog('closing ' + this.$selectBox.attr('id'));
             if (this.isOpen) {
                 this.isOpen = false;
 
@@ -116,7 +116,7 @@
             }
         },
         toggle: function () {
-            //console.log('toggle');
+            //this.consoleLog('toggle');
             if (this.isOpen) {
                 this.close();
             } else {
@@ -169,7 +169,7 @@
                 window.clearTimeout(this.updateUlViewTimeout);
             }
             this.updateUlViewTimeout = window.setTimeout(function () {
-                //console.log('updateUlViewTimeout');
+                //that.consoleLog('updateUlViewTimeout');
                 that.updateUlViewTimeout = null;
 
                 var activeFound = false;
@@ -192,13 +192,13 @@
             var that = this;
 
             this.$ul.on('click.pSelect', function (e) {
-                console.log('$ul click.pSelect');
+                that.consoleLog('$ul click.pSelect');
                 e.stopPropagation();
                 e.preventDefault();
             });
 
             this.$ul.on('click.pSelect', 'li', function (e) {
-                console.log('$ul click.pSelect');
+                that.consoleLog('$ul click.pSelect');
                 that.selectOption($(this).data('item'));
                 if (that.multiple) {
                     that.focus();
@@ -208,26 +208,28 @@
             });
 
             this.$ul.on('touchstart.pSelect', function (e) {
-                console.log('$ul touchstart.pSelect');
+                that.consoleLog('$ul touchstart.pSelect');
                 e.stopPropagation();
             });
 
             this.$wrapperLabel.on('click.pSelect', function (e) {
-                console.log('$wrapperLabel click.pSelect');
+                that.consoleLog('$wrapperLabel click.pSelect');
                 e.stopPropagation();
+                that.closeOtherInstances();
+
                 //e.preventDefault();
                 //return false;
             });
 
             this.$input.on('focus.pSelect', function () {
-                console.log('$input focus.pSelect');
+                that.consoleLog('$input focus.pSelect');
                 that.closeOtherInstances();
                 that.hasFocus = true;
                 that.updateLabelView();
             });
 
             this.$input.on('blur.pSelect', function () {
-                console.log('$input blur.pSelect');
+                that.consoleLog('$input blur.pSelect');
                 if (that.isOpen) {
                     that.focus();
                 } else {
@@ -236,31 +238,31 @@
             });
 
             this.$input.on('click.pSelect', function (e) {
-                console.log('$input click.pSelect');
+                that.consoleLog('$input click.pSelect');
                 e.stopPropagation();
                 e.preventDefault();
                 that.toggle();
             });
 
             this.$input.on('keydown.pSelect', function (e) {
-                console.log('$input keydown.pSelect');
+                that.consoleLog('$input keydown.pSelect');
                 that.inputKeyDown(e);
             });
             this.$input.on('keypress.pSelect', function (e) {
-                console.log('$input keypress.pSelect');
+                that.consoleLog('$input keypress.pSelect');
                 that.inputKeyPress(e);
             });
             this.$input.on('keyup.pSelect', function (e) {
-                console.log('$input keyup.pSelect');
+                that.consoleLog('$input keyup.pSelect');
                 that.inputKeyUp(e);
             });
 
             this.$selectBox.on('updateLabelView.pSelect', function () {
-                console.log('$selectBox updateLabelView.pSelect');
+                that.consoleLog('$selectBox updateLabelView.pSelect');
                 that.updateLabelView();
             });
             this.$selectBox.on('change.pSelect', function (e) {
-                console.log('$selectBox change.pSelect');
+                that.consoleLog('$selectBox change.pSelect');
                 e.preventDefault();
                 if (!that.isOpen) {
                     that.fillUl();
@@ -268,7 +270,7 @@
                 that.updateLabelView();
             });
             this.$selectBox.on('click.pSelect', function () {
-                console.log('$selectBox click.pSelect');
+                that.consoleLog('$selectBox click.pSelect');
                 that.$input.trigger('focus.pSelect');
             });
 
@@ -288,7 +290,7 @@
             }
         },
         fillUl: function () {
-            //console.log('fillUl');
+            //this.consoleLog('fillUl');
             this.$ul.empty();
             this.getStruct();
             for (var i = 0; i < this.Struct.items.length; i++) {
@@ -395,8 +397,8 @@
                     if (that.options.ulMaxHeight && ulCss.maxHeight > that.options.ulMaxHeight) {
                         ulCss.maxHeight = that.options.ulMaxHeight;
                     }
-                    //  console.log(ulCss.maxHeight);
-                    //  console.log(that.$ul.get(0).scrollHeight);
+                    //  that.consoleLog(ulCss.maxHeight);
+                    //  that.consoleLog(that.$ul.get(0).scrollHeight);
                     //if (ulCss.maxHeight < ulScrollHeight && ulCss.maxHeight < wrapperLabelHeight * 6 && distanceAvailable * 2 < wrapperLabelOfset.top - windowScrollTop) {
                     if (ulCss.maxHeight < wrapperLabelHeight * 6 && distanceAvailable * 2 < wrapperLabelOfset.top - windowScrollTop) {
                         that.positionUl(true);
@@ -419,8 +421,8 @@
                 //window.setTimeout(function () { that.$ul.css({ overflowY: 'auto' }); }, 500);
                 //that.$ul.css(ulCss);
 
-                //console.log(ulCss.maxHeight);
-                //console.log(ulScrollHeight);
+                //that.consoleLog(ulCss.maxHeight);
+                //that.consoleLog(ulScrollHeight);
 
                 if (that.ulScrollTop === null) {
                     var selectedposition = that.$ul.find('li.' + that.options.selectedItemClass).position();
@@ -441,7 +443,7 @@
             this.$input.removeClass('pHidden');
         },
         selectOption: function (item) {
-            //console.log(item);
+            //this.consoleLog(item);
             if (this.multiple) {
                 if (!item.Disabled) {
                     item.Selected = !item.Selected;
@@ -623,7 +625,7 @@
             }
         },
         filterOptions: function (keycode) {
-            //console.log('filterOptions: ' + keycode);
+            //this.consoleLog('filterOptions: ' + keycode);
             var keyCodes = $.fn.pSelect.keyCodes;
             /*
             
@@ -661,7 +663,7 @@
             for (var i = 0; i < $.fn.pSelect.instances.length; i++) {
                 var instance = $.fn.pSelect.instances[i];
                 if (instance !== this) {
-                    //console.log('closeOtherInstances');
+                    //this.consoleLog('closeOtherInstances');
                     instance.close();
                     instance.blur();
                 }
@@ -676,7 +678,10 @@
         focusedItemIndex: 0,
         ulScrollTop: null,
         lastInputValue: '',
-        multiple: false
+        multiple: false,
+        consoleLog: function (o) {
+            if (this.options.debug && window.console && window.console.log) console.log(o);
+        }
     };
 
 
@@ -705,7 +710,7 @@
     };
 
     $.fn.pSelect.defaults = {
-        debug: true,
+        debug: false,
         inputClass: 'pInput',
         labelClass: 'pSelect',
         innerSpanClass: 'pInnerSpan',
