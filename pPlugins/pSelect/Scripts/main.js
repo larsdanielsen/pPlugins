@@ -4,7 +4,14 @@
     var options = {
         summeyText: '# of % selected',
         labelIfNoneSelected: 'Please select here ...',
-        summeyIfMoreThan: 3
+        summeyIfMoreThan: 3,
+        Animate: function($ul, ulCss) {
+            $ul.css({maxHeight: 0, overflow: 'hidden'});
+            $ul.show();
+            window.setTimeout(function () { $ul.css(ulCss); }, 0);
+            window.setTimeout(function () { $ul.css({ overflowY: 'auto' }); }, 100);
+            
+        }
     };
 
     $('[data-action=remove]').click(function () {

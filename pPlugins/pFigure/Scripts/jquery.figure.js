@@ -43,7 +43,7 @@ figcaptionClass:                        Classname that will be added to the
 transferImgStyleToFigureStyle:          If true, any style attribute from the
                                         image will be transferred to the
                                         figure
-transferImgClassNamesToFigureStyle:     If true, any style attribute from the
+transferImgClassNamesToFigureStyle:     If true, any class attribute from the
                                         image will be transferred to the
                                         figure
 transferCaptionStyleToFigcaptionStyle:  If true, any style attribute from the

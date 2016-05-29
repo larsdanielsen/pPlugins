@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>pPlugins</h1>
+            <h1>pFigure</h1>
         </div>
     </header>
     <nav class="navbar navbar-default">
@@ -27,15 +27,12 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav" data-role="TopNav">
-                    <li><a href="/pSelect/">pSelect</a></li>
-                    <li><a href="/pCheckRadio/">pCheckRadio</a></li>
-                </ul>
+                <ul class="nav navbar-nav" data-role="TopNav"></ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group">
                         <div class="radio">
-                            <label class="checkbox-inline"><input type="radio" name="theme" data-theme="simple">Simple</label>
-                            <label class="checkbox-inline"><input type="radio" name="theme" data-theme="bootstrap">Bootstrap</label>
+                            <label class="radio-inline"><input type="radio" name="theme" data-theme="simple">Simple</label>
+                            <label class="radio-inline"><input type="radio" name="theme" data-theme="bootstrap">Bootstrap</label>
                         </div>
                     </div>
                 </form>
@@ -43,37 +40,37 @@
         </div><!-- /.container -->
     </nav>
     <div class="container">
-        <div class="form-group col-lg-6">
-            <div class="generic-html" data-richtext>
-                <h2>
-                    After plugin is run
-                </h2>
-                <p>
-                    <img class="img-responsive" src="http://placekitten.com/g/400/190" />
-                </p>
-                <h6>Caption in a h6, automatically converted to figcaption</h6>
-                <p>
-                    The image is wrapped in a figure tag.
-                </p>
-                <h6><img class="img-responsive" src="http://placekitten.com/g/400/190" />Caption in a h6, automatically converted to figcaption</h6>
-            </div>
-        </div>
-        <div class="form-group col-lg-6">
-            <div class="generic-html">
-                <h2>
-                    No plugin is run
-                </h2>
-                <p>
-                    <img class="img-responsive" src="http://placekitten.com/g/400/190" />
-                </p>
-                <h6>Caption in a h6, will automatically convert to figcaption</h6>
-                <p>
-                    The image should be wrapped in a figure tag.
-                </p>
-            </div>
-        </div>
+        <form role="form">
 
-
+            <div class="row">
+                <div class="form-group col-lg-8">
+                    <button type="button" class="btn btn-default" data-action="run">Run</button>
+                    <button type="button" class="btn btn-default" data-action="remove">Remove</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <textarea data-html class="form-control center-block" rows="20">
+                        <h2>
+                            After plugin is run
+                        </h2>
+                        <p>
+                            <img class="img-responsive" src="http://placekitten.com/g/400/190" />
+                        </p>
+                        <h6>Caption in a h6, automatically converted to figcaption</h6>
+                        <p>
+                            The image is wrapped in a figure tag.
+                        </p>
+                        <img class="img-responsive" src="http://placekitten.com/g/400/190" />
+                        <h6>Caption in a h6, automatically converted to figcaption</h6>
+                    </textarea>
+                </div>
+                <div class="form-group col-lg-6">
+                    <div class="generic-html" data-richtext>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
     <footer>
         <div class="container">

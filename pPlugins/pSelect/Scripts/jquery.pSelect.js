@@ -412,15 +412,14 @@
                     ulCss.maxHeight = $(window).outerHeight() - 20;
                 }
 
-                that.$ul.css(ulCss);
-                that.$ul.show();
 
-                //that.$ul.css({maxHeight: 0, overflow: 'hidden'});
-                //that.$ul.show();
-                //window.setTimeout(function () { that.$ul.css(ulCss); }, 0);
-                //window.setTimeout(function () { that.$ul.css({ overflowY: 'auto' }); }, 500);
-                //that.$ul.css(ulCss);
-
+                if (that.options.Animate) {
+                    that.options.Animate(that.$ul, ulCss);
+                } else {
+                    that.$ul.css(ulCss);
+                    that.$ul.show(); 
+                }
+                
                 //that.consoleLog(ulCss.maxHeight);
                 //that.consoleLog(ulScrollHeight);
 
@@ -732,7 +731,8 @@
         summeyIfMoreThan: 0,
         summeyText: null,
         ulMaxHeight: null,
-        getUlMaxHeight: null
+        getUlMaxHeight: null,
+        Animate: null
     };
 
     $.fn.pSelect.instances = [];
