@@ -5,12 +5,18 @@
         summeyText: '# of % selected',
         labelIfNoneSelected: 'Please select here ...',
         summeyIfMoreThan: 3,
-        Animate: function($ul, ulCss) {
-            $ul.css({maxHeight: 0, overflow: 'hidden'});
+        Animate: function ($ul, ulCss, above) {
+
+            if (above) {
+                $ul.css({ clip: 'rect(' + ulCss.maxHeight + 'px, ' + ulCss.width + 'px, ' + ulCss.maxHeight + 'px, 0)' });
+            } else {
+                $ul.css({ clip: 'rect(0, ' + ulCss.width + 'px, 0, 0)' });
+            }
             $ul.show();
+            ulCss.clip = 'rect(0, ' + ulCss.width + 'px, ' + ulCss.maxHeight + 'px, 0)';
             window.setTimeout(function () { $ul.css(ulCss); }, 0);
-            window.setTimeout(function () { $ul.css({ overflowY: 'auto' }); }, 100);
-            
+            window.setTimeout(function () { $ul.css({ clip: 'auto' }); }, 100);
+
         }
     };
 
@@ -26,7 +32,7 @@
         $('select.doit').pSelect(options);
     });
 
-// ReSharper disable once ConditionIsAlwaysConst
+    // ReSharper disable once ConditionIsAlwaysConst
     if (runOnInit) $('[data-action=run]').trigger('click');
 
     $('body').on('change.checkboxConfirm', '[data-checkbox-confirm]', function (e) {

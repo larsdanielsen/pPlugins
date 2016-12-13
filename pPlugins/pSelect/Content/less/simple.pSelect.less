@@ -73,11 +73,12 @@ ul.pSelcetUl {
     border: 1px solid #666;
     margin: 3px 0;
     font-size: 14px;
-    -webkit-transition: max-height .1s;
-    -moz-transition: max-height .1s;
-    -o-transition: max-height .1s;
-    transition: max-height .1s;
-
+    -webkit-transition: clip .1s;
+    -moz-transition: clip .1s;
+    -o-transition: clip .1s;
+    transition: clip .1s;
+    
+            clip: rect(0, 0, 0, 0);
     li {
         margin: 0;
         border: 0 solid #ccc;

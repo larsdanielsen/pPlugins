@@ -9,6 +9,6 @@ $(document).ready(function () {
         $('input:checkbox, input:radio').pCheckRadio();
     });
 
-    $('[data-action=run]').trigger('click');
+    //$('[data-action=run]').trigger('click');
    
 });

@@ -5,6 +5,7 @@
     menu.push({ title: 'pSelect', url: '/pSelect/' });
     menu.push({ title: 'pCheckRadio', url: '/pCheckRadio/' });
     menu.push({ title: 'pFigure', url: '/pFigure/' });
+    menu.push({ title: 'pHashHandler', url: '/pHashHandler/' });
 
     topNav.empty();
 

@@ -12,3 +12,7 @@ figure figcaption {
 textarea {
   width: 80%;
 }
+textarea.html {
+  font-family: 'Courier New', monospace;
+  font-size: .8em;
+}

@@ -414,7 +414,7 @@
 
 
                 if (that.options.Animate) {
-                    that.options.Animate(that.$ul, ulCss);
+                    that.options.Animate(that.$ul, ulCss, above);
                 } else {
                     that.$ul.css(ulCss);
                     that.$ul.show(); 
