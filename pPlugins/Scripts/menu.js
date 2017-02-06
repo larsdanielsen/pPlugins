@@ -2,10 +2,10 @@
 (function ($) {
     var topNav = $('[data-role=TopNav]');
     var menu = [];
-    menu.push({ title: 'pSelect', url: 'pSelect/' });
-    menu.push({ title: 'pCheckRadio', url: 'pCheckRadio/' });
-    menu.push({ title: 'pFigure', url: 'pFigure/' });
-    menu.push({ title: 'pHashHandler', url: 'pHashHandler/' });
+    menu.push({ title: 'pSelect', url: 'pSelect/default.htm' });
+    menu.push({ title: 'pCheckRadio', url: 'pCheckRadio/default.htm' });
+    menu.push({ title: 'pFigure', url: 'pFigure/default.htm' });
+    menu.push({ title: 'pHashHandler', url: 'pHashHandler/default.htm' });
 
     topNav.empty();
 
