@@ -38,5 +38,22 @@
   {
     "outputFile": "pFigure/Content/css/page.css",
     "inputFile": "pFigure/Content/less/page.less"
+  },
+  {
+    "outputFile": "pFormdirty/Content/css/core.pFormdirty.css",
+    "inputFile": "pFormdirty/Content/less/core.pFormdirty.less"
+  },
+  {
+    "outputFile": "pFormdirty/Content/css/bootstrap.page.css",
+    "inputFile": "pFormdirty/Content/less/bootstrap.page.less"
+  },
+  {
+    "outputFile": "pFormdirty/Content/css/bootstrap.pFormdirty.css",
+    "inputFile": "pFormdirty/Content/less/bootstrap.pFormdirty.less"
+  },
+  {
+    "outputFile": "pFormdirty/Content/css/simple.pFormdirty.css",
+    "inputFile": "pFormdirty/Content/less/simple.pFormdirty.less"
   }
+
 ]

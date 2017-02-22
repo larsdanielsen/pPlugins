@@ -1,0 +1,86 @@
+﻿/*COLORS*/
+/*FONT*/
+label.pCheckRadio {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    padding: 0;
+    border: 1px dotted transparent;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    input {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        clip: rect(0 0 0 0);
+    }
+
+    &.pFocus {
+        border-color: #252d30;
+    }
+
+    &:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        padding: 0;
+        margin: 0;
+        background-image: url(/pCheckRadio/Images/pCheckRadioIcons.png);
+        content: '';
+        font-size: 0;
+        line-height: 0;
+    }
+
+    &.pCheckbox {
+
+        &:after {
+            background-position: -24px 0;
+        //content: 'v';
+        }
+
+        &.pChecked:after {
+            background-position: 0 0;
+        }
+
+        &.pDisabled:after {
+            background-position: -70px 0;
+        }
+
+        &.pDisabled.pChecked:after {
+            background-position: -47px 0;
+        }
+    }
+
+    &.pRadio {
+        &:after {
+            background-position: -24px -23px;
+        }
+
+        &.pChecked:after {
+            background-position: 0 -23px;
+        }
+
+        &.pDisabled:after {
+            background-position: -70px -23px;
+        }
+
+        &.pDisabled.pChecked:after {
+            background-position: -47px -23px;
+        }
+    }
+}

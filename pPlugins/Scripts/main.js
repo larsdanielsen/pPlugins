@@ -1,28 +1,30 @@
 $(document).ready(function () {
 
-    var settings = [false, false, false, false, false, false, true, false, true, false, true, false, false, true];
+    function testBitMap() {
+        var settings = [false, false, false, false, false, false, true, false, true, false, true, false, false, true];
 
-    var bits = getBits(settings);
-    var savedSettings = getBoolArray(bits);
+        var bits = getBits(settings);
+        var savedSettings = getBoolArray(bits);
 
 
-    console.log(settings);
-    console.log(bits);
-    console.log(bits.toString(2));
-    console.log(savedSettings);
+        console.log(settings);
+        console.log(bits);
+        console.log(bits.toString(2));
+        console.log(savedSettings);
 
-    function getBoolArray(i) {
-        var a = i.toString(2).split('').map(function (n) { return n == '1' });
-        a.shift();
-        return a;
+        function getBoolArray(i) {
+            var a = i.toString(2).split('').map(function(n) { return n == '1' });
+            a.shift();
+            return a;
+        }
+
+        function getBits(boolArray) {
+            var myArray = boolArray.slice();
+            myArray.unshift(true);
+            return parseInt(myArray.map(function(bo) { return bo ? '1' : '0' }).join(''), 2);
+        }
+
     }
-
-    function getBits(boolArray) {
-        var myArray = boolArray.slice();
-        myArray.unshift(true);
-        return parseInt(myArray.map(function (bo) { return bo ? '1' : '0' }).join(''), 2);
-    }
-
 
     var bootstrapCss = $('link[data-theme=bootstrap]');
     var simpleCss = $('link[data-theme=simple]');

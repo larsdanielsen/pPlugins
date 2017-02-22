@@ -1,0 +1,73 @@
+﻿label.pCheckRadio {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+
+    &:after {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        padding: 0;
+        margin: 0;
+        content: '';
+        font-size: 0;
+        line-height: 0;
+        background-image: none;
+        border: 1px solid #000;
+        box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+    }
+
+    &.pDisabled:after {
+        background-color: #ccc;
+    }
+
+    &:before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        content: '';
+        font-size: 0;
+        line-height: 0;
+        display: none;
+    }
+
+
+    &.pChecked:before {
+        display: inline-block;
+    }
+
+    &.pCheckbox {
+
+        &:before {
+            border-style: none solid solid none;
+            border-color: #000;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(35deg);
+            transform: rotate(35deg);
+            width: 6px;
+            height: 10px;
+            top: 3px;
+            left: 6px;
+        }
+    }
+
+    &.pRadio {
+
+        &:after {
+            border-radius: 50%;
+        }
+
+        &:before {
+            border-radius: 50%;
+            width: 6px;
+            height: 6px;
+            top: 6px;
+            left: 6px;
+            background-color: #000;
+        }
+    }
+}
