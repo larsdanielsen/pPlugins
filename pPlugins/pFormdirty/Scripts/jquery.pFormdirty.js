@@ -109,6 +109,9 @@ jQuery.fn.pFormdirty = function (init) {
         var unsavedchanges = false;
         forms.each(function () {
             var form = $(this);
+
+            console.log(form);
+            console.log(form.data('submitInProgress'));
             if (ignoreSubmitInProgress || !form.data('submitInProgress')) {
                 var serializedFormData = form.data('serializedData');
 
@@ -125,6 +128,7 @@ jQuery.fn.pFormdirty = function (init) {
             }
         });
 
+        console.log('unsavedchanges: ' + unsavedchanges);
         return unsavedchanges;
     }
 

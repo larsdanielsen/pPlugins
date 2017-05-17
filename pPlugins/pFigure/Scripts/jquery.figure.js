@@ -97,7 +97,7 @@ jQuery.fn.figure = function (init) {
 	
     function convertImage(wrapper, img, options) {		
 		
-		if (img.parents('body').size() == 0) {
+		if (img.parents('body').length == 0) {
 			return;
 		}
 		
@@ -132,21 +132,21 @@ jQuery.fn.figure = function (init) {
         };
         this.HandleImageWrapper = function(img, elements) {
             if (elements.originalElements.hasImageWrapper) {
-                var imgElement = (elements.originalElements.imageLink && elements.originalElements.imageLink.size() > 0) ? elements.originalElements.imageLink : img;
+                var imgElement = (elements.originalElements.imageLink && elements.originalElements.imageLink.length > 0) ? elements.originalElements.imageLink : img;
                 imgElement.insertBefore(elements.originalElements.imageWrapper);
-                if (elements.originalElements.imageWrapper.text().match(/^\s*$/) && elements.originalElements.imageWrapper.children().size() == 0) {
+                if (elements.originalElements.imageWrapper.text().match(/^\s*$/) && elements.originalElements.imageWrapper.children().length == 0) {
                     elements.originalElements.imageWrapper.remove();
                 }
             }  
         };
         
         this.ApplyChanges = function (img, elements) {
-            var imgElement = (elements.originalElements.imageLink && elements.originalElements.imageLink.size() > 0) ? elements.originalElements.imageLink : img;
+            var imgElement = (elements.originalElements.imageLink && elements.originalElements.imageLink.length > 0) ? elements.originalElements.imageLink : img;
             if (elements.newElements.template) {
                 var temp = jQuery('<div/>').append(imgElement.clone());
                 elements.newElements.template.html(elements.newElements.template.html().replace(/\${img}/g, temp.html()));
                 elements.newElements.template.html(elements.newElements.template.html().replace(/\${caption}/g, elements.originalElements.imageCaptionHtml));
-                if (elements.newElements.imageCaption && elements.newElements.imageCaption.size() > 0) {
+                if (elements.newElements.imageCaption && elements.newElements.imageCaption.length > 0) {
                     elements.newElements.imageCaption.remove();
                 }
                 elements.newElements.template.insertBefore(imgElement);
@@ -236,7 +236,7 @@ jQuery.fn.figure = function (init) {
             elements.imageCaption = img.next(options.captionSelector);
         }
         
-        if (elements.imageCaption.size() > 0 && !elements.imageCaption.html().match(/^\s*$/)) {
+        if (elements.imageCaption.length > 0 && !elements.imageCaption.html().match(/^\s*$/)) {
             elements.imageCaptionHtml = elements.imageCaption.html();
         } else {
             elements.imageCaptionHtml = '';

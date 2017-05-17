@@ -33,7 +33,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav" data-role="TopNav"></ul>
-                <form class="navbar-form navbar-right" role="search">
+                <form class="navbar-form navbar-right" data-formdirty-ignore="yes">
                     <div class="form-group">
                         <div class="radio">
                             <label class="radio-inline"><input type="radio" name="theme" data-theme="simple">Simple</label>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-lg-3">
+                <div class="form-group col-lg-2">
                     <div class="checkbox">
                         <label><input type="checkbox" value="1" name="Option1">Option 1</label>
                     </div>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-lg-3">
+                <div class="form-group col-lg-2">
                     <div class="radio">
                         <label><input type="radio" name="optradio">Option 1</label>
                     </div>
@@ -76,11 +76,16 @@
                         <label><input type="radio" name="optradio" disabled>Option 3</label>
                     </div>
                 </div>
-            
+
                 <div class="form-group col-lg-3">
                     <label class="checkbox-inline"><input type="checkbox" value="1" name="checkGroup">Option 1</label>
                     <label class="checkbox-inline"><input type="checkbox" value="2" name="checkGroup">Option 2</label>
                     <label class="checkbox-inline"><input type="checkbox" value="3" name="checkGroup">Option 3</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-3">
+                    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="UserName">
                 </div>
             </div>
             <div class="row">
@@ -95,7 +100,7 @@
             Created by: Lars Danielsen
         </div>
     </footer>
-    <script src="/Scripts/jquery-2.2.0.js"></script>
+    <script src="/Scripts/jquery-3.2.1.min.js"></script>
     <script src="/Scripts/jquery.form.min.js"></script>
     <script src="/Scripts/bootstrap.js"></script>
     <script src="/Scripts/main.js"></script>
