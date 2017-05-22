@@ -8,7 +8,7 @@
             return {
                 restrict: 'AE',
                 template:
-                    '<div ng-style="{ display: display, opacity: opacity, transitionProperty: transitionProperty, transitionTimingFunction: transitionTimingFunction, transitionDuration: transitionDuration }">Loading ...</div>',
+                    '<div ng-style="{ transform: getTransform(), opacity: getOpacity(), transition: getTransition() }">Loading ...</div>',
                 replace: true,
                 scope: {
                     showAfter: '=',
@@ -18,10 +18,7 @@
                 },
                 controller: function ($scope, $element, $window, $timeout) {
 
-                    $scope.display = 'none';
-                    $scope.opacity = 0;
-                    $scope.transitionProperty = 'opacity';
-                    $scope.transitionTimingFunction = 'linear';
+                    var showIt = false;
 
                     var defaultSettings = {
                         showAfter: 500,
@@ -36,63 +33,49 @@
                         animationDuration: $scope.animationDuration === undefined ? defaultSettings.animationDuration : parseInt($scope.animationDuration),
                         handleBeforeUnload: $scope.handleBeforeUnload === undefined ? defaultSettings.handleBeforeUnload : $scope.handleBeforeUnload == 'true'
                     };
-
-                    $scope.transitionDuration = settings.animationDuration + 'ms';
-
+                    
                     $scope.$on('showAjaxLoader', function () {
-                        showLoader($scope, settings);
+                        showLoader();
                     });
 
                     $scope.$on('hideAjaxLoader', function () {
-                        hideLoader($scope, settings);
+                        hideLoader();
                     });
 
                     if (settings.handleBeforeUnload) {
                         $window.onbeforeunload = function () {
-                            showLoader($scope, settings);
+                            showLoader();
                         };
                     }
 
                     $scope.getTransition = function () {
-                        return '';
+
+                        var opacityDuration = getSecondsString(settings.animationDuration);
+                        var opacityDelay = getSecondsString(showIt ? settings.showAfter : settings.hideAfter);
+                        var transformDuration = getSecondsString(0);
+                        var transformDelay = getSecondsString(showIt ? 0 : settings.showAfter + settings.animationDuration);
+                        return 'opacity ' + opacityDuration + ' ' + opacityDelay + ', transform ' + transformDuration + ' ' + transformDelay;
+
+                        function getSecondsString(ms) {
+                            return ms / 1000 + 's';
+                        }
+
                     };
 
-                    var showLoaderTimeout;
-                    var hideLoaderTimeout;
+                    $scope.getTransform = function () {
+                        return showIt ? 'scale(1,1)' : 'scale(0,0)';
+                    };
 
-                    function showLoader(scope, settings) {
+                    $scope.getOpacity = function () {
+                        return showIt ? 1 : 0;
+                    };
 
-                        if (settings.showAfter && settings.showAfter > 0) {
-                            $timeout.cancel(hideLoaderTimeout);
-                            $timeout.cancel(showLoaderTimeout);
-                            showLoaderTimeout = $timeout(showLoaderFunction, settings.showAfter);
-                        } else {
-                            showLoaderFunction();
-                        }
-
-                        function showLoaderFunction() {
-                            scope.display = 'block';
-                            $timeout(function () { scope.opacity = 1; }, 1);
-                        }
-
+                    function showLoader() {
+                        showIt = true;
                     }
 
-                    function hideLoader(scope, settings) {
-
-                        if (settings.hideAfter && settings.hideAfter > 0) {
-                            $timeout.cancel(hideLoaderTimeout);
-                            $timeout.cancel(showLoaderTimeout);
-                            hideLoaderTimeout = $timeout(hideLoaderFunction, settings.hideAfter);
-                        } else {
-                            hideLoaderFunction();
-                        }
-
-                        function hideLoaderFunction() {
-                            scope.opacity = 0;
-                            $timeout(function () {
-                                scope.display = 'none';
-                            }, settings.animationDuration);
-                        }
+                    function hideLoader() {
+                        showIt = false;
                     }
 
                 }
@@ -130,3 +113,26 @@
     ]);
 
 })();
+
+
+/*
+    .loader {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  
+opacity: 0;
+transform: scale(0,0);
+transition: opacity 1s, transform 0s 2s;
+  
+  &.visible {
+opacity: 1;
+transform: scale(1,1);
+transition: opacity 2s, transform 0s;
+  }
+}
+
+
+
+*/
