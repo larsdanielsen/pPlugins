@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "Content/css/ajax-loader.angular.css",
+    "inputFile": "Content/less/ajax-loader.angular.less"
+  },
+  {
+    "outputFile": "Content/css/page.css",
+    "inputFile": "Content/less/page.less"
+  }
+]

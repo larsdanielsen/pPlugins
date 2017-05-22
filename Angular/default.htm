@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title data-type="base">Angular</title>
+    <link data-theme="simple" href="/Content/css/page.min.css" rel="stylesheet" />
+    <link href="Content/css/ajax-loader.angular.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Angular</h1>
+        </div>
+    </header>
+    <div class="container" ng-controller="dogListController">
+        <button ng-click="showLoader()">Show</button>
+        <button ng-click="hideLoader()">Hide</button>
+        <hr />
+        <button ng-click="getData(0)">Load</button>
+        <button ng-click="getData(2000)">Load slow</button>
+        <button ng-click="getData(2000, true)">Load slow but silent</button>
+        <ul>
+            <li ng-repeat="dog in dogs" on-last-repeat>
+                {{dog.Name}}
+            </li>
+        </ul>
+    </div>
+    <footer>
+        <div class="container">
+            Created by: Lars Danielsen
+        </div>
+    </footer>
+    <!-- ReSharper disable once Html.TagNotResolved -->
+    <ajax-loader class="ajax-loader" />
+    <script src="/Scripts/lib/angular.min.js"></script>
+    <script src="/Scripts/lib/ajax-loader.angular.js"></script>
+    <script src="/Scripts/lib/on-last-repeat.js"></script>
+    <script src="/Scripts/main.js"></script>
+    <script src="/Scripts/dog-service.js"></script>
+    <script src="/Scripts/dog-list-controller.js"></script>
+</body>
+</html>

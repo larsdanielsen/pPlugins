@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "pPlugins", "pPlugins\", "{71355504-6B33-4595-8A5F-67086F00716B}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -24,13 +24,42 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "pPlugins", "pPlugins\", "{7
 		SlnRelativePath = "pPlugins\"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Angular", "Angular\", "{912738F9-1683-4F00-9FFE-3770D39D7B83}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_57300"
+		Debug.AspNetCompiler.PhysicalPath = "Angular\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57300\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_57300"
+		Release.AspNetCompiler.PhysicalPath = "Angular\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57300\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "57300"
+		SlnRelativePath = "Angular\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{71355504-6B33-4595-8A5F-67086F00716B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71355504-6B33-4595-8A5F-67086F00716B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71355504-6B33-4595-8A5F-67086F00716B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{71355504-6B33-4595-8A5F-67086F00716B}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{912738F9-1683-4F00-9FFE-3770D39D7B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912738F9-1683-4F00-9FFE-3770D39D7B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{912738F9-1683-4F00-9FFE-3770D39D7B83}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{912738F9-1683-4F00-9FFE-3770D39D7B83}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
