@@ -16,7 +16,7 @@
                     animationDuration: '=',
                     handleBeforeUnload: '='
                 },
-                controller: function ($scope, $element, $window, $timeout) {
+                controller: function ($scope) {
 
                     var showIt = false;
 

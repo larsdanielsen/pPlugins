@@ -417,9 +417,9 @@
                     that.options.Animate(that.$ul, ulCss, above);
                 } else {
                     that.$ul.css(ulCss);
-                    that.$ul.show(); 
+                    that.$ul.show();
                 }
-                
+
                 //that.consoleLog(ulCss.maxHeight);
                 //that.consoleLog(ulScrollHeight);
 
@@ -529,9 +529,13 @@
             }, 0);
         },
         inputKeyDown: function (e) {
-
+            e.stopPropagation();
             var keyCodes = $.fn.pSelect.keyCodes;
             var keycode = e.keyCode;
+
+            if (keycode == keyCodes.Down || keycode == keyCodes.Up) {
+                e.preventDefault();
+            }
 
             if (keycode == keyCodes.Down) {
                 if (e.altKey) {
@@ -560,8 +564,9 @@
             return true;
         },
         inputKeyPress: function (e) {
+            e.stopPropagation();
             if (!this.options.autoComplete) {
-                //e.preventDefault();
+                e.preventDefault();
                 var charcode = e.charCode || e.keyCode;
                 this.findAndSelectNearest(charcode);
                 this.$input.val('');

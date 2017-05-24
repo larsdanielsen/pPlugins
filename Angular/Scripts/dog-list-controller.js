@@ -20,9 +20,13 @@
 	    };
 
 	    $scope.$on('onLastRepeat', function (scope, element, attrs) {
-	        console.log('Last dog loaded');
-	        //$timeout($scope.hideLoader, 400);
+	        //console.log('Last dog loaded');
+	        bLazyRevalidate();
 	    });
+
+	    function bLazyRevalidate() {
+	        root.bLazy.revalidate();
+	    };
 
 	});
 })(MyAppSettings || (MyAppSettings = {}));

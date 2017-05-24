@@ -15,13 +15,21 @@
     <div class="container" ng-controller="dogListController">
         <button ng-click="showLoader()">Show</button>
         <button ng-click="hideLoader()">Hide</button>
-        <hr />
+        <br /><br />
         <button ng-click="getData(0)">Load</button>
         <button ng-click="getData(2000)">Load slow</button>
         <button ng-click="getData(2000, true)">Load slow but silent</button>
-        <ul>
-            <li ng-repeat="dog in dogs" on-last-repeat>
-                {{dog.Name}}
+        <ul class="dogs-list">
+            <li class="dog" ng-repeat="dog in dogs" on-last-repeat>
+                <h4>
+                    {{dog.Name}}
+                </h4>
+                <p>{{dog.BreedName}}</p>
+                <img class="b-lazy portrait"
+                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     data-blazy="{{dog.Image}}"
+                     alt="{{dog.BreedName}}" />
+
             </li>
         </ul>
     </div>
@@ -32,6 +40,7 @@
     </footer>
     <!-- ReSharper disable once Html.TagNotResolved -->
     <ajax-loader class="ajax-loader" />
+    <script src="/Scripts/lib/blazy.min.js"></script>
     <script src="/Scripts/lib/angular.min.js"></script>
     <script src="/Scripts/lib/ajax-loader.angular.js"></script>
     <script src="/Scripts/lib/on-last-repeat.js"></script>
