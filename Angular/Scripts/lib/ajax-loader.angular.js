@@ -33,7 +33,7 @@
                         animationDuration: $scope.animationDuration === undefined ? defaultSettings.animationDuration : parseInt($scope.animationDuration),
                         handleBeforeUnload: $scope.handleBeforeUnload === undefined ? defaultSettings.handleBeforeUnload : $scope.handleBeforeUnload == 'true'
                     };
-                    
+
                     $scope.$on('showAjaxLoader', function () {
                         showLoader();
                     });
@@ -82,57 +82,51 @@
             };
         });
 
-    app.factory('ajaxLoaderInterceptor',
-        function ($rootScope) {
-            return {
-                request: function (config) {
-                    if (!config.cancelAjaxLoader) {
-                        $rootScope.$broadcast('showAjaxLoader');
-                    }
-                    return config;
-                },
-                requestError: function (config) {
-                    $rootScope.$broadcast('hideAjaxLoader');
-                    return config;
-                },
-                response: function (config) {
-                    $rootScope.$broadcast('hideAjaxLoader');
-                    return config;
-                },
-                responseError: function (config) {
-                    $rootScope.$broadcast('hideAjaxLoader');
-                    return config;
-                }
-            };
-        });
 
     app.config([
         '$httpProvider', function ($httpProvider) {
-            $httpProvider.interceptors.push('ajaxLoaderInterceptor');
+            $httpProvider.interceptors.push(function ($q, $rootScope) {
+                var api = {
+                    hideLoaderFunctions: {}
+                };
+
+                api.request = function (config) {
+                    if (!config.cancelAjaxLoader) {
+                        $rootScope.$broadcast('showAjaxLoader');
+                        config.ajaxLoaderId = 'Id' + Math.random();
+                        api.hideLoaderFunctions = {};
+                        api.hideLoaderFunctions[config.ajaxLoaderId] = function () {
+                            $rootScope.$broadcast('hideAjaxLoader');
+                        };
+                    }
+                    return config;
+                };
+
+                api.requestError = function (rejection) {
+                    hideLoader(rejection.config);
+                    return $q.reject(rejection);
+                };
+
+                api.response = function (response) {
+                    hideLoader(response.config);
+                    return response;
+                };
+
+                api.responseError = function (rejection) {
+                    hideLoader(rejection.config);
+                    return $q.reject(rejection);
+                };
+
+                function hideLoader(config) {
+                    if (!config.cancelAjaxLoader && api.hideLoaderFunctions[config.ajaxLoaderId]) {
+                        api.hideLoaderFunctions[config.ajaxLoaderId]();
+                        delete api.hideLoaderFunctions[config.ajaxLoaderId];
+                    }
+                }
+
+                return api;
+            });
         }
     ]);
 
 })();
-
-
-/*
-    .loader {
-  background-color: black;
-  color: white;
-  padding: 20px;
-  box-sizing: border-box;
-  
-opacity: 0;
-transform: scale(0,0);
-transition: opacity 1s, transform 0s 2s;
-  
-  &.visible {
-opacity: 1;
-transform: scale(1,1);
-transition: opacity 2s, transform 0s;
-  }
-}
-
-
-
-*/

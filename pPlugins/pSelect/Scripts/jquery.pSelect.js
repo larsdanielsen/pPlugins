@@ -43,10 +43,10 @@
                 this.$input.prop('readonly', true);
             }
 
-            this.$selectBox.bind('removeSelect.pSelect', function () {
+            this.$selectBox.on('removeSelect.pSelect', function () {
                 var pSelectInstance = $(this).data('pSelect');
                 pSelectInstance.$wrapperLabel.before($(this)).remove();
-                $(this).unbind('.pSelect')
+                $(this).off('.pSelect')
                     .removeData('pSelect');
             });
 
@@ -518,14 +518,15 @@
                     item.$li.trigger('click.pSelect');
                 }
                 var liTop = item.$li.position().top;
-                var ulInnerHeight = that.$ul.innerHeight();
-                var liOuterHeight = item.$li.outerHeight(true);
+                var ulInnerHeight = Math.round(that.$ul.innerHeight());
+                var liOuterHeight = Math.round(item.$li.outerHeight(true));
                 var ulScrollTop = that.$ul.get(0).scrollTop;
                 if (liTop < ulScrollTop) {
                     that.$ul.get(0).scrollTop = liTop; // scroll up
                 } else if (liTop + liOuterHeight > ulInnerHeight + ulScrollTop) {
                     that.$ul.get(0).scrollTop = liOuterHeight + liTop - ulInnerHeight; // scroll down
                 }
+                console.log(liTop, ulInnerHeight, liOuterHeight, ulScrollTop);
             }, 0);
         },
         inputKeyDown: function (e) {

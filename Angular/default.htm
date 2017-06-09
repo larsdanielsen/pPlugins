@@ -15,18 +15,22 @@
     <div class="container" ng-controller="dogListController">
         <button ng-click="showLoader()">Show</button>
         <button ng-click="hideLoader()">Hide</button>
+        <button ng-click="clearCache()">Clear cache</button>
         <br /><br />
         <button ng-click="getData(0)">Load</button>
         <button ng-click="getData(2000)">Load slow</button>
         <button ng-click="getData(2000, true)">Load slow but silent</button>
+        <br /><br />
+        <button ng-click="overlappingRequests()">Two overlapping requests</button>
         <ul class="dogs-list">
-            <li class="dog" ng-repeat="dog in dogs" on-last-repeat>
+            <li class="dog" ng-repeat="dog in dogs" on-last-repeat ng-cloak>
                 <h4>
                     {{dog.Name}}
                 </h4>
                 <p>{{dog.BreedName}}</p>
+                <p>Born: {{ jsonDateToDate(dog.Born) | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
                 <img class="b-lazy portrait"
-                     src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     ng-src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                      data-blazy="{{dog.Image}}"
                      alt="{{dog.BreedName}}" />
 

@@ -168,7 +168,7 @@ jQuery.fn.figure = function (init) {
         this.TransferWidth = function(options, elements) {            
             if (options.transferImgWidthToFigureWidth) {
                 var newImg =  elements.newElements.figureElement.find('img');
-                newImg.bind('load', function () {
+                newImg.on('load', function () {
                     setFigureWidth (elements);
                 });
                 if (newImg.width() > 0) {

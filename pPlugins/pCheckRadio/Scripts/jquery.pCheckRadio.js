@@ -46,10 +46,10 @@
             var that = this;
             var options = this.options;
             this.$element.data('options', options);
-            this.$element.bind('removeCheckRadio.pCheckRadio', function () {
+            this.$element.on('removeCheckRadio.pCheckRadio', function () {
                 var cb = $(this);
                 cb.closest('label.' + options.labelClass).before(cb).remove();
-                cb.unbind('.pCheckRadio')
+                cb.off('.pCheckRadio')
                     .removeData('pCheckRadio');
             });
 
@@ -65,20 +65,20 @@
 
             this.$element.data('label', this.$element.closest('label.' + options.labelClass));
 
-            this.$element.bind('focus.pCheckRadio', function () {
+            this.$element.on('focus.pCheckRadio', function () {
                 that.$element.data('label').addClass(options.focusClass);
             });
-            this.$element.bind('blur.pCheckRadio', function () {
+            this.$element.on('blur.pCheckRadio', function () {
                 that.$element.data('label').removeClass(options.focusClass);
             });
-            this.$element.closest('form').bind('reset.pCheckRadio', function () {
+            this.$element.closest('form').on('reset.pCheckRadio', function () {
                 that.$element.prop('checked', that.$element.get(0).defaultChecked);
                 updateCheckboxRadio($(this));
             });
-            this.$element.bind('change.pCheckRadio', function () {
+            this.$element.on('change.pCheckRadio', function () {
                 updateCheckboxRadio($(this));
             });
-            this.$element.bind('update.pCheckRadio', function () {
+            this.$element.on('update.pCheckRadio', function () {
                 updateCheckboxRadio($(this));
             });
 
