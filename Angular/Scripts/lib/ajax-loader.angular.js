@@ -87,17 +87,17 @@
         '$httpProvider', function ($httpProvider) {
             $httpProvider.interceptors.push(function ($q, $rootScope) {
                 var api = {
-                    hideLoaderFunctions: {}
+                    hideLoaderFunctions: []
                 };
 
                 api.request = function (config) {
                     if (!config.cancelAjaxLoader) {
                         $rootScope.$broadcast('showAjaxLoader');
-                        config.ajaxLoaderId = 'Id' + Math.random();
-                        api.hideLoaderFunctions = {};
-                        api.hideLoaderFunctions[config.ajaxLoaderId] = function () {
-                            $rootScope.$broadcast('hideAjaxLoader');
-                        };
+                        config.ajaxLoaderId = Math.random();
+                        api.hideLoaderFunctions.push({
+                            id: config.ajaxLoaderId,
+                            func: function () { $rootScope.$broadcast('hideAjaxLoader'); }
+                        });
                     }
                     return config;
                 };
@@ -118,9 +118,18 @@
                 };
 
                 function hideLoader(config) {
-                    if (!config.cancelAjaxLoader && api.hideLoaderFunctions[config.ajaxLoaderId]) {
-                        api.hideLoaderFunctions[config.ajaxLoaderId]();
-                        delete api.hideLoaderFunctions[config.ajaxLoaderId];
+                    if (!config.cancelAjaxLoader) {
+                        for (var i = 0; i < api.hideLoaderFunctions.length; i++) {
+                            console.log(api.hideLoaderFunctions[i]);
+                            console.log(config.ajaxLoaderId);
+                            if (api.hideLoaderFunctions[i].id == config.ajaxLoaderId) {
+                                if (api.hideLoaderFunctions.length == 1) {
+                                    api.hideLoaderFunctions[i].func();
+                                }
+                                api.hideLoaderFunctions.splice(i, 1);
+                                break;
+                            }
+                        }
                     }
                 }
 
