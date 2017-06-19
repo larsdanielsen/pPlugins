@@ -15,8 +15,8 @@
         };
 
         $scope.overlappingRequests = function () {
-            $scope.getData(1000, false, true);
             $scope.getData(4000);
+            $scope.getData(1000, false, true);
         };
 
         $scope.showLoader = function () {
