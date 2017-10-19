@@ -1,5 +1,81 @@
-﻿(function () {
+﻿
+var ajaxSpinner = {};
+var ajaxSpinnerSettings = {};
+
+(function (api, userSettings) {
     'use strict';
+    var spinnerDateRole = 'ajaxSpinnerTag',
+        showIt = false;
+
+
+    var defaultSettings = {
+        showAfter: 500,
+        hideAfter: 200,
+        animationDuration: 300,
+        handleBeforeUnload: false
+    };
+
+    var settings = {
+        showAfter: userSettings.showAfter === undefined ? defaultSettings.showAfter : parseInt(userSettings.showAfter),
+        hideAfter: userSettings.hideAfter === undefined ? defaultSettings.hideAfter : parseInt(userSettings.hideAfter),
+        animationDuration: userSettings.animationDuration === undefined ? defaultSettings.animationDuration : parseInt(userSettings.animationDuration),
+        handleBeforeUnload: userSettings.handleBeforeUnload === undefined ? defaultSettings.handleBeforeUnload : userSettings.handleBeforeUnload == 'true'
+    };
+
+
+    var spinner = $('[data-role=' + spinnerDateRole + ']');
+
+    if (spinner.length == 0){
+        spinner = $('<div data-role="' + spinnerDateRole + '" class="ajax-loader">Loading &hellip;</div>');
+        spinner.appendTo('body');        
+    }
+
+
+    api.showLoader = function () {
+        showIt = true;
+        updateDisplay();
+    };
+
+    api.hideLoader = function () {
+        showIt = false;
+        updateDisplay();
+    };
+
+    var getTransform = function () {
+        return showIt ? 'scale(1,1)' : 'scale(0,0)';
+    };
+
+    var getOpacity = function () {
+        return showIt ? 1 : 0;
+    };
+
+    var getTransition = function () {
+
+        var opacityDuration = getSecondsString(settings.animationDuration);
+        var opacityDelay = getSecondsString(showIt ? settings.showAfter : settings.hideAfter);
+        var transformDuration = getSecondsString(0);
+        var transformDelay = getSecondsString(showIt ? 0 : settings.showAfter + settings.animationDuration);
+        return 'opacity ' + opacityDuration + ' ' + opacityDelay + ', transform ' + transformDuration + ' ' + transformDelay;
+
+        function getSecondsString(ms) {
+            return ms / 1000 + 's';
+        }
+
+    };
+
+    var updateDisplay = function () {
+        spinner.css({
+            transform: getTransform(),
+            opacity: getOpacity(),
+            transition: getTransition()
+        });
+    }
+
+    window.onbeforeunload = function () {
+        api.showLoader();
+    };
+
+    /*
 
     var app = angular.module('ajaxLoader', []);
 
@@ -62,13 +138,7 @@
 
                     };
 
-                    $scope.getTransform = function () {
-                        return showIt ? 'scale(1,1)' : 'scale(0,0)';
-                    };
-
-                    $scope.getOpacity = function () {
-                        return showIt ? 1 : 0;
-                    };
+                    
 
                     function showLoader() {
                         showIt = true;
@@ -138,5 +208,5 @@
             });
         }
     ]);
-
-})();
+    */
+})(ajaxSpinner, ajaxSpinnerSettings);

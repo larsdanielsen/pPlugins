@@ -10,6 +10,7 @@
         var dogServiceCache = $cacheFactory('dogServiceCache');
 
         api.getData = function (delay, silent) {
+            console.log('getData hit');
             return $http({
                 method: 'GET',
                 url: defaultApiEndpoint + '/GetData',

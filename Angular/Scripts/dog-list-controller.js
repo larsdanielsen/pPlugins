@@ -7,6 +7,8 @@
         $scope.getData = function (delay, silent, ignoreResult) {
             $scope.dogs = null;
             dogService.getData(delay, silent).then(function (response) {
+                console.log('getData done');
+                console.log(response);
                 if (!ignoreResult) {
                     $scope.dogs = response.data;
                 }

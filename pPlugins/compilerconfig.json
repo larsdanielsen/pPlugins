@@ -54,6 +54,9 @@
   {
     "outputFile": "pFormdirty/Content/css/simple.pFormdirty.css",
     "inputFile": "pFormdirty/Content/less/simple.pFormdirty.less"
+  },
+  {
+    "outputFile": "Content/css/jquery.ajax-loader.css",
+    "inputFile": "Content/less/jquery.ajax-loader.less"
   }
-
 ]

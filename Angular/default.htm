@@ -33,13 +33,16 @@
                      ng-src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                      data-blazy="{{dog.Image}}"
                      alt="{{dog.BreedName}}" />
-
+                <p ng-show="!!dog.Link">
+                    <a target="_blank" href="#" ng-href="{{ dog.Link }}">Click here &hellip;</a>
+                </p>
             </li>
         </ul>
     </div>
     <footer>
         <div class="container">
             Created by: Lars Danielsen
+            <input type="file" />
         </div>
     </footer>
     <!-- ReSharper disable once Html.TagNotResolved -->
@@ -51,5 +54,6 @@
     <script src="/Scripts/main.js"></script>
     <script src="/Scripts/dog-service.js"></script>
     <script src="/Scripts/dog-list-controller.js"></script>
+    <script src="/Scripts/lib/dir-test.directive.js"></script>
 </body>
 </html>
