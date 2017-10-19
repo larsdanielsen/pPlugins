@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html ng-app="myStylerApp">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body ng-controller="stylerController">
+    <div ng-repeat="mixin in value.Mixins">
+        <div editor-mixin="mixin"></div>
+    </div>        
+    value<pre>{{value | json }}</pre>
+    prevalues<pre>{{prevalues | json }}</pre>
+    <script src="/Scripts/lib/angular.min.js"></script>
+    <script src="/Styler/main.js"></script>
+    <script src="/Styler/EditorMixins/editor-mixin-directive.js"></script>
+    <script src="/Styler/styler-controller.js"></script>
+</body>
+</html>
