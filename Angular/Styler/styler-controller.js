@@ -4,85 +4,96 @@
     var app = root.getModule();
 
     app.controller('stylerController', function ($scope, mixinNames) {
-        
-        mockData();
-        initValue();
 
-        function initValue() {
-            angular.copy($scope.value.Mixins, $scope.existingMixins = []);
-            $scope.value.Mixins = [];
-            angular.forEach($scope.prevalues, function (value, key, obj) {
-                $scope.value.Mixins.push(getMixin(value, $scope.existingMixins));
+        mockData();
+        initModel();
+
+        function initModel() {
+            angular.copy($scope.prevalues, $scope.presentationModelMixins = []);
+            angular.copy($scope.value, $scope.existingModel = {});
+            $scope.presentationModel = {
+                className: $scope.existingModel.ClassName,
+                mixins: $scope.presentationModelMixins
+            }
+            angular.forEach($scope.presentationModel.mixins, function (presentationModelMixin) {
+                preserveExistingMixinValues(presentationModelMixin, $scope.existingModel);
             });
+            $scope.value = getValue($scope.presentationModel);
         }
 
-
-        function getMixin(mixin, existingMixins) {
-
-            var existingMixin = getExistingMixin(mixin, existingMixins);
-
-            var newMixin = {
-                MixinName: mixin.mixinName
-            };
-
-            getMixinValues(mixin, newMixin);
-            if (existingMixin !== null) {
-                preserveExistingMixinValues(existingMixin, newMixin);
+        $scope.$watch(
+            function () {
+                $scope.value = getValue($scope.presentationModel);
             }
+        );
 
+        function getValue(presentationModel) {
+            var value = {
+                ClassName: presentationModel.className,
+                Mixins: []
+            };
+            angular.forEach(presentationModel.mixins, function (presentationModelMixin, key, obj) {
+                value.Mixins.push(getMixin(presentationModelMixin));
+            });
+            return value;
+        }
+
+        function getMixin(presentationModelMixin) {
+            console.log('getMixin');
+            console.log(presentationModelMixin);
+            var newMixin = {
+                MixinName: presentationModelMixin.mixinName,
+                Values: {}
+            };
+            getMixinValues(presentationModelMixin, newMixin);
             return newMixin;
         }
 
-        function getMixinValues(mixin, newMixin) {
+        function getMixinValues(presentationModelMixin, newMixin) {
             switch (newMixin.MixinName) {
                 case mixinNames.Color:
-                    newMixin.Values = {
-                        Color: mixin.initialValues.color
-                    };
+                    newMixin.Values.Color = presentationModelMixin.initialValues.color;
                     break;
                 case mixinNames.BackgroundColor:
-                    newMixin.Values = {
-                        Color: mixin.initialValues.color
-                    };
+                    newMixin.Values.Color = presentationModelMixin.initialValues.color;
                     break;
                 case mixinNames.Gradient:
-                    newMixin.Values = {
-                        Color1: mixin.initialValues.color1,
-                        Color2: mixin.initialValues.color2
-                    };
+                    newMixin.Values.Color1 = presentationModelMixin.initialValues.color1;
+                    newMixin.Values.Color2 = presentationModelMixin.initialValues.color2;
                     break;
                 default:
             }
         }
 
-
-        function preserveExistingMixinValues(existingMixin, newMixin) {
-            switch (newMixin.MixinName) {
-                case mixinNames.Color:
-                    newMixin.Values = {
-                        Color: existingMixin.Values.Color
-                    };
-                    break;
-                case mixinNames.BackgroundColor:
-                    newMixin.Values = {
-                        Color: existingMixin.Values.Color
-                    };
-                    break;
-                case mixinNames.Gradient:
-                    newMixin.Values = {
-                        Color1: existingMixin.Values.Color1,
-                        Color2: existingMixin.Values.Color2
-                    };
-                    break;
-                default:
+        function preserveExistingMixinValues(presentationModelMixin, existingModel) {
+            var existingMixin = getExistingMixin(presentationModelMixin, existingModel.Mixins);
+            if (existingMixin) {
+                switch (presentationModelMixin.mixinName) {
+                    case mixinNames.Color:
+                        presentationModelMixin.initialValues = {
+                            color: existingMixin.Values.Color
+                        };
+                        break;
+                    case mixinNames.BackgroundColor:
+                        presentationModelMixin.Values = {
+                            Color: existingMixin.Values.Color
+                        };
+                        break;
+                    case mixinNames.Gradient:
+                        presentationModelMixin.Values = {
+                            Color1: existingMixin.Values.Color1,
+                            Color2: existingMixin.Values.Color2
+                        };
+                        break;
+                    default:
+                }
             }
         }
 
-
-        function getExistingMixin(mixin, existingMixins) {
-            for (var i = 0; i < existingMixins.length; i++) {
-                if (existingMixins[i].MixinName === mixin.mixinName) {
-                    return existingMixins[i];
+        function getExistingMixin(presentationModelMixin, existingModelMixins) {
+            for (var i = 0; i < existingModelMixins.length; i++) {
+                if (existingModelMixins[i].MixinName === presentationModelMixin.mixinName) {
+                    return existingModelMixins[i];
                 }
             }
             return null;

@@ -1,4 +1,6 @@
-﻿var MyStylerAppSettings;
+﻿///
+
+var MyStylerAppSettings;
 (function (root) {
     'use strict';
 

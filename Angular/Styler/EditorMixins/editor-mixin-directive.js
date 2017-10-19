@@ -15,8 +15,8 @@
                 controller: function ($scope, mixinNames) {
                     console.log(mixinNames);
                     $scope.getTemplateUrl = function () {
-                        console.log($scope.mixin.MixinName);
-                        switch ($scope.mixin.MixinName) {
+                        console.log($scope.mixin.mixinName);
+                        switch ($scope.mixin.mixinName) {
                             case mixinNames.Color:
                                 return '/Styler/EditorMixins/color-directive.html';
                                 break;

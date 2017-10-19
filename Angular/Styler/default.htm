@@ -5,14 +5,21 @@
     <title></title>
 </head>
 <body ng-controller="stylerController">
-    <div ng-repeat="mixin in value.Mixins">
-        <div editor-mixin="mixin"></div>
-    </div>        
-    value<pre>{{value | json }}</pre>
-    prevalues<pre>{{prevalues | json }}</pre>
-    <script src="/Scripts/lib/angular.min.js"></script>
-    <script src="/Styler/main.js"></script>
-    <script src="/Styler/EditorMixins/editor-mixin-directive.js"></script>
-    <script src="/Styler/styler-controller.js"></script>
+    className: <input ng-model="presentationModel.className"/>
+<div ng-repeat="mixin in presentationModel.mixins">
+    <div editor-mixin="mixin"></div>
+</div>
+<p ng-click="showPrevalues = ! showPrevalues">prevalues</p>
+<pre ng-if="showPrevalues">{{prevalues | json }}</pre>
+<p ng-click="showValue = ! showValue">value</p>
+<pre ng-if="showValue">{{value | json }}</pre>
+<p ng-click="showPresentationModel = ! showPresentationModel">presentationModel</p>
+<pre ng-if="showPresentationModel">{{presentationModel | json }}</pre>
+<p ng-click="showExistingModel = ! showExistingModel">existingModel</p>
+<pre ng-if="showExistingModel">{{existingModel | json }}</pre>
+<script src="/Scripts/lib/angular.min.js"></script>
+<script src="/Styler/main.js"></script>
+<script src="/Styler/EditorMixins/editor-mixin-directive.js"></script>
+<script src="/Styler/styler-controller.js"></script>
 </body>
 </html>
