@@ -22,6 +22,17 @@
         <button ng-click="getData(2000, true)">Load slow but silent</button>
         <br /><br />
         <button ng-click="overlappingRequests()">Two overlapping requests</button>
+        <br /><br />
+        <select ng-options="dog as dog.Name for dog in dogs" ng-model="selectedDog">
+            <option value="">Nothing selected</option>
+        </select>
+        <p ng-if="selectedDog">
+            {{selectedDog.Name}}
+        </p>
+        <img class="portrait" ng-if="selectedDog"
+             src="{{selectedDog.Image}}"
+             alt="{{selectedDog.BreedName}}" />
+        {{data.selectedDog|json}}
         <ul class="dogs-list">
             <li class="dog" ng-repeat="dog in dogs" on-last-repeat ng-cloak>
                 <h4>
@@ -42,7 +53,6 @@
     <footer>
         <div class="container">
             Created by: Lars Danielsen
-            <input type="file" />
         </div>
     </footer>
     <!-- ReSharper disable once Html.TagNotResolved -->
