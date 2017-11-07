@@ -10,10 +10,10 @@ var MyStylerAppSettings;
         return angular.module('myStylerApp');
     };
 
-    app.constant('mixinNames', {
-        Color: 'Color',
-        BackgroundColor: 'BackgroundColor',
-        Gradient: 'Gradient'
-    });
+    //app.constant('mixinNames', {
+    //    Color: 'Color',
+    //    BackgroundColor: 'BackgroundColor',
+    //    Gradient: 'Gradient'
+    //});
 
 })(MyStylerAppSettings || (MyStylerAppSettings = {}));

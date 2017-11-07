@@ -23,7 +23,9 @@
         <br /><br />
         <button ng-click="overlappingRequests()">Two overlapping requests</button>
         <br /><br />
-        <select ng-options="dog as dog.Name for dog in dogs" ng-model="selectedDog">
+        <button ng-click="filterBorn()">filterBorn</button>
+        <br /><br />
+        <select ng-options="item as item.Name for item in dogs" ng-model="selectedDog">
             <option value="">Nothing selected</option>
         </select>
         <p ng-if="selectedDog">
@@ -39,7 +41,7 @@
                     {{dog.Name}}
                 </h4>
                 <p>{{dog.BreedName}}</p>
-                <p>Born: {{ jsonDateToDate(dog.Born) | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
+                <p>Born: <span class="born">{{ jsonDateToDate(dog.Born) | date:'yyyy-MM-dd HH:mm:ss Z'}}</span></p>
                 <img class="b-lazy portrait"
                      ng-src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                      data-blazy="{{dog.Image}}"
@@ -57,6 +59,8 @@
     </footer>
     <!-- ReSharper disable once Html.TagNotResolved -->
     <ajax-loader class="ajax-loader" />
+    <script src="Scripts/lib/jquery-2.2.0.min.js"></script>
+    <script src="/Scripts/lib/isotope.pkgd.min.js"></script>
     <script src="/Scripts/lib/blazy.min.js"></script>
     <script src="/Scripts/lib/angular.min.js"></script>
     <script src="/Scripts/lib/ajax-loader.angular.js"></script>
@@ -64,6 +68,5 @@
     <script src="/Scripts/main.js"></script>
     <script src="/Scripts/dog-service.js"></script>
     <script src="/Scripts/dog-list-controller.js"></script>
-    <script src="/Scripts/lib/dir-test.directive.js"></script>
 </body>
 </html>

@@ -1,0 +1,51 @@
+﻿<div class="rounded-editor">
+
+    <h4>Rounded</h4>
+    <div ng-class="{active: mode == 'simple'}" ng-click="mode = 'simple'">
+        <label>
+            All
+            <input ng-model="editors.all" type="number" />
+        </label>
+    </div>
+    <div ng-class="{active: mode == 'topbottom'}" ng-click="mode = 'topbottom'">
+        <label>
+            Top
+            <input ng-model="editors.top" type="number" />
+        </label>
+        <label>
+            Bottom
+            <input ng-model="editors.bottom" type="number" />
+        </label>
+    </div>
+    <div ng-class="{active: mode == 'advanced'}" ng-click="mode = 'advanced'">
+        <label>
+            TopLeft
+            <input ng-model="mixin.initialValues.topLeft" type="number" />
+        </label>
+        <label>
+            TopRight
+            <input ng-model="mixin.initialValues.topRight" type="number" />
+        </label>
+        <label>
+            BottomLeft
+            <input ng-model="mixin.initialValues.bottomLeft" type="number" />
+        </label>
+        <label>
+            BottomRight
+            <input ng-model="mixin.initialValues.bottomRight" type="number" />
+        </label>
+
+    </div>
+    <style>
+        .rounded-editor div {
+            opacity: .5;
+            margin: 10px 0;
+        }
+        label {
+            display: block;
+        }
+        .rounded-editor div.active {
+            opacity: 1;
+        }
+    </style>
+    </div>

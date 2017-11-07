@@ -12,4 +12,6 @@
         src: 'data-blazy' // Default is data-src
     });
 
+
+
 })(MyAppSettings || (MyAppSettings = {}));
