@@ -21,10 +21,11 @@
             $scope.value = getValue($scope.presentationModel);
         }
 
-        $scope.$watch(
-            function () {
+        $scope.$watch('presentationModel',
+            function (newValue, oldValue) {
+                console.log($scope.presentationModel.className);
                 $scope.value = getValue($scope.presentationModel);
-            }
+            }, true
         );
 
         function getValue(presentationModel) {
@@ -39,8 +40,8 @@
         }
 
         function getMixin(presentationModelMixin) {
-            console.log('getMixin');
-            console.log(presentationModelMixin);
+            //console.log('getMixin');
+            //console.log(presentationModelMixin);
             var newMixin = {
                 MixinName: presentationModelMixin.mixinName,
                 Values: {}
@@ -75,14 +76,14 @@
                         };
                         break;
                     case mixinNames.BackgroundColor:
-                        presentationModelMixin.Values = {
-                            Color: existingMixin.Values.Color
+                        presentationModelMixin.initialValues = {
+                            color: existingMixin.Values.Color
                         };
                         break;
                     case mixinNames.Gradient:
-                        presentationModelMixin.Values = {
-                            Color1: existingMixin.Values.Color1,
-                            Color2: existingMixin.Values.Color2
+                        presentationModelMixin.initialValues = {
+                            color1: existingMixin.Values.Color1,
+                            color2: existingMixin.Values.Color2
                         };
                         break;
                     default:

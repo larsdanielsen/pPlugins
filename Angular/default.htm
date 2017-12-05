@@ -22,6 +22,8 @@
         <button ng-click="getData(2000, true)">Load slow but silent</button>
         <br /><br />
         <button ng-click="overlappingRequests()">Two overlapping requests</button>
+        <br /><br />
+        <select ng-if="!!dogs" ng-options="dog in dogs" ng-model="selectedDog"></select>
         <ul class="dogs-list">
             <li class="dog" ng-repeat="dog in dogs" on-last-repeat ng-cloak>
                 <h4>

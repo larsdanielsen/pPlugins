@@ -4,8 +4,10 @@
     var app = root.getModule();
 
     app.controller('dogListController', function ($scope, $rootScope, $timeout, $log, dogService) {
+        $scope.dogs = [];
+
         $scope.getData = function (delay, silent, ignoreResult) {
-            $scope.dogs = null;
+            $scope.dogs = [];
             dogService.getData(delay, silent).then(function (response) {
                 console.log('getData done');
                 console.log(response);
