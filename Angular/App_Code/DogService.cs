@@ -76,7 +76,7 @@ public class DogService : System.Web.Services.WebService
                 Born = new DateTime(2013, 4, 2),
                 Breed = Dog.Breeds.Cockapoo,
                 Image = "http://cdn2-www.dogtime.com/assets/uploads/2011/01/file_23218_cockapoo-dog-breed.jpg",
-                Link = ""
+                Link = "http://dogtime.com/dog-breeds/cockapoo"
             },
             new Dog {
                 Id = 7,
@@ -84,7 +84,7 @@ public class DogService : System.Web.Services.WebService
                 Born = new DateTime(2014, 10, 20),
                 Breed = Dog.Breeds.ShihTzu,
                 Image = "http://cdn2-www.dogtime.com/assets/uploads/2011/01/file_23126_shih-tzu-460x290.jpg",
-                Link = ""
+                Link = "http://dogtime.com/dog-breeds/shih-tzu  "
             },
             new Dog {
                 Id = 8,

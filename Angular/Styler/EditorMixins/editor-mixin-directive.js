@@ -12,19 +12,20 @@
                 scope: {
                     mixin: '=editorMixin'
                 },
-                controller: function ($scope, mixinNames) {
-                    //console.log(mixinNames);
-                    $scope.getTemplateUrl = function () {
-                        //console.log($scope.mixin.mixinName);
+                controller: function ($scope, editorFactory) {
+                    $scope.getTemplateUrl = function () {   
                         switch ($scope.mixin.mixinName) {
-                            case mixinNames.Color:
+                            case editorFactory.mixinNames.Color:
                                 return '/Styler/EditorMixins/color-directive.html';
                                 break;
-                            case mixinNames.BackgroundColor:
+                            case editorFactory.mixinNames.BackgroundColor:
                                 return '/Styler/EditorMixins/background-color-directive.html';
                                 break;
-                            case mixinNames.Gradient:
+                            case editorFactory.mixinNames.Gradient:
                                 return '/Styler/EditorMixins/gradient-directive.html';
+                                break;
+                            case editorFactory.mixinNames.Rounded:
+                                return '/Styler/EditorMixins/rounded-directive-init.html';
                                 break;
                         //    default:
                         }
