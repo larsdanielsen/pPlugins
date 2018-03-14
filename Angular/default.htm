@@ -25,9 +25,7 @@
         <br /><br />
         <button ng-click="filterBorn()">filterBorn</button>
         <br /><br />
-        <select ng-options="item as item.Name for item in dogs" ng-model="selectedDog">
-            <option value="">Nothing selected</option>
-        </select>
+        <div dog-select dogs="dogs" selected-dog="selectedDog"></div>
         <p ng-if="selectedDog">
             {{selectedDog.Name}}
         </p>
@@ -62,11 +60,13 @@
     <script src="Scripts/lib/jquery-2.2.0.min.js"></script>
     <script src="/Scripts/lib/isotope.pkgd.min.js"></script>
     <script src="/Scripts/lib/blazy.min.js"></script>
+    <!--<script src="/Scripts/lib/angular-1.1.5/angular.min.js"></script>-->
     <script src="/Scripts/lib/angular.min.js"></script>
     <script src="/Scripts/lib/ajax-loader.angular.js"></script>
     <script src="/Scripts/lib/on-last-repeat.js"></script>
     <script src="/Scripts/main.js"></script>
     <script src="/Scripts/dog-service.js"></script>
     <script src="/Scripts/dog-list-controller.js"></script>
+    <script src="/Scripts/dog-select-directive.js"></script>
 </body>
 </html>

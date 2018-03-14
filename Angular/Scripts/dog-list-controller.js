@@ -58,6 +58,12 @@
             });
         };
 
+        $scope.selectDog = function (selectedDog) {
+            $scope.selectedDog = angular.copy(selectedDog);
+            $scope.ddSelectedDog = null;
+        };
+
+
         function initIsotope() {
             console.log('initIsotope');
 
