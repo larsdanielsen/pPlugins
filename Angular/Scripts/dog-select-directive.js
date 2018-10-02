@@ -1,4 +1,4 @@
-﻿(function (root) {
+﻿(function (root, angular) {
     'use strict';
 
     var app = root.getModule();
@@ -6,7 +6,7 @@
     app.directive('dogSelect',
         function () {
 
-            var controller = function ($scope,) {
+            var controller = function ($scope) {
 
                 $scope.selectDog = function (ddSelectedDog) {
                     $scope.selectedDog = angular.copy(ddSelectedDog);
@@ -28,4 +28,4 @@
 
         });
 
-})(MyAppSettings || (MyAppSettings = {}));
+})(MyAppSettings || (MyAppSettings = {}), window.angular);

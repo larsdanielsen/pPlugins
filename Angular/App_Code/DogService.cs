@@ -93,6 +93,20 @@ public class DogService : System.Web.Services.WebService
                 Breed = Dog.Breeds.Rottweiler,
                 Image = "http://cdn2-www.dogtime.com/assets/uploads/2011/01/file_22942_rottweiler-460x290.jpg",
                 Link = "http://dogtime.com/dog-breeds/rottweiler"
+            },
+            new Dog {
+                Id = 9,
+                Name = "Sofus",
+                Born = new DateTime(2009, 5, 30),
+                Breed = Dog.Breeds.LhasaApso,
+                Image = "http://cdn2-www.dogtime.com/assets/uploads/2011/01/file_23154_lhasa-apso-460x290.jpg"
+            },
+            new Dog {
+                Id = 10,
+                Name = "Otto",
+                Born = new DateTime(2012, 1, 3),
+                Breed = Dog.Breeds.BorderTerrier,
+                Image = "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23058_border-terrier-460x290.jpg"
             }
         };
 
@@ -118,6 +132,8 @@ public class DogService : System.Web.Services.WebService
                 {
                     case Breeds.BorderCollie:
                         return "Border Collie";
+                    case Breeds.BorderTerrier:
+                        return "Border Terrier";
                     case Breeds.UnKnown:
                         return "Ukendt race";
                     case Breeds.BeardedCollie:
@@ -134,6 +150,8 @@ public class DogService : System.Web.Services.WebService
                         return "Shih Tzu";
                     case Breeds.Rottweiler:
                         return "Rottweiler";
+                    case Breeds.LhasaApso:
+                        return "Lhasa Apso";
                     default:
                         return "Ukendt race";
                 }
@@ -152,7 +170,9 @@ public class DogService : System.Web.Services.WebService
             CairnTerrier,
             Cockapoo,
             ShihTzu,
-            Rottweiler
+            Rottweiler,
+            LhasaApso,
+            BorderTerrier
         }
     }
 

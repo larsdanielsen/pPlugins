@@ -41,27 +41,25 @@
         </div><!-- /.container -->
     </nav>
     <div class="container">
-        <!-- Single definition of SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-            <symbol id="disc" viewbox="0 0 100 100">
-                <circle class="uno" cx="50" cy="50" r="40">
-            </symbol>
-            <symbol id="ring" class="hest" viewbox="0 0 100 100">
-                <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" />
-            </symbol>
-        </svg>
-        <!-- Re-use; each is styled differently (see above) -->
-        <svg class="circle circle-1">
-            <use xlink:href="#disc" />
-        </svg>
-        <svg class="ring ring-2" width="100" height="100">
-            <use href="#ring" />
-        </svg>
         <style>
-            svg.ring.ring-2 {
-                fill: red;
+            .menu-test {
+                width: 100px;
+                height: auto;
+                background-color: gold;
             }
+            .menu-test.open {
+                height: 200px;
+            }
+            .menu-test-focus {
+                position:absolute;
+                clip: rect(0, 0, 0, 0);                
+            }
+
         </style>
+        <div class="menu-test" data-role="MenuTest"><a data-role="MenuTestFocus" class="menu-test-focus" href="#">x</a><p>Menu</p></div>
+
+        <iframe src="iframe.html"></iframe>
+
     </div>
     <footer>
         <div class="container">

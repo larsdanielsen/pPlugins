@@ -1,5 +1,31 @@
 $(document).ready(function () {
 
+
+    handleMenuTest();
+
+    function handleMenuTest() {
+        $('[data-role=MenuTest]').click(openMenuV2);
+    }
+
+    function openMenu(e) {
+        e.stopPropagation();
+        $('[data-role=MenuTest]').addClass('open');
+        $('body, html').one('click', closeMenu);
+        $('iframe').contents().find('body, html').one('click', function () {
+            $('body, html', window.parent.document).trigger('click');
+        });
+    }
+
+    function openMenuV2(e) {
+        $('[data-role=MenuTest]').addClass('open');
+        var focusElem = $('[data-role=MenuTestFocus]');
+        focusElem.focus().one('blur', closeMenu);
+    }
+
+    function closeMenu() {
+        $('[data-role=MenuTest]').removeClass('open');
+    }
+
     function testBitMap() {
         var settings = [false, false, false, false, false, false, true, false, true, false, true, false, false, true];
 

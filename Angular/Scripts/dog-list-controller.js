@@ -1,4 +1,4 @@
-﻿(function (root) {
+﻿(function (root, angular, $) {
     'use strict';
 
     var app = root.getModule();
@@ -35,7 +35,7 @@
             dogService.saveDog();
         };
 
-        $scope.$on('onLastRepeat', function (scope, element, attrs) {
+        $scope.$on('onLastRepeat', function () {
             $timeout(bLazyRevalidate, 0);
         });
 
@@ -134,4 +134,4 @@
 
 
     });
-})(MyAppSettings || (MyAppSettings = {}));
+})(MyAppSettings || (MyAppSettings = {}), window.angular, window.jQuery);
