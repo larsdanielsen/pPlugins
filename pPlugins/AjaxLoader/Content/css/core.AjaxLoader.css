@@ -1,0 +1,26 @@
+﻿.dogs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /* clear fix */
+}
+.dogs-list:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.dogs-list .dog {
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+  list-style-type: none;
+  border-top: 1px solid black;
+  display: block;
+  float: left;
+  width: 300px;
+  height: 400px;
+}
+.dogs-list .dog .portrait {
+  width: 300px;
+  height: auto;
+}

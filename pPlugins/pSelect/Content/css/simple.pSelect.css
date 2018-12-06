@@ -6,7 +6,7 @@
   width: 50%;
   line-height: 18px;
   font-size: 14px;
-  opacity: .7;
+  opacity: 0.7;
 }
 label.pSelect:after {
   -moz-box-sizing: border-box;
@@ -59,10 +59,10 @@ ul.pSelcetUl {
   border: 1px solid #666;
   margin: 3px 0;
   font-size: 14px;
-  -webkit-transition: clip .1s;
-  -moz-transition: clip .1s;
-  -o-transition: clip .1s;
-  transition: clip .1s;
+  -webkit-transition: clip 0.1s;
+  -moz-transition: clip 0.1s;
+  -o-transition: clip 0.1s;
+  transition: clip 0.1s;
   clip: rect(0, 0, 0, 0);
 }
 ul.pSelcetUl li {

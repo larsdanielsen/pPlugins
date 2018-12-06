@@ -58,5 +58,13 @@
   {
     "outputFile": "Content/css/jquery.ajax-loader.css",
     "inputFile": "Content/less/jquery.ajax-loader.less"
+  },
+  {
+    "outputFile": "AjaxLoader/Content/css/core.AjaxLoader.css",
+    "inputFile": "AjaxLoader/Content/less/core.AjaxLoader.less"
+  },
+  {
+    "outputFile": "AjaxLoader/Content/css/ajax-loader.css",
+    "inputFile": "AjaxLoader/Content/less/ajax-loader.less"
   }
 ]

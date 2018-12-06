@@ -2,19 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title data-type="base">pPlugins</title>
+    <title>AjaxLoader DEMO</title>
+    <link data-type="base" href="Content/css/core.AjaxLoader.css" rel="stylesheet" />
+    <link data-type="base" href="Content/css/ajax-loader.css" rel="stylesheet" />
     <link data-theme="bootstrap" href="/Content/bootstrap.css" rel="stylesheet" />
     <link data-theme="bootstrap" href="/Content/bootstrap-theme.css" rel="stylesheet" />
-    <link data-theme="simple" href="/Content/fonts/TrendSlapOne/stylesheet.css" rel="stylesheet" />
     <link data-theme="simple" href="/Content/css/page.css" rel="stylesheet" />
-    <link href="/Content/css/jquery.ajax-loader.css" rel="stylesheet" />
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>pPlugins</h1>
+            <h1>AjaxLoader</h1>
         </div>
     </header>
+
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -41,16 +42,27 @@
         </div><!-- /.container -->
     </nav>
     <div class="container">
+        <button data-click="showLoader">Show</button>
+        <button data-click="hideLoader">Hide</button>
+        <br /><br />
+        <button data-click="getData" data-delay="0">Load</button>
+        <button data-click="getData" data-delay="2000">Load slow</button>
+        <br /><br />
+        <button ng-click="overlappingRequests()">Two overlapping requests</button>
+        <br /><br />
+        <ul class="dogs-list" data-role="DogList"><li>her</li></ul>
     </div>
     <footer>
         <div class="container">
             Created by: Lars Danielsen
         </div>
     </footer>
+    <div data-handler="AjaxLoader" class="ajax-loader">Loading ...</div>
     <script src="/Scripts/jquery-3.2.1.min.js"></script>
-    <script src="/Scripts/jquery.ajax-loader.js"></script>
     <script src="/Scripts/bootstrap.js"></script>
     <script src="/Scripts/main.js"></script>
     <script src="/Scripts/menu.js"></script>
+    <script src="Scripts/jquery.AjaxLoader.js"></script>
+    <script src="Scripts/main.js"></script>
 </body>
 </html>
