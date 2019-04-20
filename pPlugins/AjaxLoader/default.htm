@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>AjaxLoader DEMO</title>
     <link data-type="base" href="Content/css/core.AjaxLoader.css" rel="stylesheet" />
-    <link data-type="base" href="Content/css/ajax-loader.css" rel="stylesheet" />
     <link data-theme="bootstrap" href="/Content/bootstrap.css" rel="stylesheet" />
     <link data-theme="bootstrap" href="/Content/bootstrap-theme.css" rel="stylesheet" />
     <link data-theme="simple" href="/Content/css/page.css" rel="stylesheet" />
@@ -48,9 +47,9 @@
         <button data-click="getData" data-delay="0">Load</button>
         <button data-click="getData" data-delay="2000">Load slow</button>
         <br /><br />
-        <button ng-click="overlappingRequests()">Two overlapping requests</button>
+        <button data-click="overlappingRequests">Two overlapping requests</button>
         <br /><br />
-        <ul class="dogs-list" data-role="DogList"><li>her</li></ul>
+        <ul class="dogs-list" data-role="DogList"></ul>
     </div>
     <footer>
         <div class="container">

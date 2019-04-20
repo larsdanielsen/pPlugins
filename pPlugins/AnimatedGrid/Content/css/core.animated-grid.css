@@ -1,0 +1,14 @@
+﻿.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 15px;
+}
+.grid-wrapper div {
+  background: gold;
+  min-height: 50px;
+  padding: 15px;
+}
+.grid-wrapper div img {
+  width: 100%;
+  height: auto;
+}

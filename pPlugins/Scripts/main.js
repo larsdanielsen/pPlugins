@@ -34,10 +34,10 @@ $(document).ready(function () {
         var theme = $(this).data('theme');
         setCookie('themeIndex', theme);
         $('body').fadeOut(10, function () {
-            if (theme == 'bootstrap') {
+            if (theme === 'bootstrap') {
                 bootstrapCss.insertAfter('[data-type=base]');
                 simpleCss.detach();
-            } else if (theme == 'simple') {
+            } else if (theme === 'simple') {
                 simpleCss.insertAfter('[data-type=base]');
                 bootstrapCss.detach();
             }

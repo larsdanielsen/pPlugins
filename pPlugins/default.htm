@@ -1,56 +1,100 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title data-type="base">pPlugins</title>
-    <link data-theme="bootstrap" href="/Content/bootstrap.css" rel="stylesheet" />
-    <link data-theme="bootstrap" href="/Content/bootstrap-theme.css" rel="stylesheet" />
-    <link data-theme="simple" href="/Content/fonts/TrendSlapOne/stylesheet.css" rel="stylesheet" />
+    <link
+      data-theme="bootstrap"
+      href="/Content/bootstrap.css"
+      rel="stylesheet"
+    />
+    <link
+      data-theme="bootstrap"
+      href="/Content/bootstrap-theme.css"
+      rel="stylesheet"
+    />
+    <link
+      data-theme="simple"
+      href="/Content/fonts/TrendSlapOne/stylesheet.css"
+      rel="stylesheet"
+    />
     <link data-theme="simple" href="/Content/css/page.css" rel="stylesheet" />
     <link href="/Content/css/jquery.ajax-loader.css" rel="stylesheet" />
-</head>
-<body>
+    <style>
+      .my-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 15px;
+      }
+
+      .my-grid div {
+        background: gold;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <h1>pPlugins</h1>
-        </div>
+      <div class="container">
+        <h1>pPlugins</h1>
+      </div>
     </header>
     <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">pPlugins</a>
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">pPlugins</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav" data-role="TopNav"></ul>
+          <form class="navbar-form navbar-right" data-formdirty-ignore="yes">
+            <div class="form-group">
+              <div class="radio">
+                <label class="radio-inline"
+                  ><input
+                    type="radio"
+                    name="theme"
+                    data-theme="simple"
+                  />Simple</label
+                >
+                <label class="radio-inline"
+                  ><input
+                    type="radio"
+                    name="theme"
+                    data-theme="bootstrap"
+                  />Bootstrap</label
+                >
+              </div>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav" data-role="TopNav"></ul>
-                <form class="navbar-form navbar-right" data-formdirty-ignore="yes">
-                    <div class="form-group">
-                        <div class="radio">
-                            <label class="radio-inline"><input type="radio" name="theme" data-theme="simple">Simple</label>
-                            <label class="radio-inline"><input type="radio" name="theme" data-theme="bootstrap">Bootstrap</label>
-                        </div>
-                    </div>
-                </form>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
+          </form>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
     </nav>
-    <div class="container">
+    <div class="container">      
     </div>
     <footer>
-        <div class="container">
-            Created by: Lars Danielsen
-        </div>
+      <div class="container">
+        Created by: Lars Danielsen
+      </div>
     </footer>
     <script src="/Scripts/jquery-3.2.1.min.js"></script>
     <script src="/Scripts/jquery.ajax-loader.js"></script>
     <script src="/Scripts/bootstrap.js"></script>
     <script src="/Scripts/main.js"></script>
     <script src="/Scripts/menu.js"></script>
-</body>
+  </body>
 </html>

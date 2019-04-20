@@ -107,6 +107,14 @@ public class DogService : System.Web.Services.WebService
                 Born = new DateTime(2012, 1, 3),
                 Breed = Dog.Breeds.BorderTerrier,
                 Image = "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23058_border-terrier-460x290.jpg"
+            },
+            new Dog {
+                Id = 11,
+                Name = "Freja",
+                Born = new DateTime(2012, 10, 3),
+                Breed = Dog.Breeds.Lowchen,
+                Image = "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23156_lowchen-460x290.jpg",
+                Link = "https://dogtime.com/dog-breeds/lowchen"
             }
         };
 
@@ -153,6 +161,8 @@ public class DogService : System.Web.Services.WebService
                         return "Rottweiler";
                     case Breeds.LhasaApso:
                         return "Lhasa Apso";
+                    case Breeds.Lowchen:
+                        return "Löwchen";
                     default:
                         return "Ukendt race";
                 }
@@ -173,7 +183,8 @@ public class DogService : System.Web.Services.WebService
             ShihTzu,
             Rottweiler,
             LhasaApso,
-            BorderTerrier
+            BorderTerrier,
+            Lowchen
         }
     }
 

@@ -8,23 +8,26 @@
     $('[data-click]').each(function () {
         var clickaction = $(this).data('click').toString();
         if (clickaction === 'showLoader') {
-            $(this).on('click',
-                function () {
-                    ajaxLoader.ShowLoader();
-                });
+            $(this).on('click', function () {
+                ajaxLoader.ShowLoader();
+            });
 
         } else if (clickaction === 'hideLoader') {
-            $(this).on('click',
-                function () {
-                    ajaxLoader.HideLoader();
-                });
+            $(this).on('click', function () {
+                ajaxLoader.HideLoader();
+            });
         } else if (clickaction === 'getData') {
-            $(this).on('click',
-                function () {
-                    var delay = parseInt($(this).data('delay').toString(), 10);
-                    getDogData(delay);
-                });
+            $(this).on('click', function () {
+                var delay = parseInt($(this).data('delay').toString(), 10);
+                getDogData(delay);
+            });
+        } else if (clickaction === 'overlappingRequests') {
+            $(this).on('click', function () {
+                overlappingRequests();
+            });
         }
+
+
     });
 
 
@@ -37,15 +40,21 @@
             method: 'GET',
             data: { delay: delay || 0 }
         }).done(function (data) {
-            displayDogs(data);
             ajaxLoader.HideLoader();
+            displayDogs(data);
         });
+    }
+
+
+    function overlappingRequests() {
+        getDogData(4000);
+        window.setTimeout(function() { getDogData(1000) }, 1000);
     }
 
     function removeDogs() {
         var list = $('[data-role=DogList]');
         list.empty();
-        
+
     }
 
     function displayDogs(data) {
@@ -61,6 +70,12 @@
                 .addClass('portrait')
                 .attr('src', dog.Image)
                 .attr('alt', dog.BreedName));
+
+            if (dog.Link) {
+                var link = $('<a/>').html('Click here &hellip;').attr('href', dog.Link).attr('target', '_blank');
+                dogLi.append($('<p/>').append(link));
+            }
+
             list.append(dogLi);
         }
     }

@@ -1,4 +1,22 @@
-﻿.dogs-list {
+﻿/* LOADER */
+.ajax-loader {
+  opacity: 0;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  z-index: 1000000;
+  background-color: #2A2B2B;
+  border-radius: 12px;
+  box-shadow: 0 0 17px 5px rgba(0, 0, 0, 0.4);
+  background-image: url(/Content/media/spin.gif);
+  background-repeat: no-repeat;
+  background-position: center center;
+  font-size: 0 !important;
+}
+.dogs-list {
   list-style: none;
   margin: 0;
   padding: 0;

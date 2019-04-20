@@ -8,6 +8,7 @@
     menu.push({ title: 'pFormdirty', url: '/pFormdirty/' });
     menu.push({ title: 'pHashHandler', url: '/pHashHandler/' });
     menu.push({ title: 'AjaxLoader', url: '/AjaxLoader/' });
+    menu.push({ title: 'AnimatedGrid', url: '/AnimatedGrid/' });
 
     topNav.empty();
 

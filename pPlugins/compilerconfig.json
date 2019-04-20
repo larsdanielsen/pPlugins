@@ -66,5 +66,9 @@
   {
     "outputFile": "AjaxLoader/Content/css/ajax-loader.css",
     "inputFile": "AjaxLoader/Content/less/ajax-loader.less"
+  },
+  {
+    "outputFile": "AnimatedGrid/Content/css/core.animated-grid.css",
+    "inputFile": "AnimatedGrid/Content/less/core.animated-grid.less"
   }
 ]
