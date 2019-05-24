@@ -37,7 +37,7 @@
             e.preventDefault();
         }
         this.$element = $(element);
-        this.options = $.extend({}, $.fn.pCheckRadio.defaults, this.$element.data(), typeof options == 'object' && options);
+        this.options = $.extend({}, $.fn.pCheckRadio.defaults, this.$element.data(), typeof options === 'object' && options);
         this.init();
     };
 
@@ -91,7 +91,7 @@
         this.each(function () {
             
             var $this = $(this),
-                options = typeof option == 'object' && option;
+                options = typeof option === 'object' && option;
 
             if (option === 'remove') {
                 $this.trigger('removeCheckRadio.pCheckRadio');

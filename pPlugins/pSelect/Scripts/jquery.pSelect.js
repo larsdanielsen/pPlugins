@@ -24,7 +24,7 @@
             e.preventDefault();
         }
         this.$selectBox = $(element);
-        this.options = $.extend({}, $.fn.pSelect.defaults, this.$selectBox.data(), typeof options == 'object' && options);
+        this.options = $.extend({}, $.fn.pSelect.defaults, this.$selectBox.data(), typeof options === 'object' && options);
         this.init();
     };
 

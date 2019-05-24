@@ -1,34 +1,36 @@
-﻿$('#Sort').click(() => {
-    fixGrid($('.my-grid'));
-    resizeTimeout = window.setTimeout(() => {
-        animateGrid($('.my-grid'), sortRandom);
-    }, 200);
+﻿$(document).ready(function () {
+    $('.my-grid').animatedGrid({ handleResize: false });
 });
 
-$('#SortOnly').click(() => {
-    sortRandom($('.my-grid-2'));
+$('#Sort').click(() => {
+    //sortRandom($('.my-grid'));
+    switchTwo($('.my-grid'));
+    //removeOne($('.my-grid'), 0);
+
+    //$('.my-grid').animatedGrid('fix');
+    //resizeTimeout = window.setTimeout(() => {
+    //    $('.my-grid').animatedGrid('animate', sortRandom);
+    //}, 200);
 });
 
-
-var resizeTimeout = 0;
-$(window).resize(function () {
-    window.clearTimeout(resizeTimeout);
-    fixGrid($('.my-grid'));
-    resizeTimeout = window.setTimeout(() => {
-        animateGrid($('.my-grid'));
-    }, 500);
-});
-
+function removeOne(wrapper, i) {
+    wrapper.children().eq(i).remove();
+}
+function switchTwo(wrapper) {
+    wrapper.children().eq(0).insertAfter(wrapper.children().eq(1));
+}
 
 function sortRandom(wrapper) {
     var count = wrapper.children().length;
-    console.log(count);
+    //console.log(count);
+    for (var i = 0; i < count; i++) {
 
-    var elemIndex = Math.floor(Math.random() * count);
-    var endIndex = Math.floor(Math.random() * count);
-    console.log(elemIndex);
-    console.log(endIndex);
+        var elemIndex = Math.floor(Math.random() * count);
+        var endIndex = Math.floor(Math.random() * count);
+        //console.log(elemIndex);
+        //console.log(endIndex);
 
-    var elem = wrapper.children().get(elemIndex);
-    $(elem).insertAfter(wrapper.children().get(endIndex));
+        var elem = wrapper.children().get(elemIndex);
+        $(elem).insertAfter(wrapper.children().get(endIndex));
+    }
 }

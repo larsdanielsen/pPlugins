@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    
-
     function testBitMap() {
         var settings = [false, false, false, false, false, false, true, false, true, false, true, false, false, true];
 
@@ -15,7 +13,7 @@ $(document).ready(function () {
         console.log(savedSettings);
 
         function getBoolArray(i) {
-            var a = i.toString(2).split('').map(function(n) { return n == '1' });
+            var a = i.toString(2).split('').map(function (n) { return n == '1' });
             a.shift();
             return a;
         }
@@ -23,7 +21,7 @@ $(document).ready(function () {
         function getBits(boolArray) {
             var myArray = boolArray.slice();
             myArray.unshift(true);
-            return parseInt(myArray.map(function(bo) { return bo ? '1' : '0' }).join(''), 2);
+            return parseInt(myArray.map(function (bo) { return bo ? '1' : '0' }).join(''), 2);
         }
 
     }
@@ -41,7 +39,11 @@ $(document).ready(function () {
                 simpleCss.insertAfter('[data-type=base]');
                 bootstrapCss.detach();
             }
-        }).fadeIn();
+        }).fadeIn(0, () => {
+            $('body').trigger('resize');
+            //$('.my-grid').animatedGrid({ handleResize: true });
+        });
+
     });
 
     var theme = getCookie('themeIndex') || 'bootstrap';
